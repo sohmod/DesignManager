@@ -3,17 +3,17 @@
 // Set the database access information as constants.
 
 DEFINE ('DB_USER', 'ckasuser');
-DEFINE ('DB_PASSWORD', 'pwckas');
+DEFINE ('DB_PASSWORD', 'password');
 DEFINE ('DB_HOST', 'localhost');
 DEFINE ('DB_NAME', 'ckas');
 /*
 DEFINE ('DB_USER', 'wsmedia_luqman');
-DEFINE ('DB_PASSWORD', 'ws2189!');
+DEFINE ('DB_PASSWORD', 'password!');
 DEFINE ('DB_HOST', 'localhost');
 DEFINE ('DB_NAME', 'wsmedia_luqman_ckas'); 
 // DB_USER,DB_PASSWORD,DB_HOST,DB_NAME
 DEFINE ('DB_USER', 'wsmedia_luqman');
-DEFINE ('DB_PASSWORD', 'ws2189!');
+DEFINE ('DB_PASSWORD', 'password!');
 DEFINE ('DB_HOST', 'localhost');
 DEFINE ('DB_NAME', 'wsmedia_luqman_ckas'); //*/
 #####################

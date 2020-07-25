@@ -1,0 +1,1222 @@
+/*****************************************
+-Source Files
+       - classes
+	   - conf
+	   - css
+	   - include
+	   - sql
+
+Import Excel/CSV into MySQL
+
+To import an Excel file into MySQL, first export it as a CSV file. Remove the CSV headers from the generated CSV file along with empty data that Excel may have put at the end of the CSV file.
+
+You can then import it into a MySQL table by running:
+
+load data local infile 'D:\\test.csv' into table tna_kub
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+(uniqName, uniqCity, uniqComments)
+
+The fields here are the actual tblUniq table fields that the data needs to sit in. The enclosed by and lines terminated by are optional and can help if you have columns enclosed with double-quotes such as Excel exports, etc.
+
+
+....
+LOAD DATA INFILE 'D:\\test.csv' REPLACE INTO TABLE tna_kub 
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+ESCAPED BY '\\'
+LINES TERMINATED BY '\r\n'
+
+
+*********************************************/
+
+create database AirAlliance;
+
+//DATABASES:
+create database bkackasj;
+create database ckaj;
+create database phpmyfamily;
+create database kplaylist;
+create database ajax;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON ajax.* TO 'ajaxuser'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON ckaj.* TO 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON phpmyfamily.* TO 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON kplaylist.* TO 'kplaylist'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON test.* TO 'username'@'localhost' IDENTIFIED BY 'password';
+create database bka;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON bka.* TO 'kppk'@'localhost' IDENTIFIED BY 'password';
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'kppk';
+FLUSH PRIVILEGES;
+create database luqman_gfc;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_gfc.* TO 'username'@'localhost' IDENTIFIED BY 'password';
+
+USE mysql;
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'root';
+UPDATE mysql.user SET Password = PASSWORD('password') WHERE Host = 'localhost' AND User = 'root';
+
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'root';
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'username';
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'ajaxuser';
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'ajaxuser';
+FLUSH PRIVILEGES;
+
+
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON ajax.* TO 'ajaxuser'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON bka.* TO 'kppk'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON ckaj.* TO 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON kplaylist.* TO 'kplaylist'@'localhost' IDENTIFIED BY 'password';
+
+UPDATE user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'ajaxuser';
+UPDATE user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'kppk';
+UPDATE user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'username';
+UPDATE user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'root';
+UPDATE user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'kplaylist';
+
+FLUSH PRIVILEGES;
+
+
+
+/*TABLES FOR AJAX*/
+DROP TABLE IF EXISTS `ajax`.`mydrawings`;
+CREATE TABLE  `ajax`.`mydrawings` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `daftar_id` mediumint(9) NOT NULL,
+  `tajuk` varchar(250) NOT NULL,
+  `nombor` varchar(100) NOT NULL,
+  `kategori` varchar(15) NOT NULL,
+  `peti` varchar(50) NOT NULL,
+  `tarikh` date NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `kp` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  `pelukis` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `daftar_id` (`daftar_id`,`tajuk`,`nombor`,`kategori`)
+) ENGINE=MyISAM AUTO_INCREMENT=820 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `ajax`.`lotsite`;
+CREATE TABLE  `ajax`.`lotsite` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `daftar_id` mediumint(9) NOT NULL,
+  `gridX` float(10,2) NOT NULL,
+  `gridY` float(10,2) NOT NULL,
+  `xy` text NOT NULL,
+  `ze` text NOT NULL,
+  `regist_date` datetime NOT NULL,
+  `tprojek` varchar(250) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `daftar_id` (`daftar_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `ajax`.`ulasan`;
+CREATE TABLE  `ajax`.`ulasan` (
+  `id_art` int(10) unsigned NOT NULL auto_increment,
+  `id` varchar(25) NOT NULL,
+  `form_type` varchar(50) NOT NULL,
+  `old_content` varchar(250) NOT NULL,
+  `new_content` varchar(250) NOT NULL,
+  `old_option` varchar(250) NOT NULL,
+  `new_option` varchar(250) NOT NULL,
+  `old_option_text` varchar(250) NOT NULL,
+  `new_option_text` varchar(250) NOT NULL,
+  `id_daftar` mediumint(9) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `kp` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`id_art`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8187 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `ajax`.`kriteria`;
+CREATE TABLE  `ajax`.`kriteria` (
+  `id_art` int(10) unsigned NOT NULL auto_increment,
+  `id` varchar(25) NOT NULL,
+  `new_content` varchar(250) NOT NULL,
+  `old_content` varchar(250) NOT NULL,
+  `form_type` varchar(50) NOT NULL,
+  `old_option` varchar(250) NOT NULL,
+  `new_option` varchar(250) NOT NULL,
+  `old_option_text` varchar(250) NOT NULL,
+  `new_option_text` varchar(250) NOT NULL,
+  `id_daftar` mediumint(9) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `kp` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`id_art`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8908 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ajax`.`chat`;
+CREATE TABLE  `ajax`.`chat` (
+  `chat_id` int(11) NOT NULL auto_increment,
+  `posted_on` datetime NOT NULL,
+  `user_name` varchar(200) default NULL,
+  `message` text NOT NULL,
+  `color` char(7) default '#000000',
+  PRIMARY KEY  (`chat_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+
+
+/* TABLES FOR CKAJ    */
+DROP TABLE IF EXISTS `ckaj`.`butiran_projek`;
+CREATE TABLE  `ckaj`.`butiran_projek` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id_daftar` mediumint(9) NOT NULL,
+  `pereka` varchar(100) default NULL,
+  `penyemak` varchar(100) default NULL,
+  `pelukis` varchar(100) default NULL,
+  // ALTER TABLE butiran_projek ADD COLUMN ppenguasa VARCHAR(100) AFTER pelukis;
+  `startDate` date NOT NULL default '0000-00-00',
+  `rekastartDate` date NOT NULL default '0000-00-00',
+  `rekasiapDate` date NOT NULL default '0000-00-00',
+  `tenderDate` date NOT NULL default '0000-00-00',
+  `mtapakDate` date NOT NULL default '0000-00-00',
+  `binasiapDate` date NOT NULL default '0000-00-00',
+  `catatan` text,
+  `username` varchar(20) default NULL,
+  `kp_s` varchar(15) default NULL,
+  `regist_date` datetime NOT NULL,
+  `kontraktor` varchar(100) default NULL,  // ALTER TABLE butiran_projek drop COLUMN kontraktor;
+  `hadSiling` double(12,2) default '0.00',
+  `kpda` double(12,2) default '0.00',
+  `katda` double(12,2) default '0.00',
+  `kkontrak` double(12,2) default '0.00',
+  `kacda` double(12,2) default '0.00',
+  `kluar` double(12,2) default '0.00',
+  `ktanah` double(12,2) default '0.00',
+  `kair` double(12,2) default '0.00',
+  `knajis` double(12,2) default '0.00',
+  `kjalan` double(12,2) default '0.00',
+  `kprelim` double(12,2) default '0.00',
+  `luastapak` double(12,2) default '0.00',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=661 DEFAULT CHARSET=latin1;
+
+ALTER TABLE butiran_projek ADD COLUMN kaedahT VARCHAR(50) AFTER luastapak;
+ALTER TABLE butiran_projek ADD COLUMN `bilPetender` int(4) NOT NULL AFTER kaedahT;
+ALTER TABLE butiran_projek ADD COLUMN kontraktor VARCHAR(100) AFTER kaedahT;
+
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`butiran_sivil`;
+CREATE TABLE  `ckaj`.`butiran_sivil` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id_daftar` mediumint(9) NOT NULL,
+  `OIC` varchar(20) default NULL,
+  `luaran` text,
+  `tanah` text,
+  `bekalanair` text,
+  `pembetungan` text,
+  `jalan` text,
+  `username` text,
+  `kp_s` varchar(15) default 'yymmdd-st-code',
+  `startDate` date NOT NULL default '0000-00-00',
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id_daftar` (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
+
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`daftar_projek`;
+CREATE TABLE  `ckaj`.`daftar_projek` (
+  `daftar_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `username` varchar(20) default NULL,
+  `tajuk` varchar(250) NOT NULL,
+  `lokasi` varchar(50) default NULL,
+  `mod_kerja` varchar(50) default NULL,
+  `OIC` varchar(20) NOT NULL,
+  `startDate` date NOT NULL default '0000-00-00',
+  `siapDate` date NOT NULL default '0000-00-00',
+  `kp_s` varchar(15) default NULL,
+  `registration_date` datetime NOT NULL,
+  `program` varchar(10) default NULL,
+  `catatan` varchar(250) NOT NULL,
+  `nosiri_fail` mediumint(8) NOT NULL default '1',
+  `KemKlient` varchar(50) NOT NULL,
+  PRIMARY KEY  (`daftar_id`),
+  UNIQUE KEY `OIC` (`OIC`,`KemKlient`,`lokasi`,`nosiri_fail`)
+) ENGINE=MyISAM AUTO_INCREMENT=982 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`dplan_projek`;
+CREATE TABLE  `ckaj`.`dplan_projek` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id_daftar` mediumint(9) NOT NULL,
+  `startDate` date NOT NULL default '0000-00-00',
+  `sketch_proposal` varchar(5) default NULL,
+  `analisa` varchar(5) default NULL,
+  `rekabentuk` varchar(5) default NULL,
+  `lukisan` varchar(5) default NULL,
+  `Bill_Q` varchar(5) default NULL,
+  `Tender_doc` varchar(5) default NULL,
+  `Design_report` varchar(5) default NULL,
+  `catatan` text,
+  `username` varchar(20) default NULL,
+  `kp_s` varchar(15) default NULL,
+  `regist_date` datetime NOT NULL,
+  `k_luar` varchar(20) default NULL,
+  `k_tanah` varchar(20) default NULL,
+  `k_air` varchar(20) default NULL,
+  `k_najis` varchar(20) default NULL,
+  `k_jalan` varchar(20) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id_daftar` (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`perunding_projek`;
+CREATE TABLE  `ckaj`.`perunding_projek` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id_daftar` mediumint(9) NOT NULL,
+  `startDate` date NOT NULL default '0000-00-00',
+  `terimaDate` date NOT NULL default '0000-00-00',
+  `jawabDate` date NOT NULL default '0000-00-00',
+  `nameP1` varchar(200) default NULL,
+  `nameP2` varchar(200) default NULL,
+  `nameP3` varchar(200) default NULL,
+  `selectedP` varchar(200) default NULL,
+  `selecPDate` date NOT NULL default '0000-00-00',
+  `ulasanDate` date NOT NULL default '0000-00-00',
+  `catatan` text,
+  `username` varchar(20) default NULL,
+  `kp_s` varchar(15) default NULL,
+  `OIC` varchar(20) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id_daftar` (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=176 DEFAULT CHARSET=latin1;
+
+
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`status_projek`;
+CREATE TABLE  `ckaj`.`status_projek` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id_daftar` mediumint(9) NOT NULL,
+  `OIC` varchar(20) NOT NULL,
+  `startDate` date NOT NULL default '0000-00-00',
+  `progress` varchar(5) default NULL,
+  `survey_work` varchar(20) default NULL,
+  `SI_work` varchar(20) default NULL,
+  `LAcquire` varchar(20) default NULL,
+  `sketch_proposal` varchar(20) default NULL,
+  `analisa` varchar(5) default NULL,
+  `rekabentuk` varchar(5) default NULL,
+  `lukisan` varchar(5) default NULL,
+  `Bill_Q` varchar(5) default NULL,
+  `Tender_doc` varchar(5) default NULL,
+  `Design_report` varchar(5) default NULL,
+  `catatan` text,
+  `username` varchar(20) default NULL,
+  `kp_s` varchar(15) default NULL,
+  `regist_date` datetime NOT NULL,
+  `k_luar` varchar(20) default NULL,
+  `k_tanah` varchar(20) default NULL,
+  `k_air` varchar(20) default NULL,
+  `k_najis` varchar(20) default NULL,
+  `k_jalan` varchar(20) default NULL,
+  `lawatDate` date NOT NULL default '0000-00-00',
+  `tenderEval` varchar(6) default NULL,
+  `bilPetender` mediumint(9) NOT NULL,
+  `startEvalDate` date NOT NULL default '0000-00-00',
+  `complEvalDate` date NOT NULL default '0000-00-00',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id_daftar` (`id_daftar`,`startDate`)
+) ENGINE=MyISAM AUTO_INCREMENT=324 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`uploads`;
+CREATE TABLE  `ckaj`.`uploads` (
+  `upload_id` int(10) unsigned NOT NULL auto_increment,
+  `file_name` varchar(250) NOT NULL,
+  `file_size` int(10) unsigned NOT NULL,
+  `file_type` varchar(100) NOT NULL,
+  `id_daftar` mediumint(9) NOT NULL,
+  `nomlukisan` varchar(100) NOT NULL,
+  `description` varchar(250) default NULL,
+  `upload_date` datetime NOT NULL,
+  `first_name` varchar(15) NOT NULL,
+  PRIMARY KEY  (`upload_id`),
+  UNIQUE KEY `id_daftar` (`id_daftar`,`nomlukisan`),
+  KEY `file_name` (`file_name`)
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`users`;
+CREATE TABLE  `ckaj`.`users` (
+  `user_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `username` varchar(20) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(40) default NULL,
+  `password` varchar(16) NOT NULL,
+  `registration_date` datetime NOT NULL,
+  `kp_s` varchar(30) NOT NULL,
+  PRIMARY KEY  (`user_id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `kp_s` (`kp_s`),
+  KEY `first_name` (`first_name`),
+  KEY `last_name` (`last_name`),
+  KEY `password` (`password`)
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+
+
+
+
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/butiran_projek.txt" INTO TABLE butiran_projek;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/butiran_sivil.txt" INTO TABLE butiran_sivil;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/daftar_projek.txt" INTO TABLE daftar_projek;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/dplan_projek.txt" INTO TABLE dplan_projek;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/perunding_projek.txt" INTO TABLE perunding_projek;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/status_projek.txt" INTO TABLE status_projek;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/uploads.txt" INTO TABLE uploads;
+LOAD DATA LOCAL INFILE "E:/DataMySQL5027/users.txt" INTO TABLE users;
+
+LOAD DATA LOCAL INFILE "C:/_integral/ulasan2ulasanteknikal.txt" INTO TABLE ulasanteknikal;
+LOAD DATA LOCAL INFILE "D:/datagertak/ketuabka_ogos2011.txt" INTO TABLE tna_kub;
+LOAD DATA LOCAL INFILE "D:/datagertak/stafbka_ogos2011.txt" INTO TABLE tna_staf;
+
+
+LOAD DATA LOCAL INFILE "http://www.wanluqman.com/photos/uploads/byajax/soalank1.txt" INTO TABLE soalank1;
+
+/*************************  table TNA ************************************/
+DROP TABLE IF EXISTS `ckaj`.`tna_bajet`;
+CREATE TABLE  `ckaj`.`tna_bajet` (
+  `id` mediumint(9) NOT NULL auto_increment,
+  `Bilangan` tinyint(4) default NULL,
+  `Nama` varchar(200) NOT NULL,
+  `sasaran` varchar(150) default NULL,
+  `bilkursus` varchar(50) default NULL,
+  `bilpeserta` varchar(50) default NULL,
+  `tempoh` varchar(50) default NULL,
+  `tempat` varchar(100) default NULL,
+  `penganjur` varchar(100) default NULL,
+  `startDate` date NOT NULL default '0000-00-00',
+  `os14` double(12,2) default '0.00',
+  `os15` double(12,2) default '0.00',
+  `os21` double(12,2) default '0.00',
+  `os24` double(12,2) default '0.00',
+  `os29` double(12,2) default '0.00',
+  `alamat_sasaran` varchar(15) default NULL,
+  `catatan` varchar(200) default NULL,
+  `kp_s` varchar(15) default NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_kompeten`;
+CREATE TABLE  `ckaj`.`tna_kompeten` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `description` varchar(250) NOT NULL,
+  `tksemasa` tinyint(4) default NULL,
+  `tkperlu` tinyint(4) default NULL,
+  `jurang` tinyint(4) default NULL,
+  `latihanpt` tinyint(4) default NULL,
+  `kaedah` tinyint(4) default NULL,
+  `tkatahun` tinyint(4) default NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime NOT NULL,
+  `kategori` tinyint(4) default NULL,
+  UNIQUE KEY `kp_s` (`kp_s`,`description`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_kub`;
+CREATE TABLE  `ckaj`.`tna_kub` (
+  `Idk` mediumint(9) NOT NULL auto_increment,
+  `kp_k` varchar(15) default NULL,
+  `nama_k` varchar(150) default NULL,
+  `gelaran_jaw_k` varchar(50) default NULL,
+  `jawatan_k` varchar(50) default NULL,
+  `jurusan_k` varchar(50) default NULL,
+  `gred_k` varchar(10) default NULL,
+  `caw_unit_k` varchar(100) default NULL,
+  PRIMARY KEY  (`Idk`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_kursus`;
+CREATE TABLE  `ckaj`.`tna_kursus` (
+  `Idy` mediumint(9) NOT NULL auto_increment,
+  `Tajuk` varchar(250) default NULL,
+  `TrkMula` date default '0000-00-00',
+  `TrkTamat` date default '0000-00-00',
+  `Venue` varchar(150) default NULL,
+  `Penganjur` varchar(100) default NULL,
+  `Kos` double(12,2) default '0.00',
+  `FailRuj` varchar(50) default NULL,
+  `KodKursus` mediumint(9) NOT NULL,
+  `username` varchar(20) default NULL,
+  `BilangPeserta` mediumint(9) NOT NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  UNIQUE KEY `Idy` (`Idy`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_latihan`;
+CREATE TABLE  `ckaj`.`tna_latihan` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `description` varchar(200) NOT NULL,
+  `kategori` tinyint(4) default NULL,
+  `tahaplat` tinyint(4) default NULL,
+  `tempatlat` varchar(200) default NULL,
+  `panjurlat` varchar(200) default NULL,
+  `statahun` tinyint(4) default NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  UNIQUE KEY `kp_s` (`kp_s`,`description`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_penilaian`;
+CREATE TABLE  `ckaj`.`tna_penilaian` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `description` varchar(200) NOT NULL,
+  `tempohlat` varchar(200) default NULL,
+  `tempatlat` varchar(200) default NULL,
+  `panjurlat` varchar(200) default NULL,
+  `nilai1` tinyint(4) default NULL,
+  `nilai2` tinyint(4) default NULL,
+  `nilai3` tinyint(4) default NULL,
+  `nilai4` tinyint(4) default NULL,
+  `nilai5` tinyint(4) default NULL,
+  `nilai6` tinyint(4) default NULL,
+  `nilai7` tinyint(4) default NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  `KodKursus` varchar(15) default NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_peranan`;
+CREATE TABLE  `ckaj`.`tna_peranan` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `description` varchar(250) NOT NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  UNIQUE KEY `kp_s` (`kp_s`,`description`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_pesertakursus`;
+CREATE TABLE  `ckaj`.`tna_pesertakursus` (
+  `id` mediumint(9) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `username` varchar(20) NOT NULL,
+  `Bilangan` mediumint(9) default NULL,
+  `Nama` varchar(200) NOT NULL,
+  `KP` varchar(15) default NULL,
+  `AlamatB` varchar(150) default NULL,
+  `Jawatan` varchar(50) default NULL,
+  `Jurusan` varchar(50) default NULL,
+  `Gred` varchar(50) default NULL,
+  `KodKursus` varchar(15) default NULL,
+  `kp_s` varchar(15) default NULL,
+  `tarikhDaftar` datetime NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_prestasi`;
+CREATE TABLE  `ckaj`.`tna_prestasi` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `objektif` varchar(200) default NULL,
+  `ulasan` varchar(200) default NULL,
+  `nilai1` tinyint(4) default NULL,
+  `nilai2` tinyint(4) default NULL,
+  `nilai3` tinyint(4) default NULL,
+  `nilai4` tinyint(4) default NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  `KodKursus` varchar(15) default NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_sasaran`;
+CREATE TABLE  `ckaj`.`tna_sasaran` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `description` varchar(250) NOT NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  UNIQUE KEY `kp_s` (`kp_s`,`description`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_staf`;
+CREATE TABLE  `ckaj`.`tna_staf` (
+  `Ids` mediumint(9) NOT NULL auto_increment,
+  `kp_s` varchar(15) default NULL,
+  `nama_s` varchar(150) default NULL,
+  `gelaran_jaw_s` varchar(50) default NULL,
+  `jawatan_s` varchar(50) default NULL,
+  `jurusan_s` varchar(50) default NULL,
+  `gred_s` varchar(10) default NULL,
+  `caw_unit_s` varchar(100) default NULL,
+  `kp_k` varchar(15) default NULL,
+  PRIMARY KEY  (`Ids`),
+  UNIQUE KEY `kp_s` (`kp_s`)
+) ENGINE=MyISAM AUTO_INCREMENT=161 DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `ckaj`.`tna_tugasan`;
+CREATE TABLE  `ckaj`.`tna_tugasan` (
+  `id` int(6) NOT NULL auto_increment,
+  `startDate` date default '0000-00-00',
+  `Bilangan` tinyint(4) default NULL,
+  `description` varchar(250) NOT NULL,
+  `kp_s` varchar(15) NOT NULL,
+  `tarikhDaftar` datetime default NULL,
+  UNIQUE KEY `kp_s` (`kp_s`,`description`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE  `ajax`.`jqueryeip` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `id_daftar` mediumint(9) NOT NULL,
+  `element_id` varchar(50) NOT NULL,
+  `update_value` varchar(250) NOT NULL,
+  `original_html` varchar(250) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `kp` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `id_daftar` (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=8908 DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE  `ajax`.`bkaONgmap` (
+  `idgmap` mediumint(12) unsigned NOT NULL auto_increment,  
+  `id_daftar` mediumint(10) NOT NULL,
+  `id` varchar(100) NOT NULL,  
+  `url` varchar(250) NOT NULL,
+  `form_type` varchar(10) NOT NULL,
+  `orig_value` TEXT(10000),
+  `new_value` varchar(250) NOT NULL,
+  `post_data` varchar(250) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `kp` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`idgmap`),
+  UNIQUE KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8908 DEFAULT CHARSET=latin1;
+
+
+
+  
+
+//@ ajax
+CREATE TABLE  `markers` (
+  `idx` int(11) unsigned NOT NULL auto_increment,
+  `id_daftar` int(11) NOT NULL,  
+  `lat` float(10,6) NOT NULL,
+  `lng` float(10,6) NOT NULL,  
+  `tajuk` varchar(200) NOT NULL,
+  `lokasi` varchar(50) default NULL,
+  `mod_kerja` varchar(15) default NULL,
+  `OIC` varchar(15) NOT NULL,
+  `program` varchar(10) default NULL,
+  `nosiri_fail` int(11) NOT NULL default '1',
+  `KemKlient` varchar(50) NOT NULL,
+  PRIMARY KEY  (`idx`),
+  UNIQUE KEY (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE  `markers_bka` (
+  `idx` int(11) unsigned NOT NULL auto_increment,
+  `id_daftar` int(11) NOT NULL,  
+  `lat` float(10,6) NOT NULL,
+  `lng` float(10,6) NOT NULL,  
+  `tajuk` varchar(150) NOT NULL,
+  `OIC` varchar(15) default NULL,
+  PRIMARY KEY  (`idx`),
+  UNIQUE KEY (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE  `markers_bka1` (
+  `idx` int(11) unsigned NOT NULL auto_increment,
+  `id_daftar` int(11) NOT NULL,  
+  `lat` float(10,6) NOT NULL,
+  `lng` float(10,6) NOT NULL,  
+  `tajuk` varchar(150) NOT NULL,
+  `lokasi` varchar(40) default NULL,
+  `mod_kerja` varchar(15) NOT NULL,
+  `OIC` varchar(15) default NULL,
+  `nosiri_fail` int(5) NOT NULL,
+  `KemKlient` varchar(60) default NULL,  
+  PRIMARY KEY  (`idx`),
+  UNIQUE KEY (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;			
+
+CREATE TABLE  `markers_bka2` (
+  `idx` int(11) unsigned NOT NULL auto_increment,
+  `id_daftar` int(11) NOT NULL,  
+  `lat` float(10,6) NOT NULL,
+  `lat` float(10,6) NOT NULL,  
+  `tajuk` varchar(150) NOT NULL,
+  `lokasi` varchar(40) default NULL,
+  `mod_kerja` varchar(15) NOT NULL,
+  `OIC` varchar(15) default NULL,
+  `nosiri_fail` int(5) NOT NULL,
+  `KemKlient` varchar(60) default NULL,
+
+  `pereka` varchar(75) default NULL,
+  `penyemak` varchar(75) default NULL,
+  `pelukis` varchar(75) default NULL,
+  `ppenguasa` varchar(75) default NULL,
+  `mtapakDate` date NOT NULL default '0000-00-00',
+  `kkontrak` double(12,2) default '0.00',
+  `kaedahT` varchar(50) default NULL, 
+  `kontraktor` varchar(75) default NULL,
+  `kemajuan` varchar(75) default NULL,
+
+  PRIMARY KEY  (`idx`),
+  UNIQUE KEY (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;			
+
+
+
+// perancangan	susunatur @ bka 
+// ulasanteknikal  jkr_pkO_02_dua jkr_pkO_02_tiga jkr_pkO_02_empat
+CREATE TABLE  `jkr_pkO_02_dua` (
+  `idx` int(11) unsigned NOT NULL auto_increment,  
+  `id_daftar` int(11) NOT NULL,
+  `id` varchar(100) NOT NULL,  
+  `url` varchar(100) NOT NULL,
+  `form_type` varchar(10) NOT NULL,
+  `orig_value` varchar(100) NOT NULL,
+  `new_value` text,
+  `post_data` varchar(100) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `ppk` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`idx`),
+  UNIQUE KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+  id_daftar,id,url,form_type,orig_value,new_value,post_data,username,ppk,regist_date
+// @ bka
+CREATE TABLE  `laporanbulananRM9` (
+  `idx` mediumint(10) unsigned NOT NULL auto_increment,  
+  `id_daftar` mediumint(10) NOT NULL,
+  `JAN2006` varchar(17) default NULL,
+  `FEB2006` varchar(17) default NULL,
+  `MAR2006` varchar(17) default NULL,
+  `APR2006` varchar(17) default NULL,
+  `MEI2006` varchar(17) default NULL,
+  `JUN2006` varchar(17) default NULL,
+  `JUL2006` varchar(17) default NULL,
+  `OGO2006` varchar(17) default NULL,
+  `SEP2006` varchar(17) default NULL,
+  `OKT2006` varchar(17) default NULL,
+  `NOV2006` varchar(17) default NULL,
+  `DIS2006` varchar(17) default NULL, 
+
+  `JAN2007` varchar(17) default NULL,
+  `FEB2007` varchar(17) default NULL,
+  `MAR2007` varchar(17) default NULL,
+  `APR2007` varchar(17) default NULL,
+  `MEI2007` varchar(17) default NULL,
+  `JUN2007` varchar(17) default NULL,
+  `JUL2007` varchar(17) default NULL,
+  `OGO2007` varchar(17) default NULL,
+  `SEP2007` varchar(17) default NULL,
+  `OKT2007` varchar(17) default NULL,
+  `NOV2007` varchar(17) default NULL,
+  `DIS2007` varchar(17) default NULL, 
+
+  `JAN2008` varchar(17) default NULL,
+  `FEB2008` varchar(17) default NULL,
+  `MAR2008` varchar(17) default NULL,
+  `APR2008` varchar(17) default NULL,
+  `MEI2008` varchar(17) default NULL,
+  `JUN2008` varchar(17) default NULL,
+  `JUL2008` varchar(17) default NULL,
+  `OGO2008` varchar(17) default NULL,
+  `SEP2008` varchar(17) default NULL,
+  `OKT2008` varchar(17) default NULL,
+  `NOV2008` varchar(17) default NULL,
+  `DIS2008` varchar(17) default NULL, 
+  
+  `JAN2009` varchar(17) default NULL,
+  `FEB2009` varchar(17) default NULL,
+  `MAR2009` varchar(17) default NULL,
+  `APR2009` varchar(17) default NULL,
+  `MEI2009` varchar(17) default NULL,
+  `JUN2009` varchar(17) default NULL,
+  `JUL2009` varchar(17) default NULL,
+  `OGO2009` varchar(17) default NULL,
+  `SEP2009` varchar(17) default NULL,
+  `OKT2009` varchar(17) default NULL,
+  `NOV2009` varchar(17) default NULL,
+  `DIS2009` varchar(17) default NULL,   
+  
+  `JAN2010` varchar(17) default NULL,
+  `FEB2010` varchar(17) default NULL,
+  `MAR2010` varchar(17) default NULL,
+  `APR2010` varchar(17) default NULL,
+  `MEI2010` varchar(17) default NULL,
+  `JUN2010` varchar(17) default NULL,
+  `JUL2010` varchar(17) default NULL,
+  `OGO2010` varchar(17) default NULL,
+  `SEP2010` varchar(17) default NULL,
+  `OKT2010` varchar(17) default NULL,
+  `NOV2010` varchar(17) default NULL,
+  `DIS2010` varchar(17) default NULL,     
+  
+  `JAN2011` varchar(17) default NULL,
+  `FEB2011` varchar(17) default NULL,
+  `MAR2011` varchar(17) default NULL,
+  `APR2011` varchar(17) default NULL,
+  `MEI2011` varchar(17) default NULL,
+  `JUN2011` varchar(17) default NULL,
+  `JUL2011` varchar(17) default NULL,
+  `OGO2011` varchar(17) default NULL,
+  `SEP2011` varchar(17) default NULL,
+  `OKT2011` varchar(17) default NULL,
+  `NOV2011` varchar(17) default NULL,
+  `DIS2011` varchar(17) default NULL,     
+  
+  `username` varchar(20) NOT NULL,
+  `ppk` varchar(15) NOT NULL,  
+  `regist_date` datetime NOT NULL,
+  PRIMARY KEY  (`idx`),
+  UNIQUE KEY (`id_daftar`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+
+
+ALTER TABLE jkr_pko_02_dua MODIFY new_value TEXT CHARACTER SET utf8;
+
+--------------------------------------mesrahosting--------------------------
+
+
+
+create database luqman_phpmyfamily1;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_phpmyfamily1.* TO 'phpmyfamily'@'localhost' IDENTIFIED BY 'password';
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'phpmyfamily'; 
+UPDATE family_users SET username = 'luqman_f' WHERE id = 43; 
+UPDATE family_users SET password = md5('password') WHERE id = 43; 
+
+create database luqman_eggblog;
+GRANT ALL PRIVILEGES ON luqman_eggblog.* TO 'eggblog'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON luqman_eggblog.* TO 'eggblog'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'eggblog';    
+UPDATE mysql.user SET Password = md5('password') WHERE Host = '%' AND User = 'eggblog';    
+flush privileges;
+
+create database luqman_ckasj;
+GRANT ALL PRIVILEGES ON luqman_ckasj.* TO 'luqman_sohmod'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+
+
+
+
+
+create database luqman_mwq1_5;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_mwq1_5.* TO 'mwq1_5'@'localhost' IDENTIFIED BY 'password';
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'mwq1_5'; 
+
+
+create database luqman_comment;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_comment.* TO 'comment'@'localhost' IDENTIFIED BY 'password';
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'comment';    
+
+
+
+create database luqman_wordpress;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'password';
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'wordpress';  
+
+create database luqman_bloly;
+GRANT ALL PRIVILEGES ON luqman_bloly.* TO 'luqman_bloly'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON luqman_bloly.* TO 'luqman_bloly'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'luqman_bloly';    
+UPDATE mysql.user SET Password = md5('password') WHERE Host = '%' AND User = 'luqman_bloly';    
+flush privileges;
+
+
+
+
+create database luqman_hmailserver ;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_hmailserver.* TO 'luqman_mail'@'localhost' IDENTIFIED BY 'password ';
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'luqman_mail';    
+
+
+UPDATE family_users SET password = md5('password') WHERE id = 43;    
+UPDATE family_users SET username = 'luqman' WHERE id = 43;    
+UPDATE eb_articles SET article_date = 1284109760 WHERE article_id = 43; 
+
+
+
+
+////////////////////////////kuiz
+create database luqman_kuiz;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_kuiz.* TO 'luqman_kuiz'@'localhost' IDENTIFIED BY 'password';
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'luqman_kuiz';
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'luqman_kuiz';    
+FLUSH PRIVILEGES;
+
+CREATE TABLE  `soalank1` (
+  `Idx` int(8) NOT NULL AUTO_INCREMENT,
+  `Soalan` text,
+  `JawapanAA` text,
+  `JawapanBB` text,
+  `JawapanCC` text,
+  `JawapanDD` text,
+  `JawaBENAR` varchar(4) DEFAULT NULL,
+  `Kodquest` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`Idx`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+LOAD DATA LOCAL INFILE "C:/_integral/kuiz_i/soalank1.txt" INTO TABLE soalank1;
+
+LOAD DATA LOCAL INFILE "http://www.wanluqman.com/kuiz_i/soalank1.txt" INTO TABLE soalank1;
+UPDATE soalank1 SET Kodquest = 'umum' WHERE Idx >=1 and Idx <=28;
+UPDATE soalank1 SET Kodquest = 'awam' WHERE Idx >=29 and Idx <=48;
+UPDATE soalank1 SET Kodquest = 'ubahan' WHERE Idx >=49 and Idx <=68;
+UPDATE soalank1 SET Kodquest = 'mekanikal' WHERE Idx >=69 and Idx <=88;
+UPDATE soalank1 SET Kodquest = 'elektrikal' WHERE Idx >=89 and Idx <=108;
+UPDATE soalank1 SET Kodquest = 'sbina' WHERE Idx >=109 and Idx <=128;
+UPDATE soalank1 SET Kodquest = 'awam1' WHERE Idx >=129 and Idx <=158;
+UPDATE soalank1 SET Kodquest = 'sbina1' WHERE Idx >=159 and Idx <=188;
+UPDATE soalank1 SET Kodquest = 'umum1' WHERE Idx >=189 and Idx <=208;
+UPDATE soalank1 SET Kodquest = 'umum2' WHERE Idx >=209 and Idx <=236;
+
+-----------------------------------------------------------
+create database luqman_lxlink;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_lxlink.* TO 'luqman_lxlink'@'localhost' IDENTIFIED BY 'sohmod061284';
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'luqman_lxlink';
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET Password = md5('password') WHERE Host = 'localhost' AND User = 'luqman_lxlink';
+CREATE TABLE lxlinkexchange (id int NOT NULL auto_increment, linkname VARCHAR(40), link VARCHAR(100), reciplink VARCHAR(100), text VARCHAR(100), email varchar(40), linkstatus tinyint(1), PRIMARY KEY (id), UNIQUE id (id), KEY id_2 (id));
+
+// date:16062010
+create database luqman_shoutbox;
+GRANT SELECT, INSERT, UPDATE, DELETE, INDEX, ALTER, CREATE, DROP ON luqman_shoutbox.* TO 'luqman_shoutbx'@'localhost' IDENTIFIED BY 'sohmod061284';
+UPDATE mysql.user SET Password = OLD_PASSWORD('password') WHERE Host = 'localhost' AND User = 'luqman_shoutbx';
+FLUSH PRIVILEGES;
+
+
+
+
+
+
+
+
+
+
+----------------------------------
+SELECT p.topic_id,t.topic_title,p.post_body,p.post_date,u.user_name
+	 FROM eb_posts AS p
+	 LEFT JOIN eb_topics AS t ON t.topic_id=p.topic_id
+	 LEFT JOIN eb_users AS u ON u.user_id=p.author_id
+	 INNER JOIN (
+	 SELECT topic_id,MAX(post_date) AS max_date
+	 FROM eb_posts
+	 GROUP BY topic_id
+	 ) AS m ON m.topic_id=p.topic_id AND m.max_date=p.post_date
+   ORDER BY p.post_date DESC;
+
+SELECT max(new_value) as qlat,min(new_value)as qlng FROM susunatur
+where id_daftar=1029;
+
+SELECT s.*,m.* FROM susunatur AS s LEFT JOIN markers_bka2 AS m
+ON s.id_daftar=m.id_daftar
+	 INNER JOIN (
+	 SELECT max(new_value) as qlat,min(new_value) AS qlng from susunatur) as s
+   GROUP BY s.id_daftar ;
+
+SELECT * FROM susunatur s;
+desc markers_bka2;
+SELECT * FROM markers_bka2 m;
+SELECT new_value FROM susunatur WHERE id = "latNE1-498";
+
+
+UPDATE `markers_bka2` SET tajuk='dummiBlog' WHERE idx=4;
+UPDATE `markers_bka2` SET lat=6 WHERE idx=4;
+
+ALTER TABLE `eb_users` ADD COLUMN `tajuk` varchar(75) NULL AFTER user_password;
+ALTER TABLE `eb_users` ADD COLUMN `deskripsi` varchar(250) NULL AFTER tajuk;
+ALTER TABLE `eb_users` ADD COLUMN `lat` float(20,15) NULL AFTER deskripsi;
+ALTER TABLE `eb_users` ADD COLUMN `lng` float(20,15) NULL AFTER lat;
+ALTER TABLE `eb_users` ADD COLUMN `p_east` varchar(75) NULL AFTER lng;
+ALTER TABLE `eb_users` ADD COLUMN `p_west` varchar(75) NULL AFTER p_east;
+ALTER TABLE `eb_users` ADD COLUMN `p_north` varchar(75) NULL AFTER p_west;
+ALTER TABLE `eb_users` ADD COLUMN `p_south` varchar(75) NULL AFTER p_north;
+
+ALTER TABLE `eb_users` CHANGE COLUMN `tajuk` `tajuk` varchar(75);
+
+-----------------------------------------
+CREATE TABLE `eb_borehole` (
+  `idy` mediumint(11) NOT NULL auto_increment,
+  `trk_bore` date default '0000-00-00',
+  `lat` float(20,15) NOT NULL,
+  `lng` float(20,15) NOT NULL,  
+  `ground_lvl` double(12,4) NOT NULL,
+  `water_lvl` double(12,4) NOT NULL,
+  `catatan` text,
+  `user_name` varchar(25) NOT NULL,
+  `user_id` int(7) NOT NULL,
+  `trk_daftar` datetime default NULL,
+  UNIQUE KEY `idy` (`idy`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+-----------------------------------------
+
+
+
+
+////////////////////////////
+CREATE TABLE  `eb_worldmasjid` (
+  `user_id` int(11) unsigned NOT NULL,
+  `user_name` varchar(75) default NULL,
+  `user_website` varchar(250) default NULL,
+  `tajuk` varchar(250) NOT NULL,
+  `deskripsi` varchar(250) NOT NULL,
+  `lat` float(20,15) NOT NULL,
+  `lng` float(20,15) NOT NULL,  
+  `p_east` varchar(250) NOT NULL,
+  `p_west` varchar(250) NOT NULL,
+  `p_north` varchar(250) NOT NULL,
+  `p_south` varchar(250) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;			
+
+
+INSERT INTO `eb_worldmasjid` VALUES (1, 'admin', 'http://www.wanluqman.com', 'Mecca', 'Baitullah el-Haram', 21.427378,39.814838, 'http://www.wanluqman.com/photos/randpics_9/18.jpg', 'photos/randpics_9/20.jpg', 'http://www.wanluqman.com/photos/randpics_9/23.jpg', 'photos/randpics_9/26.jpg');
+
+
+CREATE TABLE `mydrawings` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `daftar_id` mediumint(9) NOT NULL,
+  `tajuk` varchar(250) NOT NULL,
+  `nombor` varchar(100) NOT NULL,
+  `kategori` varchar(15) NOT NULL,
+  `peti` varchar(50) NOT NULL,
+  `tarikh` date NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `kp` varchar(15) NOT NULL,
+  `regist_date` datetime NOT NULL,
+  `pelukis` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `daftar_id` (`daftar_id`,`tajuk`,`nombor`,`kategori`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+
+
+//==========================================================================//
+
+
+
+
+CREATE TABLE eb_borehole (
+  idy mediumint(10) NOT NULL auto_increment,
+  trk_bore date default '0000-00-00',
+  lat float(20,15) NOT NULL,
+  lng float(20,15) NOT NULL,  
+  ground_lvl double(12,4) NOT NULL,
+  water_lvl double(12,4) NOT NULL,
+  catatan text,
+  user_name varchar(25) NOT NULL,
+  user_id int(7) NOT NULL,
+  trk_daftar datetime default NULL,
+  PRIMARY KEY (idy),
+  UNIQUE KEY lat (lat,lng)  
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE eb_fieldrecord (
+  idz mediumint(10) NOT NULL auto_increment,
+  idy mediumint(10) NOT NULL,
+  depth double(12,4) NOT NULL,
+  n1 varchar(4) default NULL,
+  n2 varchar(4) default NULL,
+  n3 varchar(4) default NULL,
+  n4 varchar(4) default NULL,
+  n5 varchar(4) default NULL,
+  n6 varchar(4) default NULL,
+  n7 varchar(7) default NULL,  
+  rratio varchar(25) NOT NULL,
+  classification varchar(255) NOT NULL,
+  regist_date datetime default NULL,
+  PRIMARY KEY (idz),
+  UNIQUE KEY depth (depth,idy)    
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+	
+
+CREATE TABLE eb_particlesize (
+  idp mediumint(10) NOT NULL auto_increment,
+  idy mediumint(10) NOT NULL,
+  idz mediumint(10) NOT NULL,  
+  depth double(12,4) NOT NULL,
+  ps5000 double(6,2) default NULL,
+  ps3350 double(6,2) default NULL,
+  ps2000 double(6,2) default NULL,
+  ps1180 double(6,2) default NULL,
+  ps0600 double(6,2) default NULL,
+  ps0425 double(6,2) default NULL,
+  ps0300 double(6,2) default NULL,
+  ps0212 double(6,2) default NULL,
+  ps0150 double(6,2) default NULL,
+  ps0063 double(6,2) default NULL,
+  ps0033 double(6,2) default NULL,
+  ps0024 double(6,2) default NULL,
+  ps0018 double(6,2) default NULL,
+  ps0013 double(6,2) default NULL,
+  ps0010 double(6,2) default NULL,
+  ps0007 double(6,2) default NULL,
+  ps0005 double(6,2) default NULL,
+  ps0004 double(6,2) default NULL,
+  ps0003 double(6,2) default NULL,
+  ps0001 double(6,2) default NULL,    
+  regist_date datetime default NULL,
+  PRIMARY KEY (idp),
+  UNIQUE KEY depth (depth,idy)  
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;	
+	
+	
+CREATE TABLE eb_atterberglimit (
+  ida mediumint(10) NOT NULL auto_increment,
+  idy mediumint(10) NOT NULL,
+  idz mediumint(10) NOT NULL,  
+  depth double(12,4) NOT NULL,
+  gravel int(3) default NULL,
+  sand int(3) default NULL,
+  silt int(3) default NULL,
+  clay int(3) default NULL,
+  liquid int(3) default NULL,
+  moisture int(3) default NULL,  
+  plastic int(3) default NULL,
+  classification varchar(3) NOT NULL,
+  PRIMARY KEY (ida),
+  UNIQUE KEY depth (depth,idy)  
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;		
+	
+////////////////////////////////////////////////////////
+CREATE TABLE  laporan_yearONE_RM10 (
+  idx mediumint(10) unsigned NOT NULL auto_increment,  
+  id_daftar mediumint(10) NOT NULL,
+  REPORT_YEAR varchar(17) default NULL,  
+  JAN_wk1 varchar(17) default NULL,
+  JAN_wk2 varchar(17) default NULL,  
+  JAN_wk3 varchar(17) default NULL,
+  JAN_wk4 varchar(17) default NULL,
+  
+  FEB_wk1 varchar(17) default NULL,
+  FEB_wk2 varchar(17) default NULL,  
+  FEB_wk3 varchar(17) default NULL,
+  FEB_wk4 varchar(17) default NULL,  
+  
+  MAR_wk1 varchar(17) default NULL,
+  MAR_wk2 varchar(17) default NULL,  
+  MAR_wk3 varchar(17) default NULL,
+  MAR_wk4 varchar(17) default NULL,
+  
+  APR_wk1 varchar(17) default NULL,
+  APR_wk2 varchar(17) default NULL,  
+  APR_wk3 varchar(17) default NULL,
+  APR_wk4 varchar(17) default NULL,   
+  
+  MAY_wk1 varchar(17) default NULL,
+  MAY_wk2 varchar(17) default NULL,  
+  MAY_wk3 varchar(17) default NULL,
+  MAY_wk4 varchar(17) default NULL,
+  
+  JUN_wk1 varchar(17) default NULL,
+  JUN_wk2 varchar(17) default NULL,  
+  JUN_wk3 varchar(17) default NULL,
+  JUN_wk4 varchar(17) default NULL,  
+  
+  JUL_wk1 varchar(17) default NULL,
+  JUL_wk2 varchar(17) default NULL,  
+  JUL_wk3 varchar(17) default NULL,
+  JUL_wk4 varchar(17) default NULL,
+  
+  AUG_wk1 varchar(17) default NULL,
+  AUG_wk2 varchar(17) default NULL,  
+  AUG_wk3 varchar(17) default NULL,
+  AUG_wk4 varchar(17) default NULL,   
+
+  SEP_wk1 varchar(17) default NULL,
+  SEP_wk2 varchar(17) default NULL,  
+  SEP_wk3 varchar(17) default NULL,
+  SEP_wk4 varchar(17) default NULL,
+  
+  OCT_wk1 varchar(17) default NULL,
+  OCT_wk2 varchar(17) default NULL,  
+  OCT_wk3 varchar(17) default NULL,
+  OCT_wk4 varchar(17) default NULL,   
+
+  NOV_wk1 varchar(17) default NULL,
+  NOV_wk2 varchar(17) default NULL,  
+  NOV_wk3 varchar(17) default NULL,
+  NOV_wk4 varchar(17) default NULL,
+  
+  DEC_wk1 varchar(17) default NULL,
+  DEC_wk2 varchar(17) default NULL,  
+  DEC_wk3 varchar(17) default NULL,
+  DEC_wk4 varchar(17) default NULL,
+  
+  username varchar(20) NOT NULL,
+  ppk varchar(15) NOT NULL,  
+  regist_date datetime NOT NULL,
+  PRIMARY KEY  (idx),
+  UNIQUE KEY (id_daftar)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
