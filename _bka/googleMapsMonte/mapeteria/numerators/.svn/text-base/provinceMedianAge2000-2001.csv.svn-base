@@ -1,0 +1,71 @@
+# Canadian median age 2001
+# From Stats Canada
+# http://www.statcan.ca/Daily/English/061026/d061026b.htm
+# Downloaded 20070411
+ca,ab,34.7
+ca,bc,37.9
+ca,mb,36.4
+ca,nb,38.2
+ca,nl,38.1
+ca,ns,38.5
+ca,nt,29.9
+ca,nu,22.5
+ca,on,36.7
+ca,pe,37.6
+ca,qc,38.5
+ca,sk,36.4
+ca,yt,35.8
+# US median age
+# From: Age:2000, Census 2000 Brief, issued Oct 2001
+# http://www.census.gov/prod/2001pubs/c2kbr01-12.pdf
+us,ak,32.4
+us,al,35.8
+us,ar,36.0
+us,az,34.2
+us,ca,33.3
+us,co,34.3
+us,ct,37.4
+us,dc,34.6
+us,de,36.0
+us,fl,38.7
+us,ga,33.4
+us,hi,36.2
+us,ia,36.6
+us,id,33.2
+us,il,34.7
+us,in,35.2
+us,ks,35.2
+us,ky,35.9
+us,la,34.0
+us,ma,36.5
+us,md,36.0
+us,me,38.6
+us,mi,35.5
+us,mn,35.4
+us,mo,36.1
+us,ms,33.8
+us,mt,37.5
+us,nc,35.3
+us,nd,36.2
+us,ne,35.3
+us,nh,37.1
+us,nj,36.7
+us,nm,34.6
+us,nv,35.0
+us,ny,35.9
+us,oh,36.2
+us,ok,35.5
+us,or,36.3
+us,pa,38.0
+us,ri,36.7
+us,sc,35.4
+us,sd,35.6
+us,tn,35.9
+us,tx,32.3
+us,ut,27.1
+us,va,35.7
+us,vt,37.7
+us,wa,35.3
+us,wi,36.0
+us,wv,38.9
+us,wy,36.2

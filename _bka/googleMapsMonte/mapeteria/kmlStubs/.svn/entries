@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2007-05-27T01:25:43.788339Z"
+   url="https://mapeteria.googlecode.com/svn/trunk/kmlStubs"
+   last-author="duckysherwood"
+   kind="dir"
+   repos="https://mapeteria.googlecode.com/svn"
+   revision="3"/>
+<entry
+   committed-rev="3"
+   name="us.hires.kmlStub"
+   text-time="2007-05-27T01:09:07.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="d1f0b5ca941c842e020c218c3cffdcaf"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="fr.hires.kmlStub"
+   text-time="2007-05-27T01:09:10.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="d6c588bd0b6b2f960db47b49bfb0573b"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="fr.lowres.kmlStub"
+   text-time="2007-05-27T01:09:06.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="39ddfae3b19ce205ff380b3856bb031b"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="us.lowres.kmlStub"
+   text-time="2007-05-27T01:09:07.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="d1f0b5ca941c842e020c218c3cffdcaf"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="Countries.hires.kmlStub"
+   text-time="2007-05-27T01:09:13.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="e049181c1dc8ae5cb516af8721089a16"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="Countries.lowres.kmlStub"
+   text-time="2007-05-27T01:09:11.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="ce92290308d3e310268cf7d66f0fa2bc"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="ca.hires.kmlStub"
+   text-time="2007-05-27T01:09:06.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="9c05bc546336b717985087ac34d9575d"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="ca.lowres.kmlStub"
+   text-time="2007-05-27T01:09:06.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="6bb068f883d89b021208ec7669dd3e76"
+   last-author="duckysherwood"
+   kind="file"/>
+</wc-entries>

@@ -1,0 +1,585 @@
+<?php 
+ob_start();
+session_start();
+$ulasan = '';
+
+include_once ('../../ip_SERVER.php');
+include_once('../../'.PROJ_FOLDER.'/inc/mysql_connect2cfg.php');
+require_once ('../../'.PROJ_FOLDER.'/mysql_connect.php'); // Connect to the database.
+require ("inc/proj_kriteria_pnilaian_tech_cfg.php");
+
+if ($_SESSION['daftar_id']){
+		$q = "select t1.tajuk, t1.OIC AS ppk, t2.bilPetender from daftar_projek AS t1 , butiran_projek AS t2 where t1.daftar_id = {$_SESSION['daftar_id']} AND t2.id_daftar = {$_SESSION['daftar_id']}";
+		$r = mysql_query ($q);
+		while ($tna = mysql_fetch_array ($r)) {
+		$_SESSION['tajuk'] = $tna[0];
+		$_SESSION['ppk'] = $tna[1];
+		$_SESSION['bilPetender'] = $tna[2];
+		$chk_id=$_SESSION['daftar_id'];
+		
+				ob_end_clean(); // Delete the buffer.
+ }}
+ mysql_close();
+function InsertUpdata($id,$new_content,$id_daftar,$username,$kp,$H,$U,$P,$D){
+	$db = new mysqli($H,$U,$P,$D);
+	if(!$db) {
+		// Show error if we cannot connect.
+		echo 'ERROR: Could not connect to the database.';
+	} else {
+	$query1 = $db->query("INSERT into kriteria (id,new_content,id_daftar,username,kp,regist_date) values 
+('$id','$new_content','$chk_id','$username','$kp',NOW())");
+}
+
+	$query2 = $db->query("UPDATE kriteria SET new_content='$new_content', username='$username',kp='$kp',regist_date=NOW() WHERE id='$id' AND id_daftar='$chk_id'") ;
+}
+ 
+ 
+ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>	
+	<title>eggBlog - pt_earthwork</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<meta name="description" content="an eggBlog with checklists for civil engineering students, intro to infra works i.e. earthworks, hydrology basin, road networks, water problem, wastewater cum structural, geotechnical, installed as web applications to manage activities at design & construction stages" />
+	<meta name="keywords" content="engineering, civil, infra, earthworks, hydrology, drainage, roads, watersupply, reticulation, sewerage, STP, mysql, php, eip, jeip, tcpdf, blog, free, software, open, download" />
+	<META name="y_key" content="371e5c105efa0ea9">
+	<link rel="icon" href="../../themes/default/favicon.ico" type="image/x-icon" />
+	
+
+    <style type="text/css">
+        .eip_savebutton {height:15px; background-color: #36f; color: #fff; font-size: 9px;font-weight: bold;}
+        .eip_cancelbutton {height:15px; background-color: #000; color: #fff; font-size: 9px;font-weight: bold;}
+        .eip_saving { background-image: url('ajax-loader.gif'); background-repeat: no-repeat; background-position: left; color: #903; padding: 0 0 0 20px; }
+        .eip_empty { color: #afafaf; border: 1px solid #afafaf; padding: 3px;}
+        .eip_editfield { background-color: #ff9; }
+	a:hover {
+	color: #C30;
+	text-decoration: none;
+	background-color: #00ff00;
+			}			
+    </style>
+    <script type="text/javascript" src="prototype.js"></script>
+    <script type="text/javascript" src="editinplace.js"></script>
+
+<fieldset> <small> <center>
+<a href="<?php echo "http://".$ipthis."/".PROJ_FOLDER."/projek_daftar.php?event=Pinda";?>">Daftar</a> |
+<a href="<?php echo "http://".$ipthis."/".PROJ_FOLDER."/projek_Dplan.php?event=Pinda";?>">D-Plan</a> |
+<!--a href="<?php echo "projek_Perunding.php?event=Pinda";?>">Perunding</a> |-->
+<a href="<?php echo "http://".$ipthis."/".PROJ_FOLDER."/projek_butiran.php?event=Pinda";?>"-->Butiran</a> |
+
+<!--a href="<?php echo "projek_sivil.php?event=Pinda";?>">Kerja sivil</a> |
+<a href="<?php echo "projek_status.php?event=Pinda";?>">Status</a> | -->
+<a href="<?php echo "http://".$ipthis."/_bka/editinPlacejQuery/kemajuanRB.php";?>"><font color="green" size="2em" style="text-decoration:none">KemajuanRB</font></a> | 
+
+<!--a href="<?php echo "projek_senarai.php?order={$_SESSION['ppk']}";?>">Senarai</a> |-->
+<a href="<?php echo "http://".$ipthis."/_bka/editinPlacejQuery/ulasanTeknikal_general.php" ;?>">U.Teknikal</a> |
+<!--a href="<?php echo "http://".$ipthis."/_bka/editinPlace050/penilaian_kriteria_earthwork.php" ;?>"-->P.Tender<!--/a--> |
+<a href="<?php echo "http://".$ipthis."/_bka/editinPlace050/NeedsStatement.php" ;?>">N.S.</a> |
+<a href="<?php echo "http://".$ipthis."/_bka/liveforms/MyBulkDrawings11.php" ;?>">D.Lukisan</a>
+</center> </small> </fieldset>			
+	
+<?php
+
+$db=mysql_connect($ajaxHost,$ajaxULogin,$ajaxPass) or die('Error connecting to the server');
+      mysql_select_db($ajaxDbase) or die('Error selecting database');
+ 
+$bilPetender = $_SESSION['bilPetender'];
+if ($_SESSION['bilPetender']==0){$bilPetender = 1; }
+if ($_SESSION['bilPetender']>15){$bilPetender = 15; }
+if (!$_SESSION['daftar_id']){$chk_id=7654321;$bilPetender =2;$username='public';$kp='123456-78-9012';}
+
+$widtbl=450 + 130 * $bilPetender;
+echo '	
+</head>
+<body> 
+<table width="'.$widtbl.'" border="1" align="center" cellpadding="-1" cellspacing="0" bordercolor="#E4E4E4" >';
+echo '<div align="center"><span>
+Tajuk projek:>&nbsp;:&nbsp;&nbsp;&nbsp; <b><font color="darkblue" style="font-size:14">'.$_SESSION['tajuk'].'</font></b>
+<br/>
+<font color="gray">EditInPlace - <b>Penilaian</b> Teknikal Kerja Sivil : </font><font color="red">Earthwork</font>
+<font color="green">&nbsp;Job no:>'.$_SESSION['daftar_id'].'</font><br/>
+
+<!--a href="http://'.$ipthis.'/_bka/editinPlace050/penilaian_kriteria_earthwork.php"><font color="green" size="2em" style="text-decoration:none"-->earthwork<!--/font></a-->
+<a href="http://'.$ipthis.'/_bka/editinPlace050/penilaian_kriteria_drainage.php"><font color="green" size="2em" style="text-decoration:none">drainage</font></a>
+<a href="http://'.$ipthis.'/_bka/editinPlace050/penilaian_kriteria_roadwork.php"><font color="green" size="2em" style="text-decoration:none">roadwork</font></a>
+<a href="http://'.$ipthis.'/_bka/editinPlace050/penilaian_kriteria_watersupply.php"><font color="green" size="2em" style="text-decoration:none">watersupply</font></a>
+<a href="http://'.$ipthis.'/_bka/editinPlace050/penilaian_kriteria_sewerage.php"><font color="green" size="2em" style="text-decoration:none">sewerage</font></a>
+<a href="http://'.$ipthis.'/_bka/editinPlace050/penilaian_kriteria_summary.php"><font color="green" size="2em" style="text-decoration:none">summary</font></a>
+</span></div>';
+
+
+
+$chk='ac136#'.$chk_id;
+      $result=mysql_query("SELECT new_content FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$ac136 = $row['new_content'];}
+
+
+echo '
+<!----------------------------->
+<tr height="25">
+<td colspan="4" bgcolor="#FFFFFF" align="right"  style="padding-right: 5px;font-size:14px">Petender :</td>';
+
+for ($j=1;$j<=$bilPetender;$j++){ 
+
+$chk='PETENDER'.$j.'#'.$chk_id;
+
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+$petender = $new_content;$new_content='';
+	}
+echo '<td colspan="2" bgcolor="#FFFFFF" align="center" style="padding-left: 0px;font-size:16px">
+<span id="PETENDER'.$j.'#'.$chk_id.'">'. $petender .'</span></td>';	
+	}
+echo '</tr>	
+<!---------------------------->';
+
+echo '
+<!---------------------------->
+<tr>
+<td bgcolor="#FFFFFF" height="40" width="20" style="align:center;padding-left: 20px;font-size:12px">No.</td>
+<td bgcolor="#FFFFFF" height="40" width="30" style="align:left;padding-left: 2px;font-size:12px">Item</td>
+<td bgcolor="#FFFFFF" height="40" width="350" style="align:center;padding-left: 20px;font-size:12px">EVALUATION CRITERIA/ ITEM DESCRIPTION</td>
+<td bgcolor="#FFFFFF" height="40" width="50" style="align:center;padding-left: 20px;font-size:12px">WTG</td>';
+
+$denomee=6;
+if ($ac136=='__N.A.__'){$denomee=5;}
+
+
+$gredskor='';
+for ($j=1;$j<=$bilPetender;$j++){ 
+
+$gredskor .=
+'<td bgcolor="#FFFFFF" height="40" width="65" style="align:center;padding-left: 20px;font-size:12px">GRADE</td>
+<td bgcolor="#FFFFFF" height="40" width="65" style="align:center;padding-left: 20px;font-size:12px">SCORE</td>';
+							}
+echo $gredskor.'</tr>
+<!-------------------e------------------>'; 
+			
+
+//<!------------start----scope---earthwork------------------>
+$scope = 1; //earthwork
+//$chk_id=$_SESSION['daftar_id'];
+//if (!$_SESSION['daftar_id']){$chk_id=7654321;}
+
+
+echo ' 
+<tr height="25">
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span id="item_'.$scope.'#'.$chk_id.'">'.$item[100].'</span></td>
+<td colspan="2" width="380" bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">'.$kriteria[100].'</td>
+<td bgcolor="#FDFECF" bordercolor="#EBEEF5" style="align:center;padding-left: 20px;font-size:12px">';
+
+$chk1='WTG_'.$scope.'1#'.$chk_id;$chk2='WTG_'.$scope.'2#'.$chk_id;$chk3='WTG_'.$scope.'3#'.$chk_id;
+
+	$result=mysql_query("SELECT SUM(new_content) FROM kriteria where (id='$chk1' || id='$chk2' || id='$chk3')") or die ('Error performing query');
+$swtg=mysql_fetch_array($result);	  
+$sumWTG=$swtg[0];
+
+echo '<span id="WORKSCOPE_'.$scope.'#'.$chk_id.'"><b>'.
+$sumWTG.'</b></span></td>';
+InsertUpdata('WORKSCOPE_'.$scope.'#'.$chk_id, $sumWTG, $chk_id, $username, $kp ,$ajaxHost,$ajaxULogin,$ajaxPass,$ajaxDbase);
+
+for ($j=1;$j<=$bilPetender;$j++){ 
+///variable shall be manually tally to array kod or id & must be equal no of criteria considered
+$chk_d1="gred111".$j."#".$chk_id;$chk_d2="gred112".$j."#".$chk_id;$chk_d3="gred113".$j."#".$chk_id;$chk_d4="gred114".$j."#".$chk_id;
+
+$chk_c1="gred121".$j."#".$chk_id;$chk_c2="gred122".$j."#".$chk_id; //$chk_c3="gred123".$j."#".$chk_id;$chk_c4="gred124".$j."#".$chk_id;
+
+$chk_p1="gred131".$j."#".$chk_id;$chk_p2="gred132".$j."#".$chk_id;$chk_p3="gred133".$j."#".$chk_id;$chk_p4="gred134".$j."#".$chk_id;$chk_p5="gred135".$j."#".$chk_id;$chk_p6="gred136".$j."#".$chk_id;
+
+            $result=mysql_query("SELECT SUM(new_content) FROM kriteria where (id='$chk_d1' || id='$chk_d2' || id='$chk_d3'  || id='$chk_d4')") or die ('Error performing query');
+$sumg=mysql_fetch_array($result);	  
+$sumgred1=$sumg[0];  // 3 el
+
+            $result=mysql_query("SELECT SUM(new_content) FROM kriteria where (id='$chk_c1' || id='$chk_c2')") or die ('Error performing query');
+$sumg=mysql_fetch_array($result);	  
+$sumgred2=$sumg[0]; // 1 el
+
+if ($ac136=='__N.A.__'){
+            $result=mysql_query("SELECT SUM(new_content) FROM kriteria where (id='$chk_p1' || id='$chk_p2' || id='$chk_p3' || id='$chk_p4' || id='$chk_p5')") or die ('Error performing query');
+$sumg=mysql_fetch_array($result);	  
+$sumgred3=$sumg[0];  } 
+
+else
+
+{$result=mysql_query("SELECT SUM(new_content) FROM kriteria where (id='$chk_p1' || id='$chk_p2' || id='$chk_p3' || id='$chk_p4' || id='$chk_p5' || id='$chk_p6')") or die ('Error performing query');
+$sumg=mysql_fetch_array($result);	  
+$sumgred3=$sumg[0];  }
+
+$chkwtg='WTG_'.$scope.'1#'.$chk_id;
+            $result=mysql_query("SELECT new_content FROM kriteria where id='$chkwtg'") or die ('Error performing query');
+$wtg=mysql_fetch_array($result);	  
+$wtg_1=$wtg[0];
+
+$chkwtg='WTG_'.$scope.'2#'.$chk_id;
+            $result=mysql_query("SELECT new_content FROM kriteria where id='$chkwtg'") or die ('Error performing query');
+$wtg=mysql_fetch_array($result);	  
+$wtg_2=$wtg[0];
+
+$chkwtg='WTG_'.$scope.'3#'.$chk_id;
+            $result=mysql_query("SELECT new_content FROM kriteria where id='$chkwtg'") or die ('Error performing query');
+$wtg=mysql_fetch_array($result);	  
+$wtg_3=$wtg[0];
+
+$sumskor1 = floatval($sumgred1)*floatval($wtg_1)/(4*5);
+$sumskor2 = floatval($sumgred2)*floatval($wtg_2)/(2*5);
+$sumskor3 = floatval($sumgred3)*floatval($wtg_3)/($denomee*5);
+
+$sumgred = round($sumgred1+$sumgred2+$sumgred3,2);
+$sumskor = round($sumskor1+$sumskor2+$sumskor3,2);
+
+echo '<td bgcolor="#FDFECF" bordercolor="#EBEEF5" style="align:center;padding-left: 20px;font-size:12px">
+<span id="gred10'.$j.'#'.$chk_id.'"><b>'. $sumgred .'</b></span></td>';
+echo '<td bgcolor="#FDFECF" bordercolor="#EBEEF5" style="align:center;padding-left: 20px;font-size:12px">
+<span id="skor10'.$j.'#'.$chk_id.'"><b>'.$sumskor.'</b></span></td>';		
+InsertUpdata('skor10'.$j.'#'.$chk_id, $sumskor, $chk_id, $username, $kp ,$ajaxHost,$ajaxULogin,$ajaxPass,$ajaxDbase);
+InsertUpdata('gred10'.$j.'#'.$chk_id, $sumgred, $chk_id, $username, $kp ,$ajaxHost,$ajaxULogin,$ajaxPass,$ajaxDbase);
+
+		}
+
+echo '</tr>';
+//<!------------e----scope---earthwork------------------>
+
+
+//<!-----------------s--Recommendations--s---------------->
+$cat=1;
+echo '<tr height="25">
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span id="item_'.$scope.$cat.'#'.$chk_id.'">'.$item[$scope.$cat].'</span></td>
+<td colspan="2" bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+'.$kriteria[$scope.$cat].'</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:12px">';
+$chk='WTG_'.$scope.$cat.'#'.$chk_id;
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+		}
+$weightage = $new_content; $new_content='';
+		
+echo '<span id="WTG_'.$scope.$cat.'#'.$chk_id.'">'.
+$weightage.'</span></td>
+';
+$linkrow='';
+for ($j=1;$j<=$bilPetender;$j++){ 
+$linkrow .='
+<td bgcolor="#FFFFFF" style="align:center;padding-left: -2px;font-size:12px">.</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: -2px;font-size:11px">.</td>';
+		}
+echo $linkrow.'</tr>';
+//<!-----------------e--Recommendations--e---------------->
+
+
+//<!-----------------s--details--s---------------->
+for ($nitm=111;$nitm<=114;$nitm++){ 
+echo '
+<tr height="25">
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 0px;font-size:12px">.</td>
+<td bgcolor="#FFFFFF" align="right" style="align:right;padding-right: 2px;font-size:12px">
+'. $item[$nitm].'</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span>'. $kriteria[$nitm].'</span></td>
+<td bgcolor="#FFFFFF" align="left" style="padding-left: 0px;font-size:12px"><span>.</span></td>';
+for ($j=1;$j<=$bilPetender;$j++){ 
+
+$chk='gred'.$nitm.$j.'#'.$chk_id;
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+		}
+		$gred = $new_content; $new_content='';
+$skor = floatval($gred)*floatval($weightage)/(4*5);
+$skor = round($skor,2);
+echo '<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:11px">
+<span id="gred'.$nitm.$j.'#'.$chk_id.'">'.$gred.'</span></td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:11px">
+<span id="skor'.$nitm.$j.'#'.$chk_id.'">'.$skor.'</span></td>';
+InsertUpdata('skor'.$nitm.$j.'#'.$chk_id,$skor,$id_daftar,$username,$kp ,$ajaxHost,$ajaxULogin,$ajaxPass,$ajaxDbase);
+} 
+echo '</tr>';
+				}
+//<!-----------------e--details--e---------------->
+/////////////PRE_CALCULATION/////////////////////////////
+//<!-----------------s--PRE_CALCULATION--s---------------->
+$cat=2;
+echo '<tr height="25">
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span id="item_'.$scope.$cat.'#'.$chk_id.'">'.$item[$scope.$cat].'</span></td>
+<td colspan="2" bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+'.$kriteria[$scope.$cat].'</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:12px">';
+$chk='WTG_'.$scope.$cat.'#'.$chk_id;
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+		}
+$weightage = $new_content; $new_content='';
+		
+echo '<span id="WTG_'.$scope.$cat.'#'.$chk_id.'">'.
+$weightage.'</span></td>
+';
+$linkrow='';
+for ($j=1;$j<=$bilPetender;$j++){ 
+$linkrow .='
+<td bgcolor="#FFFFFF" style="align:center;padding-left: -2px;font-size:12px">.</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: -2px;font-size:11px">.</td>';
+		}
+echo $linkrow.'</tr>';
+//<!-----------------e--Recommendations--e---------------->
+
+
+//<!-----------------s--details--s---------------->
+for ($nitm=121;$nitm<=122;$nitm++){ 
+echo '
+<tr height="25">
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 0px;font-size:12px">.</td>
+<td bgcolor="#FFFFFF" align="right" style="align:right;padding-right: 2px;font-size:12px">
+'. $item[$nitm].'</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span>'. $kriteria[$nitm].'</span></td>
+<td bgcolor="#FFFFFF" align="left" style="padding-left: 0px;font-size:12px"><span>.</span></td>';
+for ($j=1;$j<=$bilPetender;$j++){ 
+
+$chk='gred'.$nitm.$j.'#'.$chk_id;
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+		}
+		$gred = $new_content; $new_content='';
+$skor = floatval($gred)*floatval($weightage)/(2*5);
+$skor = round($skor,2);
+echo '<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:11px">
+<span id="gred'.$nitm.$j.'#'.$chk_id.'">'.$gred.'</span></td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:11px">
+<span id="skor'.$nitm.$j.'#'.$chk_id.'">'.$skor.'</span></td>';
+InsertUpdata('skor'.$nitm.$j.'#'.$chk_id,$skor,$id_daftar,$username,$kp ,$ajaxHost,$ajaxULogin,$ajaxPass,$ajaxDbase);
+} 
+echo '</tr>';
+				}
+///////////////////PRELIM_KEYPLAN////////////////////////////////////////
+/////////////PRELIM_KEYPLAN/////////////////////////////
+//<!-----------------s--PRELIM_KEYPLAN--s---------------->
+$cat=3;  
+echo '<tr height="25">
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span id="item_'.$scope.$cat.'#'.$chk_id.'">'.$item[$scope.$cat].'</span></td>
+<td colspan="2" bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+'.$kriteria[$scope.$cat].'</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:12px">';
+$chk='WTG_'.$scope.$cat.'#'.$chk_id;
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+		}
+$weightage = $new_content; $new_content='';
+		
+echo '<span id="WTG_'.$scope.$cat.'#'.$chk_id.'">'.
+$weightage.'</span></td>
+';
+$linkrow='';
+for ($j=1;$j<=$bilPetender;$j++){ 
+$linkrow .='
+<td bgcolor="#FFFFFF" style="align:center;padding-left: -2px;font-size:12px">.</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: -2px;font-size:11px">.</td>';
+		}
+echo $linkrow.'</tr>';
+//<!-----------------e--Recommendations--e---------------->
+
+
+//<!-----------------s--details--s---------------->
+$denomee=6;
+if ($ac136=='__N.A.__'){$denomee=5;}
+
+for ($nitm=131;$nitm<=136;$nitm++){ 
+echo '
+<tr height="25">';
+if ($nitm==136){
+echo '
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 15px;font-size:12px">*</td>';}
+ else
+{echo '
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 0px;font-size:12px">.</td>';}
+
+
+echo '
+<td bgcolor="#FFFFFF" align="right" style="align:right;padding-right: 2px;font-size:12px">
+'. $item[$nitm].'</td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 5px;font-size:12px">
+<span>'. $kriteria[$nitm].'</span></td>';
+
+if ($nitm==136){
+echo '
+<td bgcolor="#bbFF" align="left" style="padding-left: 7px;font-size:12px"><span id="ac136#'.$chk_id.'">'.$ac136.'</span></td>';} else
+{
+echo '
+<td bgcolor="#FFFFFF" align="left"style="padding-left:0px;font-size:12px"> <span>.</span></td>';}
+
+
+for ($j=1;$j<=$bilPetender;$j++){ 
+
+$chk='gred'.$nitm.$j.'#'.$chk_id;
+      $result=mysql_query("SELECT * FROM kriteria WHERE id='$chk'") or die ('Error performing query');
+      while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
+$id  = $row['id'];
+$form_type = $row['form_type'];
+$old_content = $row['old_content'];
+$new_content = $row['new_content'];
+$old_option = $row['old_option'];
+$new_option = $row['new_option'];
+$old_option_text = $row['old_option_text'];
+$new_option_text = $row['new_option_text'];
+$id_daftar = $row['id_daftar'];
+		}
+		$gred = $new_content; $new_content='';
+$skor = floatval($gred)*floatval($weightage)/($denomee*5);
+$skor = round($skor,2);
+if ($ac136=='__N.A.__' AND $nitm==136){$skor='__N.A.__';}
+echo '<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:11px">
+<span id="gred'.$nitm.$j.'#'.$chk_id.'">'.$gred.'</span></td>
+<td bgcolor="#FFFFFF" style="align:center;padding-left: 20px;font-size:11px">
+<span id="skor'.$nitm.$j.'#'.$chk_id.'">'.$skor.'</span></td>';
+InsertUpdata('skor'.$nitm.$j.'#'.$chk_id,$skor,$id_daftar,$username,$kp ,$ajaxHost,$ajaxULogin,$ajaxPass,$ajaxDbase);
+
+} 
+echo '</tr>';
+				}
+
+////////////////////////////////////////////////////////////
+echo '
+<!----------------------------------------->
+<!---//////////////--><!---//////////////-->
+</table> <BR>';
+
+
+
+?>
+
+
+<script type="text/javascript">
+
+	EditInPlace.defaults['save_url'] = 'save_kriteria.php';
+	
+<?php
+
+
+//$chk_id=$_SESSION['daftar_id'];
+//if (!$_SESSION['daftar_id']){$chk_id=7654321;}
+	
+	
+for ($j=1;$j<=$bilPetender;$j++){ 	
+	echo " $('skor10".$j."#".$chk_id."').editInPlace({	form_type: 'textarea'});
+	$('gred10".$j."#".$chk_id."').editInPlace({	form_type: 'textarea'});
+	$('PETENDER".$j."#".$chk_id."').editInPlace({	form_type: 'textarea'});"; 
+	}
+
+for ($i=111;$i<=114;$i++){ 	
+	for ($j=1;$j<=$bilPetender;$j++){ 	
+		echo " $('gred".$i.$j."#".$chk_id."').editInPlace({
+		form_type: 'select',
+		select_options: { '0':'0','1':'1','2':'2','3':'3','4':'4','5':'5'
+		}, external_control: 'skor".$i.$j."#".$chk_id."'});"; 
+								}
+							}
+							
+for ($i=121;$i<=122;$i++){ 	
+	for ($j=1;$j<=$bilPetender;$j++){ 	
+		echo " $('gred".$i.$j."#".$chk_id."').editInPlace({
+		form_type: 'select',
+		select_options: { '0':'0','1':'1','2':'2','3':'3','4':'4','5':'5'
+		}, external_control: 'skor".$i.$j."#".$chk_id."'});"; 
+								}
+							}
+							
+	for ($i=136;$i<=136;$i++){ 	
+	for ($j=1;$j<=$bilPetender;$j++){ 	
+		echo " $('gred".$i.$j."#".$chk_id."').editInPlace({
+		form_type: 'select',
+		select_options: { '0':'0','1':'1','2':'2','3':'3','4':'4','5':'5','6':'__N.A.__'
+		}, external_control: 'skor".$i.$j."#".$chk_id."'});"; 
+								}
+							}							
+							
+							
+for ($i=131;$i<=135;$i++){ 	
+	for ($j=1;$j<=$bilPetender;$j++){ 	
+		echo " $('gred".$i.$j."#".$chk_id."').editInPlace({
+		form_type: 'select',
+		select_options: { '0':'0','1':'1','2':'2','3':'3','4':'4','5':'5'
+		}, external_control: 'skor".$i.$j."#".$chk_id."'});"; 
+								}
+							}	
+							
+ 	echo " $('ac136#".$chk_id."').editInPlace({
+		form_type: 'select',
+		select_options: { '0':'Applicable','1':'__N.A.__'}});"; 
+							
+for ($w=1;$w<=5;$w++){ 		
+	echo " $('WORKSCOPE_".$w."#".$chk_id."').editInPlace();"; 
+	
+	echo " $('WTG_".$w."1#".$chk_id."').editInPlace();"; 
+	echo " $('WTG_".$w."2#".$chk_id."').editInPlace();"; 
+	echo " $('WTG_".$w."3#".$chk_id."').editInPlace();"; 
+	}
+
+	
+	?>
+	
+
+
+</script>
+
+</body>
+</html>
+<?php // Flush the buffered output to the Web browser.
+ob_flush();
+?>

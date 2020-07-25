@@ -1,0 +1,78 @@
+<?php 	
+		ob_start();
+		session_start();
+		require_once('config.php');
+		 require_once('auth-kpp.php');
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Registration Successful</title>
+<link href="demo.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<p><a href="lokasi_senarai.php">Klik di sini</a> untuk lihat senarai lokasi borelog.</p>
+<?php
+if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
+		echo '<ul class="err">';
+		foreach($_SESSION['ERRMSG_ARR'] as $msg) {
+			echo '<li>',$msg,'</li>'; 
+		}
+		echo '</ul>';
+		unset($_SESSION['ERRMSG_ARR']);
+	}
+
+
+
+
+//Connect to mysql db
+$conn = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD);
+mysql_select_db(DB_DATABASE,$conn);
+
+//-------------------
+ $trk_bore = $_SESSION['trk_bore'];
+ $lat = $_SESSION['lat'];
+ $lng = $_SESSION['lng'];
+ $ground_lvl = $_SESSION['ground_lvl'];
+ $water_lvl = $_SESSION['water_lvl'];
+ $catatan = $_SESSION['catatan'];
+ $username = $_SESSION['username'];
+ $user_id = $_SESSION['user_id'];
+ $trk_daftar = $_SESSION['trk_daftar'];
+
+
+if (count($_SESSION['ERRMSG_ARR'])==0 && !empty($_SESSION['OIC']) && !empty($_SESSION['idy']) ){ 
+$sql="INSERT INTO eb_borehole (trk_bore,lat,lng,ground_lvl,water_lvl,catatan,user_name,user_id,trk_daftar) VALUES ('$trk_bore','$lat','$lng','$ground_lvl','$water_lvl','$catatan','$username','$user_id',NOW())";
+$result=mysql_query($sql,$conn); }
+
+
+
+if (!$result) {
+(empty($_SESSION['OIC'])) ? die('<center>Daftar Projek Oleh KPPK sahaja !</center>') :
+die('<center>Data tidak didaftarkan :  ' . mysql_error().' Duplicated Post Data.<br/><font color="gray"><small>Kembali ke template <a href="index.php">INPUT</a>.</small></font></center><br>');} 
+elseif (empty($_SESSION['idy'])){ 
+echo "<center>Skipping Data Input...  duplicate nama projek</center><br>";
+echo '<h1>Pendaftaran TIDAK Berjaya</h1>';
+  }
+else {
+echo '<center>Lokasi borehole baru telah didaftarkan. Terima kasih!<br/>
+<font color="gray"><small>Kembali ke template <a href="index.php">INPUT</a>.</small></font>
+</center><br>';
+echo '<h1>Pendaftaran Berjaya</h1>';
+  }
+
+//print "<pre>".print_r($_POST, true)."</pre>";
+
+mysql_free_result($chk_result);
+unset(
+	$_SESSION['idy'] );
+
+?>
+</body>
+</html>
+<?php ob_flush();
+?>

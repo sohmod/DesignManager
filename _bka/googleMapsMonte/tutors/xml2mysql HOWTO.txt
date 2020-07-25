@@ -1,0 +1,390 @@
+http://www.bobulous.org.uk/coding/php-xml-regex-3.html
+Matching a unique XML element
+Here is the code for a function I've written called value_in which extracts the content of a single element in a piece of XML:
+
+function value_in($element_name, $xml, $content_only = true) {
+    if ($xml == false) {
+        return false;
+    }
+    $found = preg_match('#<'.$element_name.'(?:\s+[^>]+)?>(.*?)'.
+            '</'.$element_name.'>#s', $xml, $matches);
+    if ($found != false) {
+        if ($content_only) {
+            return $matches[1];  //ignore the enclosing tags
+        } else {
+            return $matches[0];  //return the full pattern match
+        }
+    }
+    // No match found: return false.
+    return false;
+}You tell it the name of the element you're interested in, give it the XML you want to extract the data from, and tell it whether it should return only the content of the named element or preserve the enclosing tags of the named element. Then value_in returns the content of the first element it finds within the supplied XML that is an exact match for the given name.
+
+Examples of use
+Consider an XML sample:
+
+<movies>
+    <movie>
+        <title>Der Untergang</title>
+        <actor>
+            <name>Bruno Ganz</name>
+        </actor>
+        <actor>
+            <name>Alexandra Maria Lara</name>
+        </actor>
+        <director>
+            <name>Oliver Hirschbiegel</name>
+        </director>
+    </movie>
+</movies>If you had the above XML stored in a variable called $xml then you could extract the value of the title element by calling value_in like this:
+
+$title = value_in('title', $xml);And then $title should contain the value "Der Untergang". If you wanted to preserve the enclosing title tags, you could call value_in with the optional third parameter set to false:
+
+$title = value_in('title', $xml, false);so that $title should instead contain the value "<title>Der Untergang</title>".
+
+Remember that value_in extracts the content of the first element whose name matches the provided parameter. So what if you want to extract the director's name from the above XML sample? You can't just call value_in with the parameter 'name' because it will return the content of the first name element in the sample, which would be "Bruno Ganz". Instead, it's easiest to make one call to value_in to select the director element, and then use the value returned as the input for a second call to value_in, this time asking for the content of the name element. Like this:
+
+$director = value_in('director', $xml);
+$name = value_in('name', $director);Or even more compact:
+
+$name = value_in('name', value_in('director', $xml);Now $name should contain the value 'Oliver Hirshbiegel'.
+
+
+Matching multiple XML elements
+Here is the code for a function I've written which builds an array of all elements in an XML file that have a specified name:
+
+function element_set($element_name, $xml, $content_only = false) {
+    if ($xml == false) {
+        return false;
+    }
+    $found = preg_match_all('#<'.$element_name.'(?:\s+[^>]+)?>' .
+            '(.*?)</'.$element_name.'>#s',
+            $xml, $matches, PREG_PATTERN_ORDER);
+    if ($found != false) {
+        if ($content_only) {
+            return $matches[1];  //ignore the enlosing tags
+        } else {
+            return $matches[0];  //return the full pattern match
+        }
+    }
+    // No match found: return false.
+    return false;This function works very similarly to value_in, but this time an array of results is returned instead of a single string. You provide the name of the element you want to search for, an XML sample to search through, and tell the function whether to preserve or discard the initial enclosing tags for each result returned.
+
+Example of use
+This time consider a different XML sample:
+
+<catalogue version="2.0" gen="TatBase2000">
+    <item>
+        <name>Steel nails, 10-pack, rusty</name>
+        <price>€3,99</price>
+        <dimensions>
+            <depth>70mm</depth>
+            <width>6mm</width>
+        </dimensions>
+    </item>
+    <item>
+        <name>Box of vinyl LPs, water damaged</name>
+        <price>¥356</price>
+        <dimensions>
+            <width>40cm</width>
+            <height>40cm</height>
+            <depth>20cm</depth>
+        </dimensions></item>
+    <item>
+        <name>Crocodile Dundee, Betamax tape</name>
+        <price>$1.00</price>
+        <dimensions>
+            <width>9.5cm</width>
+            <height>15.5cm</height>
+            <depth>2.5cm</depth>
+        </dimensions>
+    </item>
+    <item>
+        <name>Bangers & Mash, cold</name>
+        <price>73p</price>
+    </item>
+</catalogue>The above XML has more than one item element, so the value_in function is of no use. The elment_set function, however, can produce an array that contains each item element in the XML sample. Call element_set like this:
+
+$item_set = element_set('item', $xml);Now $item_set should be an array which contains four strings, each one containing the content of an item element from the XML sample. PHP's print_r function can confirm the content of the $item_set array like this:
+
+print_r($item_set);Array
+(
+    [0] => <item>
+        <name>Steel nails, 10-pack, rusty</name>
+        <price>€3,99</price>
+        <dimensions>
+            <depth>70mm</depth>
+            <width>6mm</width>
+        </dimensions>
+    </item>
+
+    [1] => <item>
+        <name>Box of vinyl LPs, water damaged</name>
+        <price>¥356</price>
+        <dimensions>
+            <width>40cm</width>
+            <height>40cm</height>
+            <depth>20cm</depth>
+        </dimensions>
+    </item>
+
+    [2] => <item>
+        <name>Crocodile Dundee, Betamax tape</name>
+        <price>$1.00</price>
+        <dimensions>
+            <width>9.5cm</width>
+            <height>15.5cm</height>
+            <depth>2.5cm</depth>
+        </dimensions>
+    </item>
+
+    [3] => <item>
+        <name>Bangers & Mash, cold</name>
+        <price>73p</price>
+    </item>
+)
+(I've added newlines and tabs to make the above output more readable.)
+
+By default, element_set preserves the enclosing tags of the named element (which is the opposite behaviour to the value_in function). Pass a value of true as the third parameter to element_set if you want to discard them instead.
+
+Now that we have an array that contains the content of each item element, we can use value_in to pick out the sub-elements we're interested in. If you wanted to display all of the prices one after the other, you could loop through the array using foreach like this:
+
+foreach ($item_set as $item) {
+    $name = value_in('name', $item);
+    $price = value_in('price', $item);
+    echo '<p>Price of '.$name.' is '.$price.'</p>';
+}which gives the following output:
+
+<p>Price of Steel nails, 10-pack, rusty is €3,99</p>
+<p>Price of Box of vinyl LPs, water damaged is ¥356</p>
+<p>Price of Crocodile Dundee, Betamax tape is $1.00</p>
+<p>Price of Bangers & Mash, cold is 73p</p>Using element_set to build an array of elements, and then looping through the array and using value_in to further extract content if necessary, you can very quickly produce HTML that contains the data you want from an XML file.
+
+
+
+Extracting attributes from XML elements
+Here is the code for a simple function I've written to extract attributes from a named XML element:
+
+function element_attributes($element_name, $xml) {
+    if ($xml == false) {
+        return false;
+    }
+    // Grab the string of attributes inside an element tag.
+    $found = preg_match('#<'.$element_name.
+            '\s+([^>]+(?:"|\'))\s?/?>#',
+            $xml, $matches);
+    if ($found == 1) {
+        $attribute_array = array();
+        $attribute_string = $matches[1];
+        // Match attribute-name attribute-value pairs.
+        $found = preg_match_all(
+                '#([^\s=]+)\s*=\s*(\'[^<\']*\'|"[^<"]*")#',
+                $attribute_string, $matches, PREG_SET_ORDER);
+        if ($found != 0) {
+            // Create an associative array that matches attribute
+            // names to attribute values.
+            foreach ($matches as $attribute) {
+                $attribute_array[$attribute[1]] = $attribute[3];
+            }
+            return $attribute_array;
+        }
+    }
+    // Attributes either weren't found, or couldn't be extracted
+    // by the regular expression.
+    return false;
+}This function searches the provided XML sample for the first element of the given name that has attributes, and returns those attributes in an associative array. The array keys are the attribute names, and the array values are the attribute values.
+
+Example of use
+Given the following XML sample in a PHP variable called $xml:
+
+<item>
+    <target href="http://somedomain.com/" type="text/html"
+	        category="Home &amp; Leisure" />
+    <title>This is the title of this item</title>
+</item>you could call element_attributes like this:
+
+$attribute_array = element_attributes('target', $xml);Now, if the function hasn't failed and returned false, you should have an associative array that contains the attribute values of the target element. In the returned array, the attribute names are the keys to the array, so you can grab the value of the individual attributes like this:
+
+$href = $attribute_array['href'];
+$type = $attribute_array['type'];
+$category = $attribute_array['category'];A very handy way of quickly grabbing the attribute values of a lone element. But if there are several empty elements with the same name, you will only be able to get the attributes of the first matching element that has attributes. Which leads us into a note about the limitations of these functions.
+
+Limitations of using generic regex to extract XML data
+The three pages of this article have offered simple functions for grabbing at the content and attributes of XML elements by using regular expression patterns to match the juicy bits in an XML sample.
+
+Limitations of value_in and element_set
+Because of the way the regular expressions in these functions work, there are some XML structures that will break value_in and element_set and cause them to return unexpected results. For instance, neither function can extract the content of an element that contains another element with the same name, as in this example:
+
+<div class="outer">
+    <div class="inner">some content</div>
+</div>Calling value_in to extract the content of "div" from the above XML would break, because the regular expression would stop when it found the closing tag for the inner div element, thinking it was the closing tag for the outer div element.
+
+Another shortcoming with the regular expression approach is where elements at different levels within a piece of XML share the same name. For instance:
+
+<root>
+    <sub-element>
+        <name>Alan</name>
+    </sub-element>
+    <name>Brad</name>
+</root>Because of the way the regular expression in value_in works, there's no way of isolating the name element that contains "Brad" in the above XML, so there's no way of selecting it using value_in. This happens because there's no way to match the element called 'name' that contains "Brad" without first matching the element called 'name' that contains "Alan". Using element_set to extract the name elements would store both of them in an array, but you wouldn't be able to isolate only name elements that were immediate child elements of root.
+
+Limitations of element_attributes
+The element_attributes function also has a serious limitation. It can only grab the attributes from the first named element that has attributes. If there is more than one element with the same name, such as in this XML sample,
+
+<item>
+	<hyperlink />
+	<hyperlink/>
+	<hyperlink type="text/html" href="http://www.bobulous.org.uk/coding/" />
+	<hyperlink href="text/html" href="http://www.bbc.co.uk/"/>
+</item>then the element_attributes function can only return an associative array that contains the attributes for the third hyperlink element, because the first two have no attributes and the fourth hyperlink element cannot be isolated.
+
+If the elements weren't empty elements, then the element_set function could gather up the elements into an array, and then you could call element_attributes on each one. But element_set doesn't match empty elements (because they contain no content), so it wouldn't work in this example. You could create a modified version of element_set that looks for empty elements, but hopefully you won't encounter many XML data formats that make use of empty element siblings with the same name.
+
+Summary
+These limitations won't be a problem if you're trying to extract content from well-designed XML data files, but if you're trying to extract content from XHTML files or files that feature problem structures like the above, you'll have to come up with your own customised regular expressions, or switch to an event-based parser like the one that expat offers.
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------
+  
+<?php require_once ('connect.php'); 
+db_connect();
+ 
+$xmlReader = new XMLReader();
+ 
+$filename = "getmein.xml";
+$url = "http://www.icanget.co.uk/getmein.xml";
+file_put_contents($filename, file_get_contents($url));
+ 
+$xmlReader->open($filename); 
+ 
+while ($xmlReader->read()) 
+{
+}
+switch ($xmlReader->name)
+{
+case 'product':
+ 
+$dom = new DOMDocument();
+$domNode = $xmlReader->expand();
+$element = $dom->appendChild(domNode);
+$domstring = utf8_encode($dom->saveXML($element));
+$product = new SimpleXMLElement($domString);
+ 
+$product_code = $product->product_code;
+$product_name = $product->product_name;
+$level1 = $product->level1;
+$level2 = $product->level2;
+$description = $product->description;
+$buyat_short_deeplink_url = $product->buyat_short_deeplink_url;
+ 
+$image_url = $product->image_url;
+$currency = $product->currency;
+$price = $product->online_price;
+$city = $product->city;
+$country = $product->country;
+$event_date = $product->event_date;
+$event_venue = $product->event_venue;
+$number_available = $product->number_available;
+ 
+if (strlen($product_code)> 0)
+{
+$query = mysql_query("REPLACE INTO icanget_tickets
+(product_code, product_name, level1, level2, description, buyat_short_deeplink_url, image_url, currency, price, country, event_date, event_venue, number_available)
+ 
+VALUES ('$product_code', '$product_name', '$level1', '$level2', '$description', '$buyat_short_deeplink_url', '$image_url', '$currency', '$price', '$country', '$event_date', '$event_venue', '$number_available')");
+ 
+echo $product_name . "has been inserted </br>";
+}
+break;
+ 
+}
+ 
+?>
+
+
+
+
+
+
+
+
+-------------------------------------
+
+<?php 
+#require_once ('connect.php'); 
+#db_connect();
+ 
+$xmlReader = new XMLReader();
+ 
+$filename = "Product.xml";
+#$url = "http://www.icanget.co.uk/getmein.xml";
+#file_put_contents($filename, file_get_contents($url));
+ 
+$xmlReader->open($filename); 
+ 
+while ($xmlReader->read()) 
+{
+ 
+switch ($xmlReader->name)
+{
+case 'product':
+ 
+$dom = new DOMDocument();
+$domNode = $xmlReader->expand();
+$element = $dom->appendChild($domNode);
+$domString = utf8_encode($dom->saveXML($element));
+$product = new SimpleXMLElement($domString);
+ 
+$product_code = $product->product_code;
+$product_name = $product->product_name;
+$level1 = $product->level1;
+$level2 = $product->level2;
+$description = $product->description;
+$buyat_short_deeplink_url = $product->buyat_short_deeplink_url;
+ 
+$image_url = $product->image_url;
+$currency = $product->currency;
+$price = $product->online_price;
+$city = $product->city;
+$country = $product->country;
+$event_date = $product->event_date;
+$event_venue = $product->event_venue;
+$number_available = $product->number_available;
+ 
+if (strlen($product_code)> 0)
+{
+echo "REPLACE INTO icanget_tickets
+(product_code, product_name, level1, level2, description, buyat_short_deeplink_url, image_url, currency, price, country, event_date, event_venue, number_available)
+ 
+VALUES ('$product_code', '$product_name', '$level1', '$level2', '$description', '$buyat_short_deeplink_url', '$image_url', '$currency', '$price', '$country', '$event_date', '$event_venue', '$number_available')";
+#if(!$query) die(mysql_error()); 
+echo $product_name . "has been inserted </br>";
+}
+break;
+ 
+}
+ 
+}
+ 
+?>
+
+
+
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+

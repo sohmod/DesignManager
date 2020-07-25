@@ -1,0 +1,18 @@
+# This shows the emission reduction potential of Ground
+# Source Heat Pump technology for an average Canadian
+# home (1500 sq ft), using a coefficient of performance
+# of 4 for natural gas.
+# Source: Jana Hanova, my bud.
+ca,nl,5
+ca,pe,2.3
+ca,ns,1.1
+ca,nb,2.9
+ca,qc,6.1
+ca,on,4.2
+ca,mb,5.1
+ca,sk,1.2
+ca,ab,1.5
+ca,bc,3.9
+ca,yt,2.8
+ca,nt,2.8
+ca,nu,2.8

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2007-05-27T01:25:43.788339Z"
+   url="https://mapeteria.googlecode.com/svn/trunk/numerators"
+   last-author="duckysherwood"
+   kind="dir"
+   repos="https://mapeteria.googlecode.com/svn"
+   revision="3"/>
+<entry
+   committed-rev="3"
+   name="frMilkProduction1997.csv"
+   text-time="2007-05-27T01:09:05.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="f5b76be1f20cf7403208c2882b608574"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="caHeatPumpSavingsVsGas.csv"
+   text-time="2007-05-27T01:09:05.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="b976dbbd2b0251b6a7c91830f412c4cb"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="FrenchPopulation2005.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="dae603e01c94fb306124f6142cd86790"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="frGrapeProduction1997.csv"
+   text-time="2007-05-27T01:09:05.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="8556b6727f6adb20fb09d43f08221d55"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="fatByCountry.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="da25bbe4788b8256762ed273c16f8ccb"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usStateResidentialElectricityPrices2006.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="2a2859b63b6ef0381fccfef78b4b3244"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usCollegeDegree2000.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="cd13c0a5e31f35c811b1639aa1918a06"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="countryPaperConsumption2005.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="d303b97e6c49f330ce74e435531923a9"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="provinceMedianAge2000-2001.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="d9303591af59050cc02bcd63fed10eba"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usStateCommercialElectricityPrices2006.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="d0e8d00e5aeeb392b863a705d95da85a"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="frBSE2000.csv"
+   text-time="2007-05-27T01:09:05.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="f4a47d7eed7d50c7fb6198850daed2ec"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="provinceMedianIncome2005.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="42458375c24f3e41045f08cc865165c1"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="provinceUniversityDegree2001.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="9e225867d5a4ed90e63ce7c06f1dea7e"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="countryPaperConsumption1961.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="f6e274904b612081afccaeea10c377aa"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usStateRepresentation.csv"
+   text-time="2007-05-27T01:09:05.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="6e5e6ebd0d2340af982963c8812f98bb"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usStateAllSectorElectricityPrices2006.csv"
+   text-time="2007-05-27T01:09:04.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="2816ad8338fbd3b5ec1c6da7c759bf81"
+   last-author="duckysherwood"
+   kind="file"/>
+</wc-entries>

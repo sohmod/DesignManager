@@ -1,0 +1,433 @@
+jQuery, Ajax, Json and Php  
+Facts - HTML and Javascript  
+Thursday, 09 October 2008 19:16  
+There are several ways for passing data between a webserver and a browser with Ajax. You could pass data using XML data structures or using JSON java structures.
+
+XML is a way for representing data with a complex structure. At the time of this writing browser support for XML is still poor: there is no standard way for parsing/rendering XML data within javascript that is supported by the most used browsers. Therefore many websites use JSON to pass data between the browsers and the server. Fortunately JSON is well supported within javascript and server side scripting languages such as PHP. It has more or less the same capabilities for representing data with a complex structure.
+
+Here I will first expand on repeating datastructures in XML and JSON. Then I will show how to pass complex JSON objects between browser javascript (jQuery) and PHP.
+
+Suppose we have a repeating xml-structure as below.
+
+ 
+<data>
+  <sales>
+    <item>
+      <firstname>John</firstname>
+      <lastname>Brown</lastname>
+    </item>
+    <item>
+      <firstname>Marc</firstname>
+      <lastname>Johnson</lastname>
+    </item>
+  </sales>
+</data>
+ The question is how this structure translates to JSON/javascript:
+
+ 
+  var data = 
+    { 
+      "sales": [ 
+         { "firstname" : "John", "lastname" : "Brown" },
+         { "firstname" : "Marc", "lastname" : "Johnson" }
+      ] // end of sales array
+    }
+ As shown this is a name-value type syntax with colons in between. The rectangular brackets define the array, the curly brackets define the start and the end of a JSON objects. Note that in javascript the item tag is missing. The sales object can be accessed as follows:
+
+ 
+alert("first item: " +employees.sales[0])
+var extraSales = { "firstname" : "Mary",
+                    "lastname"  : "Doe"};
+data.sales[employees.sales.length] = extraSales; // add extra sales record (with index 2)
+alert("extra sales from: " +data.sales[2].firstname); // shows "Mary"
+ The JSON records are accessed using an index starting from zero. This is similar to accessing the item tags in the xml using XPath. In that case the index starts from one. Furthermore a JSON substructure must be created first before its subfields can be accessed or set. For example:
+
+ 
+  data.sales[3]= extraSales; // or: data.sales.push(extraSales);
+// the next statement is ok because sales[3] is has been created before
+  data.sales[3].firstname = "Pete"; 
+ It is easy to pass JSON objects between jQuery and PHP. Below is an example html file simpleform.html doing an ajax call to a PHP script simpleformSubmit.php. This webpage sends a JSON object, which is echoed by the PHP script.
+
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- -*-nxml-*- -->
+<head>
+<title>Simple form sending and receiving a JSON object to/from PHP</title>
+<script type="text/javascript" src="../../jQuery/jquery-1.2.6/dist/jquery.pack.js"></script>
+<script type="text/javascript" src="../../jQuery/plugins/json2.js"></script>
+ 
+<script type="text/javascript"><!--
+$(document).ready(function(){ 
+  var data = 
+  { 
+    "sales": [ 
+      { "firstname" : "John", "lastname" : "Brown" },
+      { "firstname" : "Marc", "lastname" : "Johnson" }
+    ] // end of sales array
+  }
+  var dataString = JSON.stringify(data);
+  $.post('simpleformSubmit.php', { data: dataString}, showResult, "text");
+});
+ 
+function showResult(res)
+{
+  $("#fullresponse").html("Full response: " +res);
+  var obj = JSON.parse(res);
+  $("#sales1Lastname").html("Lastname of sales[1]: " +obj.sales[1].lastname);
+}
+//--></script>
+</head>
+<body>
+  <div id="fullresponse"><span/></div>
+  <div id="sales1Lastname"><span/></div>
+</body>
+</html> 
+ The PHP script simpleformSubmit.php:
+
+ 
+<?php // -*-php-*- (sets emacs to use php mode)
+ 
+$logFile = 'logFile';
+$res = json_decode(stripslashes($_POST['data']), true);
+error_log("result: ".$_POST['data'].", res=".json_encode($res), 3, $logFile);
+error_log(", sales1_lastname: ".$res['sales'][1]['lastname'], 3, $logFile);
+error_log("\n", 3, $logFile);
+ 
+header("Content-type: text/plain");
+echo json_encode($res);
+?>
+ As shown this example uses the standard json script json2.js with methods JSON.stringify and JSON.parse to convert between the javascript object and a string from or for the server. My impression is that JSON.parse is pretty sophisticated: it prevents insertion of javascript code to some extend. Note also that in the PHP script I use stripslashes before decoding the JSON string. This is only necessary if magic_quotes_runtime or magic_quotes_gpc is on. 
+ 
+Last Updated on Friday, 08 May 2009 08:53  
+ 
+///////////////////////////////////////// netmag
+Been at this for an hour, finally got it working.
+
+It doesn't work for a number of reasons.
+
+First off, if you're copying and pasting the code, be sure to do a find and replace on all quotes " ", as the format they are in does not copy properly. Do this in the HTML, Javascript and the JSON file.
+
+Secondly, place all the extra functions within the onLoad function. If you place the other functions such as parseJson and createMarker outside of onLoad, nothing will work.
+
+Make sure that this line
+GDownloadUrl("points.json", function(data, responseCode) { parseJson(data);});
+
+immediately follws this line 
+gmap.setCenter( new GLatLng(54.7,-4), 5);
+
+and place all the functions below that. One of the main reasons that it doesn't work is that in the parseJson function it tries to reference gmap.
+
+gmap.addOverlay(marker);
+
+As gmap was defined outside the scope of this function it does not know what it is.
+
+Also, in the JSON file, on the second marker
+"information": "Morbi at sapien......
+
+Make sure the whole thing is on one line...
+
+Hopefully after that it should be up and running and ready for tweaking.
+
+Best of luck.
+
+
+---------------------------
+kairi, i've just got it working following colin comment.
+
+what i did:
+1)replace those wrong " in html, js, json
+2)repair split lines
+3)put GDownloadUrl method just after gmap.setCenter
+4)add gmap parameter to GDownloadUrl so it looks like this:
+GDownloadUrl("points.json", function(data, responseCode) {parseJson(data, gmap);});
+5)add gmap to parseJson so it starts like this:
+function parseJson (doc, gmap) {
+4+5 repairs different scope of gmap
+
+its what colin already said just in different words
+
+------------------------------------ map2.js
+
+{"markers": [
+		{
+			"point":new GLatLng(40.266044,-74.718479), 
+			"homeTeam":"Lawrence Library",
+			"awayTeam":"LUGip",
+			"markerImage":"images/red.png",
+			"information": "Linux users group meets second Wednesday of each month.",
+			"fixture":"Wednesday 7pm",
+			"capacity":"",
+			"previousScore":""
+		},
+		{
+			"point":new GLatLng(40.211600,-74.695702),
+			"homeTeam":"Hamilton Library",
+			"awayTeam":"LUGip HW SIG",
+			"markerImage":"images/white.png",
+			"information": "Linux users can meet the first Tuesday of the month to work out harward and configuration issues.",
+			"fixture":"Tuesday 7pm",
+			"capacity":"",
+			"tv":""
+		},
+		{
+			"point":new GLatLng(40.294535,-74.682012),
+			"homeTeam":"Applebees",
+			"awayTeam":"After LUPip Mtg Spot",
+			"markerImage":"images/newcastle.png",
+			"information": "Some of us go there after the main LUGip meeting, drink brews, and talk.",
+			"fixture":"Wednesday whenever",
+			"capacity":"2 to 4 pints",
+			"tv":""
+		},
+] }
+
+
+------------------------------------------------------------------------------
+
+//// jason2
+{"markers": [
+     {"point":new GLatLng(43.65654,-79.90138), "html":"Some stuff to display in the<br>First Info Window","label":"Marker One"},
+     {"point":new GLatLng(43.91892,-78.89231), "html":"Some stuff to display in the<br>Second Info Window","label":"Marker Two"},
+     {"point":new GLatLng(43.82589,-79.10040), "html":"Some stuff to display in the<br>Third Info Window","label":"Marker Three"}
+   ],
+
+
+ "lines": [
+     {"colour":"#FF0000", "width":2, "points":[ new GLatLng(43.65654,-79.90138),
+                                                new GLatLng(43.91892,-78.89231),
+                                                new GLatLng(43.82589,-79.10040)
+                                              ]
+     },
+     {"colour":"#008800", "width":4, "points":[ new GLatLng(43.9078,-79.0264),
+                                                new GLatLng(44.1037,-79.6294),
+                                                new GLatLng(43.5908,-79.2567),
+                                                new GLatLng(44.2248,-79.2567),
+                                                new GLatLng(43.7119,-79.6294),
+                                                new GLatLng(43.9078,-79.0264)
+                                              ]
+     }
+   ]
+
+}
+
+////  jason1
+{"markers": [
+     {"lat":43.65654, "lng":-79.90138, "html":"Some stuff to display in the<br>First Info Window","label":"Marker One"},
+     {"lat":43.91892, "lng":-78.89231, "html":"Some stuff to display in the<br>Second Info Window","label":"Marker Two"},
+     {"lat":43.82589, "lng":-79.10040, "html":"Some stuff to display in the<br>Third Info Window","label":"Marker Three"}
+   ],
+
+
+ "lines": [
+     {"colour":"#FF0000", "width":2, "points":[ {"lat":43.65654 ,"lng":-79.90138 },
+                                                {"lat":43.91892 ,"lng":-78.89231 },
+                                                {"lat":43.82589 ,"lng":-79.10040 }
+                                              ]
+     },
+     {"colour":"#008800", "width":4, "points":[ {"lat":43.9078 ,"lng":-79.0264 },
+                                                {"lat":44.1037 ,"lng":-79.6294 },
+                                                {"lat":43.5908 ,"lng":-79.2567 },
+                                                {"lat":44.2248 ,"lng":-79.2567 },
+                                                {"lat":43.7119 ,"lng":-79.6294 },
+                                                {"lat":43.9078 ,"lng":-79.0264 }
+                                              ]
+     }
+   ]
+
+}
+
+/////////////////// 
+
+JSON - JavaScript Object Notation
+Tutorial of this simple and universal data exchange format
+JSON is a part of the ECMAScript standard since ECMA has defined in 1999 the eval() function that parses the format.
+It has been popularized with the success of Ajax. 
+The JSON word appears often when one is speaking about Ajax. We know this is another data format, that can replace XML, and this format is supported by a lot of programmers. But what is exactly JSON, what are the advantages?
+
+
+Content
+Why JSON? 
+JSON and XML 
+The syntax of JSON 
+Example of JSON file 
+How to use the format 
+Client side (browser) 
+Server side 
+Data exchange 
+Example 
+Simple demo 
+YAML and JSON 
+Resources 
+ 
+
+
+
+Why JSON?
+The benefit of JSON is that it is recognized natively by JavaScript. No need for parsing an XML document to extract the data and get it throught the net.
+
+
+JSON and XML
+Benefits of JSON: 
+- The easiness of reading.
+- The easiness of using.
+
+Benefits of XML:
+- XML is extensible.
+- It is widely used and recognized by almost all programming languages. 
+
+Unfortunally, both XML and JSON are enable to integrate a large amount of data in binary form. 
+
+
+The syntax of JSON
+The components of JSON:
+- An object: contains objets or attributes.
+- A scalar variable: Number, String, Boolean.
+- An array.
+- Literal values: null, true, false, "string of characters", and numerical values.
+
+Object
+It contains a member or a list of members, and each member has the form:
+
+"name" : "value"The syntax of the object is:
+
+{ member, member, .... }Array
+A collection of values, separated by commas. [ value, value, ....]
+Values
+A value may be: an object, an array, a litteral (string, number, true, false, null).
+
+Nothing more is required to create a JSON file!
+
+
+Example of JSON file
+A simple example, designing a menu: 
+It is an object made of members that are an attribute and an array that holds other objects, the rows of the menu.
+
+{ 
+  "menu": "File", 
+  "commands": [ 
+      {
+          "title": "New", 
+          "action":"CreateDoc"
+      }, 
+      {
+          "title": "Open", 
+          "action": "OpenDoc"
+      }, 
+      {
+          "title": "Close",
+          "action": "CloseDoc"
+      }
+   ] 
+}The XML equivalent: <?xml version="1.0" ?>
+<root>
+  <menu>File</menu>
+  <commands>
+     <item>
+         <title>New</value>
+         <action>CreateDoc</action>
+     </item>
+     <item>
+         <title>Open</value>
+         <action>OpenDoc</action>
+     </item>
+     <item>
+         <title>Close</value>
+         <action>CloseDoc</action>
+     </item>
+  </commands>
+</root>
+How to use the format
+The JSON file allows to load data from the server or to send data to it, in this format. For example, storing the content of a form, just filled by an user. This involves three steps: the browser processing, the server processing, and the data exchange between them.
+
+Client side (browser)
+This is rather easy, as JSON is a part of the JavaScript definition. The content of a file, or the definition of the data is assigned to a variable, and this variable becomes an object of the program.
+
+Server side
+JSON file are used by various programming languages, including PHP and Java thanks to parsers that allow to get the content and that may even convert it into classes and attributes of the language.
+The json.org includes a C parser and a list of parsers in other languages.
+
+Data exchange
+Loading a file may be accomplished from JavaScript in several ways:
+- direct including of the file into the HTML page, as a JavaScript .js external file.
+- loading by a JavaScript command.
+- using XMLHttpRequest.
+The JSON file is parsed by the eval() JavaScript function.
+
+Sending the file to the server may be accomplished by XMLHttpRequest. The file is sent as a text file and processed by the parser of the programming language that uses it.
+
+Example
+The XMLHttpRequest code:
+
+var req = new XMLHttpRequest();
+req.open("GET", "file.json", true); 
+req.onreadystatechange = myCode;   // the handler 
+req.send(null); The JavaScript handler: 
+
+function myCode() 
+{ 
+   if (req.readyState == 4) 
+   { 
+        var doc = eval('(' + req.responseText + ')'); 
+   }
+} 
+Using the data: var menuName = document.getElementById('jsmenu');   // finding a field
+menuName.value = doc.menu.value;           // assigning a value to the field
+How to access data: doc.commands[0].title      // read value of the "title" field in the array
+doc.commands[0].action     // read value of the "action" field in the array
+Simple demo
+This demo loads a json file that hold a menu and displays the content on the page. Details in the source code of the page, that includes the ajax.js file.
+
+See the json file. 
+Run the demo.
+
+
+YAML and JSON
+Acronym for "YAML Ain't Markup Language" (this is recursive), YAML is another data exchange format with the goal to serialize data to objects of programming languages. It makes use of whitespace indentation to denote structure, along with a large set of special characters: & ! ? - --- [] * etc... 
+This makes a definition rather obfuscated, unlike that of JSON.
+A JSON definition is a valid YAML content (and not conversely), apart the comments /* */ that must be replaced by #.
+
+
+Resources
+json.org. Diagrams of the grammar, list of parsers. 
+ECMAScript. Specification of the standard in 1999. 
+JavaScript. A directory of tutorials and resources. 
+Ajason. Parser for PHP 5, this is also an Ajax framework. 
+YAML. Main site of this other widely used data exchange format.   
+
+
+///////////////////////////////////////////////////
+
+Creating and Parsing JSON data with PHP
+Saturday, October 4, 2008, 18:10 how-to, javascript, php, web services 15 comments Yesterday, I was in a party and a guy came near to me and asked me what is JSON and how can handle it via PHP. Today, I’m going to tell you something about JSON data and how we can handle them via PHP. Although, JSON stands JavaScript Object Notation, it is used by many other technologies like PHP and Java for data interchange format over the Internet.
+
+
+What is JSON?
+JSON is ultra-weight data interchange data format used over the internet for transferring the data. While XML is a dominant data interchange format over the internet but JSON is less complex and light-weight data.
+
+Though it was first made to be used with JavaScript for accessing remote data, it is now used by many other languages because JSON data is platform independent data format.
+
+Data Types and Example of JSON data
+JSON supports various kind of data types which included numbers, strings, booleans as well as array datas and obviously object (collection of key:value pairs, comma-separated and enclosed in curly brackets).
+
+Now, let’s look at the example of simple format of JSON data for a detail of a employee,
+
+{"id":"1","name":"mike","country":"usa","office":["microsoft","oracle"]}Creating and Parsing JSON data format in PHP
+To handle JSON data there is JSON extension in PHP which is aviable after PHP 5.2.0. Two funcitons : json_encode() and json_decode() are very useful converting and parsing JSON data through PHP.
+
+First of all, let’s look at the PHP code to create the JSON data format of above example using array of PHP.
+
+$json_data = array ('id'=>1,'name'=>"mike",'country'=>'usa',"office"=>array("microsoft","oracle"));
+echo json_encode($json_data);The above code generates the JSON data exactly as above. Now, let’s decode above JSON data in PHP.
+
+$json_string='{"id":1,"name":"mike","country":"usa","office":["microsoft","oracle"]} ';
+$obj=json_decode($json_string);Now, the $obj variable contains JSON data parsed in PHP object which you can display using code below.
+
+echo $obj->name; //displays mike
+echo $obj->office[0]; //displays microsoftAs you can guess,$obj->office is an array and you can loop through it using foreach loop of PHP,
+
+foreach($obj->office as $val)
+    echo $val;
+	
+	
+
+
+

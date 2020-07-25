@@ -1,0 +1,121 @@
+<?php # Script 12.1 - header.html
+// This page begins the HTML header for the site.
+
+// Start output buffering and initialize a session.
+ob_start();
+session_start();
+
+// Check for a $page_title value.
+if (!isset($page_title)) {
+	$page_title = 'status / laporan';
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title><?php echo $page_title; ?></title>
+<style type="text/css">
+.demo-show { 
+width: 825px; 
+margin: 1em .5em; 
+} 
+.demo-show h3 { 
+margin: 0; 
+padding: .25em; 
+background: #bfcd93; 
+border-top: 1px solid #386785; 
+border-bottom: 1px solid #386785; 
+} 
+.demo-show div { 
+padding: .5em .25em; 
+align:left;
+font-family:verdana, arial, helvetica, sans-serif;
+
+} 
+.demo-show h5 { 
+margin: 0; 
+padding:none; 
+background: #ffffff; 
+cursor:hand;
+font-weight:normal;
+font-family:verdana, arial, helvetica, sans-serif;
+} 
+tr {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; vertical-align: top; font-color: #333; }
+td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; vertical-align: top; color: #333; }
+
+</style>
+
+
+    <script type="text/javascript" src="../../js/jquery-latest.pack.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+
+  $('div.demo-show:eq(0)> div').hide();
+  $('div.demo-show:eq(0)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+
+  $('div.demo-show:eq(1)> div').hide();
+  $('div.demo-show:eq(1)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+ $('div.demo-show:eq(2)> div').hide();
+  $('div.demo-show:eq(2)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+
+  $('div.demo-show:eq(3)> div').hide();
+  $('div.demo-show:eq(3)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+ $('div.demo-show:eq(4)> div').hide();
+  $('div.demo-show:eq(4)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+
+  $('div.demo-show:eq(5)> div').hide();
+  $('div.demo-show:eq(5)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+
+  $('div.demo-show:eq(6)> div').hide();
+  $('div.demo-show:eq(6)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+ $('div.demo-show:eq(7)> div').hide();
+  $('div.demo-show:eq(7)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+
+  $('div.demo-show:eq(8)> div').hide();
+  $('div.demo-show:eq(8)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+ $('div.demo-show:eq(9)> div').hide();
+  $('div.demo-show:eq(9)> h5').click(function() {
+	$(this).next().slideToggle('fast');
+  });
+
+
+ // toggles the slickbox on clicking the noted link
+  $('#slickbox').hide();
+  $('a#slick-toggle').click(function() {
+	$('#slickbox').toggle(400);
+	return false;
+  });
+
+});
+
+    </script>
+
+
+
+
+</head>
+<body>
+
+  <td valign="top" class="content"> 
+    <!-- Script 11.1 - header.html -->

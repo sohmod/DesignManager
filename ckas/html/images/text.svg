@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
+<svg width="300px" height="600" viewBox="0 0 300 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str {stroke:black;stroke-width:1}
+    .fnt {font-weight:normal;font-size:20;font-family:'Arial, sans-serif'}
+    .red {fill:red}
+    .blu {fill:blue}
+    .yel {fill:yellow}
+    .gra {fill:grey}
+    .frn {fill-rule:nonzero}
+    .sser {font-weight:normal;font-size:25;font-family:Tahoma, Verdana, Helvetica, Arial, sans-serif;text-decoration:none}
+    .seri {font-weight:normal;font-size:35;font-family:Book, 'Times New Roman', serif;text-decoration:none}
+   ]]>
+  </style>
+
+  <clipPath id="pix">
+   <text x="15" y="560" font-weight="bold" font-size="55">clipping</text>
+  </clipPath>
+  
+ </defs>
+ <g id="mainlayer">
+  <text class="sser" x="44" y="30">City</text>
+  <text class="seri" x="140" y="30">County</text>
+  <text class="sser gra" x="32" y="66" transform="rotate(20)" style="font-size:20;"><tspan dx="3 3 3 3 3 3 3 3 3">Street</tspan></text>
+  <text class="sser red" x="140" y="73">lines:<tspan x="140" y="98">first line</tspan><tspan x="140" y="123">2nd line</tspan></text>
+  <text x="10" y="165" class="sser">The color is <tspan class="yel">yellow</tspan>, bad!</text>
+  <text class="sser" x="10" y="205" style="fill:rgb(255,164,0)"><tspan dx="0 1 2 3 4 5 6 7 8 9 10 11 12 13">Letterspacing</tspan></text>
+  <text x="10" y="255" class="seri">A <tspan dy="-9"> higher</tspan> <tspan rotate="10 35 50 65 80" dx="0 5 9 9 12">Word!</tspan></text>
+
+	  <path id="MyPath" d="M 30 330 s 50 -50 100 0 s 80 -50 110 0" style="stroke:blue;fill:none;stroke-width:10" />
+	  <text class="sser blu" style="font-size:22">
+	    <textPath xlink:href="#MyPath" startOffset="1%"><tspan dy="-10">The Times go unnoticed</tspan></textPath>
+	  </text>
+  <text class="sser yel" x="15" y="389" style="font-size:44;stroke:red;stroke-width:1">Borders ...</text>
+  <text class="sser" x="15" y="440" style="font-size:15;text-rendering:optimizeLegibility;">text-rendering:optimizeLegibility</text>
+  <text class="sser" x="15" y="460" style="font-size:15;text-rendering:optimizeSpeed;">text-rendering:optimizeSpeed</text>
+  <text class="sser" x="15" y="480" style="font-size:15;text-rendering:geometricPrecision;">text-rendering:geometricPrecision</text>
+  <text class="sser" x="15" y="500" style="font-size:15;text-rendering:auto;">text-rendering:auto</text>
+  
+  
+ <g style="clip-path:url(#pix)">
+   <image x="10" y="510" width="290" height="290" xlink:href="fill.png"/>
+ </g>
+ 
+ </g>
+</svg>

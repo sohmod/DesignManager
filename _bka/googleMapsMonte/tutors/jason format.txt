@@ -1,0 +1,213 @@
+//// jason2
+{"markers": [
+     {"point":new GLatLng(43.65654,-79.90138), "html":"Some stuff to display in the<br>First Info Window","label":"Marker One"},
+     {"point":new GLatLng(43.91892,-78.89231), "html":"Some stuff to display in the<br>Second Info Window","label":"Marker Two"},
+     {"point":new GLatLng(43.82589,-79.10040), "html":"Some stuff to display in the<br>Third Info Window","label":"Marker Three"}
+   ],
+
+
+ "lines": [
+     {"colour":"#FF0000", "width":2, "points":[ new GLatLng(43.65654,-79.90138),
+                                                new GLatLng(43.91892,-78.89231),
+                                                new GLatLng(43.82589,-79.10040)
+                                              ]
+     },
+     {"colour":"#008800", "width":4, "points":[ new GLatLng(43.9078,-79.0264),
+                                                new GLatLng(44.1037,-79.6294),
+                                                new GLatLng(43.5908,-79.2567),
+                                                new GLatLng(44.2248,-79.2567),
+                                                new GLatLng(43.7119,-79.6294),
+                                                new GLatLng(43.9078,-79.0264)
+                                              ]
+     }
+   ]
+
+}
+
+////  jason1
+{"markers": [
+     {"lat":43.65654, "lng":-79.90138, "html":"Some stuff to display in the<br>First Info Window","label":"Marker One"},
+     {"lat":43.91892, "lng":-78.89231, "html":"Some stuff to display in the<br>Second Info Window","label":"Marker Two"},
+     {"lat":43.82589, "lng":-79.10040, "html":"Some stuff to display in the<br>Third Info Window","label":"Marker Three"}
+   ],
+
+
+ "lines": [
+     {"colour":"#FF0000", "width":2, "points":[ {"lat":43.65654 ,"lng":-79.90138 },
+                                                {"lat":43.91892 ,"lng":-78.89231 },
+                                                {"lat":43.82589 ,"lng":-79.10040 }
+                                              ]
+     },
+     {"colour":"#008800", "width":4, "points":[ {"lat":43.9078 ,"lng":-79.0264 },
+                                                {"lat":44.1037 ,"lng":-79.6294 },
+                                                {"lat":43.5908 ,"lng":-79.2567 },
+                                                {"lat":44.2248 ,"lng":-79.2567 },
+                                                {"lat":43.7119 ,"lng":-79.6294 },
+                                                {"lat":43.9078 ,"lng":-79.0264 }
+                                              ]
+     }
+   ]
+
+}
+
+/////////////////// 
+
+JSON - JavaScript Object Notation
+Tutorial of this simple and universal data exchange format
+JSON is a part of the ECMAScript standard since ECMA has defined in 1999 the eval() function that parses the format.
+It has been popularized with the success of Ajax. 
+The JSON word appears often when one is speaking about Ajax. We know this is another data format, that can replace XML, and this format is supported by a lot of programmers. But what is exactly JSON, what are the advantages?
+
+
+Content
+Why JSON? 
+JSON and XML 
+The syntax of JSON 
+Example of JSON file 
+How to use the format 
+Client side (browser) 
+Server side 
+Data exchange 
+Example 
+Simple demo 
+YAML and JSON 
+Resources 
+ 
+
+
+
+Why JSON?
+The benefit of JSON is that it is recognized natively by JavaScript. No need for parsing an XML document to extract the data and get it throught the net.
+
+
+JSON and XML
+Benefits of JSON: 
+- The easiness of reading.
+- The easiness of using.
+
+Benefits of XML:
+- XML is extensible.
+- It is widely used and recognized by almost all programming languages. 
+
+Unfortunally, both XML and JSON are enable to integrate a large amount of data in binary form. 
+
+
+The syntax of JSON
+The components of JSON:
+- An object: contains objets or attributes.
+- A scalar variable: Number, String, Boolean.
+- An array.
+- Literal values: null, true, false, "string of characters", and numerical values.
+
+Object
+It contains a member or a list of members, and each member has the form:
+
+"name" : "value"The syntax of the object is:
+
+{ member, member, .... }Array
+A collection of values, separated by commas. [ value, value, ....]
+Values
+A value may be: an object, an array, a litteral (string, number, true, false, null).
+
+Nothing more is required to create a JSON file!
+
+
+Example of JSON file
+A simple example, designing a menu: 
+It is an object made of members that are an attribute and an array that holds other objects, the rows of the menu.
+
+{ 
+  "menu": "File", 
+  "commands": [ 
+      {
+          "title": "New", 
+          "action":"CreateDoc"
+      }, 
+      {
+          "title": "Open", 
+          "action": "OpenDoc"
+      }, 
+      {
+          "title": "Close",
+          "action": "CloseDoc"
+      }
+   ] 
+}The XML equivalent: <?xml version="1.0" ?>
+<root>
+  <menu>File</menu>
+  <commands>
+     <item>
+         <title>New</value>
+         <action>CreateDoc</action>
+     </item>
+     <item>
+         <title>Open</value>
+         <action>OpenDoc</action>
+     </item>
+     <item>
+         <title>Close</value>
+         <action>CloseDoc</action>
+     </item>
+  </commands>
+</root>
+How to use the format
+The JSON file allows to load data from the server or to send data to it, in this format. For example, storing the content of a form, just filled by an user. This involves three steps: the browser processing, the server processing, and the data exchange between them.
+
+Client side (browser)
+This is rather easy, as JSON is a part of the JavaScript definition. The content of a file, or the definition of the data is assigned to a variable, and this variable becomes an object of the program.
+
+Server side
+JSON file are used by various programming languages, including PHP and Java thanks to parsers that allow to get the content and that may even convert it into classes and attributes of the language.
+The json.org includes a C parser and a list of parsers in other languages.
+
+Data exchange
+Loading a file may be accomplished from JavaScript in several ways:
+- direct including of the file into the HTML page, as a JavaScript .js external file.
+- loading by a JavaScript command.
+- using XMLHttpRequest.
+The JSON file is parsed by the eval() JavaScript function.
+
+Sending the file to the server may be accomplished by XMLHttpRequest. The file is sent as a text file and processed by the parser of the programming language that uses it.
+
+Example
+The XMLHttpRequest code:
+
+var req = new XMLHttpRequest();
+req.open("GET", "file.json", true); 
+req.onreadystatechange = myCode;   // the handler 
+req.send(null); The JavaScript handler: 
+
+function myCode() 
+{ 
+   if (req.readyState == 4) 
+   { 
+        var doc = eval('(' + req.responseText + ')'); 
+   }
+} 
+Using the data: var menuName = document.getElementById('jsmenu');   // finding a field
+menuName.value = doc.menu.value;           // assigning a value to the field
+How to access data: doc.commands[0].title      // read value of the "title" field in the array
+doc.commands[0].action     // read value of the "action" field in the array
+Simple demo
+This demo loads a json file that hold a menu and displays the content on the page. Details in the source code of the page, that includes the ajax.js file.
+
+See the json file. 
+Run the demo.
+
+
+YAML and JSON
+Acronym for "YAML Ain't Markup Language" (this is recursive), YAML is another data exchange format with the goal to serialize data to objects of programming languages. It makes use of whitespace indentation to denote structure, along with a large set of special characters: & ! ? - --- [] * etc... 
+This makes a definition rather obfuscated, unlike that of JSON.
+A JSON definition is a valid YAML content (and not conversely), apart the comments /* */ that must be replaced by #.
+
+
+Resources
+json.org. Diagrams of the grammar, list of parsers. 
+ECMAScript. Specification of the standard in 1999. 
+JavaScript. A directory of tutorials and resources. 
+Ajason. Parser for PHP 5, this is also an Ajax framework. 
+YAML. Main site of this other widely used data exchange format.   
+
+
+
+

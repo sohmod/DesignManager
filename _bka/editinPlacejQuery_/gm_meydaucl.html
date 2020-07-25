@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Google Maps JSON</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<meta name="description" content="an eggBlog with checklists for civil engineering students, intro to infra works i.e. earthworks, hydrology basin, road networks, water problem, wastewater cum structural, geotechnical, installed as web applications to manage activities at design & construction stages" />
+	<meta name="keywords" content="engineering, civil, infra, earthworks, hydrology, drainage, roads, watersupply, reticulation, sewerage, STP, mysql, php, eip, jeip, tcpdf, blog, free, software, open, download" />
+	<!--META name="y_key" content="371e5c105efa0ea9">
+	<link rel="icon" href="../../themes/default/favicon.ico" type="image/x-icon" /-->
+	
+<style>
+
+.Body
+{
+	text-indent:;
+	text-align:center;
+	font-family:arial;
+	font-size:16px;
+	font-weight:normal;
+	color:#000000;
+	background-color:#FFFFFF;
+	border-color:#FFFFFF;
+	cursor:default;
+	overflow:hidden;
+}
+
+.Head
+{
+	text-indent:;
+	text-align:center;
+	font-family:arial;
+	font-size:16px;
+	font-weight:normal;
+	color:#000000;
+	background-color:#FFFFFF;
+	border-color:#FFFFFF;
+	cursor:default;
+	overflow:hidden;
+}
+
+.Poly
+{
+	text-indent:10px;
+	text-align:left;
+	font-family:arial;
+	font-size:16px;
+	font-weight:normal;
+	color:#000000;
+	background-color:#FFFFFF;
+	border-color:#FFFFFF;
+	cursor:default;
+	overflow:hidden;
+}
+
+.Pack
+{
+	text-indent:10px;
+	text-align:left;
+	font-family:arial;
+	font-size:11px;
+	font-weight:normal;
+	color:#000000;
+	background-color:#EEEEEE;
+	border-color:#FFFFFF;
+	cursor:pointer;
+	overflow:auto;
+}
+
+.Back
+{
+	font-family:arial;
+	font-size:11px;
+	font-weight:normal;
+	margin:10px;
+	width: 60px;
+	height:24px;
+	cursor:pointer;
+	overflow:auto;
+}
+
+</style>
+
+    	<script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=ABQIAAAACnoXrRu8Q1KftdJvyBfDPhT28l4knSY-FErI27KiA4Hg-isKnBT27xkesyPquQS83Rnz5Efg6aoA4w
+" type="text/javascript"></script>
+    	<!--home key--script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAACnoXrRu8Q1KftdJvyBfDPhQi9GTV_pIebhmW2VNRiJjGR_JjVRSgTagc4MZgnuWoTA4ptnwAEc1CiA" type="text/javascript"></script-->
+ <script src="js/gm_mapiconmaker.js" type="text/javascript"></script>
+ <script src="js/gm_fooble.js" type="text/javascript"></script>
+		
+    	<script type="text/javascript" src="js/gm_map2ucl.js"></script>
+		
+		
+		
+		
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="all" title="">	
+		<!--link href="css/geodemo.css" rel="stylesheet" type="text/css"-->	
+</head>
+
+  <body onload="load()" onunload="GUnload()">
+ 
+
+ 
+  <table width="100%" height= "79%" border="0" cellpadding="0" cellspacing="0" bordercolor="#000000" bgcolor="#00FF88"><tr><td  bgcolor="#ffffff"><font style="size:20px:weight:bold;color:coral">Your Projects on Googlemap</font></td><td  bgcolor="#FFFFFF"></td></tr>
+
+  
+      <tr>
+        <td width= 260 height="500" valign="top" bordercolor="#000000" bgcolor="#FFFFFF">
+		<div id="sidebar" style="overflow: auto; height: 500px; font-size: 10px; color: #000"></div>
+		</td>
+        <td width="1091" bordercolor="#FFFFFF">
+		<div id="map" style="width: 100%; height: 700px; z-index: 1;"></div>
+		</td>
+      </tr>
+  </table>  
+  
+  
+  
+  
+
+  </body>
+</html>

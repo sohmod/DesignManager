@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2007-05-27T01:25:43.788339Z"
+   url="https://mapeteria.googlecode.com/svn/trunk/denominators"
+   last-author="duckysherwood"
+   kind="dir"
+   repos="https://mapeteria.googlecode.com/svn"
+   revision="3"/>
+<entry
+   committed-rev="3"
+   name="caProvinceSqKm.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="90fd4c7bf67907c8e1b7832fe257982b"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="frDepartmentPopulations1999.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="15cb3274a813af85ad1d13ae223015e6"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="countryPopulation2006.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="4b2fd705b6b8bbab3407a9b5d90cd159"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="countrySqKm2006.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="f91728b823482cfe06e67df8b527277a"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usStatesSqKm2000.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="4178b040604a2992f377f0b2a40efeed"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="provincePopulations2006.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="efd33f1fbeaea282e82d7c32dec1edc2"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="caProvincePopulations2004.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="14dbc518c660a8988c06a0175ee93182"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="usStatePopulations2006.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="e1bf139589b1ffacf3659bc3f70a9e96"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="caProvincePopulations2005.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="53ca559ba859219c2e6dcb7987b1d65f"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="frDepartmentPopulations2005.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="9505b9d86a4407e26c2351f8d7765189"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="frDepartmentsSqKm2005.csv"
+   text-time="2007-05-27T01:09:03.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="1a91fabba0a3ce0e9f001e6877a2b603"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="provinceSqKm2000.csv"
+   text-time="2007-05-27T01:09:02.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="7fcb3dca1e9d8cba6d1b6e5f9f0f781b"
+   last-author="duckysherwood"
+   kind="file"/>
+</wc-entries>

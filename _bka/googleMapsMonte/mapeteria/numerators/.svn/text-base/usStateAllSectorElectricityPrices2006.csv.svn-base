@@ -1,0 +1,59 @@
+# Average retail price of electricity for all sectors, 2006
+# (Cents per kilowatt hour)
+# Source: Energy Information Administration
+# as reported by http://www.ppinys.org/reports/jtf/electricprices.html
+# Just the Facts - Key Economic and Social Indicators for New York State 
+# The Public Policy Institute of New York State, Inc., a research and educational organization. 
+# 152 Washington Avenue, Albany, NY 12210 
+# 518-465-7511 www.ppinys.org
+us,ak,12.78
+us,al,7.09
+us,ar,6.96
+us,az,8.3
+us,ca,12.94
+us,co,7.73
+us,ct,14.6
+us,de,9.47
+us,fl,10.4
+us,ga,7.79
+us,hi,20.95
+us,ia,7.09
+us,id,4.93
+us,il,7.2
+us,in,6.49
+us,ks,7.02
+us,ky,5.5
+us,la,8.42
+us,ma,15.51
+us,md,10.02
+us,me,12.09
+us,mi,15.51
+us,mi,8.38
+us,mn,6.99
+us,mo,6.46
+us,ms,8.31
+us,mt,6.81
+us,nc,7.54
+us,nd,6.05
+us,ne,6.15
+us,nh,13.92
+us,nj,11.98
+us,nm,7.47
+us,nv,9.6
+us,ny,14.03
+us,oh,7.74
+us,ok,7.47
+us,or,6.48
+us,pa,8.65
+us,ri,14.06
+us,sc,6.99
+us,sd,6.76
+us,tn,7.05
+us,tx,10.42
+us,ut,6.1
+us,va,6.87
+us,vt,11.43
+us,wa,6.04
+us,wi,8.14
+us,wv,5.01
+us,wy,5.27

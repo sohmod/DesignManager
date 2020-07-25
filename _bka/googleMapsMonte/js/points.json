@@ -1,0 +1,23 @@
+{"markers": [
+{
+"point":new GLatLng(53.478093,-2.116116),
+"homeTeam": "Manchester United",
+"awayTeam": "Arsenal",
+"information": "Fusce adipiscing. Pellentesque semper risus eget eros.",
+"fixture": "Sunday 4pm",
+"capacity": "67,000",
+"previousScore": "2-1",
+"markerImage": "images/mm_20_blue.png"
+},
+{
+"point": new GLatLng(51.534229,-0.111312),
+"homeTeam": "Newcastle",
+"awayTeam": "Chelsea",
+"information": "Morbi at sapien. Quisque vitae eros nec orci elementum
+bibendum.",
+"fixture": "Saturday 3pm",
+"capacity": "45,000",
+"tv": "Eye TV",
+"markerImage": "images/mm_20_red.png"
+}
+] }

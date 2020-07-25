@@ -1,0 +1,192 @@
+<html>
+<head>
+	<title>Live forms</title>
+<script type="text/javascript" src="jquery-1.2.1.pack.js"></script>
+<script type="text/javascript">
+	function lookup(inputString) {
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+			$('#suggestions').hide();
+		} else {
+			$.post("rpc.php", {queryString: ""+inputString+""}, function(data){
+				if(data.length >0) {
+					$('#suggestions').show();
+					$('#autoSuggestionsList').html(data);
+				}
+			});
+		}
+	} // lookup
+	
+	function fill(thisValue) {
+		$('#inputString').val(thisValue);
+		setTimeout("$('#suggestions').hide();", 200);
+	}
+</script>	
+	
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/Validator.js"></script>
+	<style type="text/css">
+	body
+	{
+		font-family: Helvetica, Arial, Verdana, Sans-Serif;
+		font-size: 12px;
+		color: #666;
+	}
+
+	
+	
+	input, select, textarea
+	{
+		width: 90%;
+		font-size: 14px;
+		padding: 4px;
+		height:25;
+	}
+	fieldset
+	{
+		border: 1px dotted #ccc;
+		width: 350px;
+	}
+	
+	h3 {
+		margin: 0px;
+		padding: 0px;	
+	}
+
+	.suggestionsBox {
+		position: relative;
+		left: 30px;
+		margin: 10px 0px 0px 0px;
+		width: 200px;
+		background-color: green; //#212427;
+		-moz-border-radius: 7px;
+		-webkit-border-radius: 7px;
+		border: 2px solid #000;	
+		color: #fff;
+	}
+	
+	.suggestionList {
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.suggestionList li {
+		
+		margin: 0px 0px 3px 0px;
+		padding: 3px;
+		cursor: pointer;
+	}
+	
+	.suggestionList li:hover {
+		background-color: #659CD8;
+	}	
+	
+	</style>
+</head>
+
+<body onload="Validator.Initialize('liveForm', 6, 'submit', 'img/check.gif', 'img/x.gif');">
+	<form id="liveForm" action="" method="post" onsubmit="if(!Validator.AllFieldsValidated()) return false;">
+	
+			<div>
+				Type your project:
+				<br />
+				<input type="text" size="100" value="" id="inputString" onkeyup="lookup(this.value);" onblur="fill();" />
+			</div>	
+			<div class="suggestionsBox" id="suggestions" style="display: none;">
+				<img src="upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+				<div class="suggestionList" id="autoSuggestionsList">
+					&nbsp;
+				</div>
+			</div>	
+
+			
+		<fieldset>
+			<div style="float: right;">* = required field</div>
+			<legend>Live form</legend>
+			<div class="suggestionsBox" id="suggestions" style="display: none;">
+				<img src="upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+				<div class="suggestionList" id="autoSuggestionsList">
+					&nbsp;
+				</div>
+			</div>		
+	
+
+			<p>Your first name: * <br/><input type="text" id="firstName" name="firstName" onblur="Validator.Validate(this);" /></p>
+			<p>Your last name: * <br/><input type="text" id="lastName" name="lastName" onblur="Validator.Validate(this);" /></p>
+			<p>Your email: * <br/><input type="text" id="email" name="email" onblur="Validator.Validate(this, 'email');" /></p>
+			<p>Company: <br/><input type="text" name="company" /></p>
+			<p>Street address: * <br/><input type="text" id="street" name="street" onblur="Validator.Validate(this);" /></p>
+			<p>State: *
+			<br/><select id="state" name="state" onchange="Validator.Validate(this);" onblur="Validator.Validate(this);">
+				<option value="" selected="true"></option>
+				<option value="AK">AK</option>
+				<option value="AL">AL</option>
+				<option value="AR">AR</option>
+				<option value="AZ">AZ</option>
+				<option value="CA">CA</option>
+				<option value="CO">CO</option>
+				<option value="CT">CT</option>
+				<option value="DC">DC</option>
+				<option value="DE">DE</option>
+				<option value="FL">FL</option>
+				<option value="GA">GA</option>
+				<option value="HI">HI</option>
+				<option value="IA">IA</option>
+				<option value="ID">ID</option>
+				<option value="IL">IL</option>
+				<option value="IN">IN</option>
+				<option value="KS">KS</option>
+				<option value="KY">KY</option>
+				<option value="LA">LA</option>
+				<option value="MA">MA</option>
+				<option value="MD">MD</option>
+				<option value="ME">ME</option>
+				<option value="MI">MI</option>
+				<option value="MN">MN</option>
+				<option value="MO">MO</option>
+				<option value="MS">MS</option>
+				<option value="MT">MT</option>
+				<option value="NC">NC</option>
+				<option value="ND">ND</option>
+				<option value="NE">NE</option>
+				<option value="NH">NH</option>
+				<option value="NJ">NJ</option>
+				<option value="NM">NM</option>
+				<option value="NV">NV</option>
+				<option value="NY">NY</option>
+				<option value="OH">OH</option>
+				<option value="OK">OK</option>
+				<option value="OR">OR</option>
+				<option value="PA">PA</option>
+				<option value="RI">RI</option>
+				<option value="SC">SC</option>
+				<option value="SD">SD</option>
+				<option value="TN">TN</option>
+				<option value="TX">TX</option>
+				<option value="UT">UT</option>
+				<option value="VA">VA</option>
+				<option value="VT">VT</option>
+				<option value="WA">WA</option>
+				<option value="WI">WI</option>
+				<option value="WV">WV</option>
+				<option value="WY">WY</option>
+				<option value="Other">Other</option>
+			</select>
+			</p>
+			<p>Zip code: * <br/>
+			<input type="text" id="zip" name="zip" maxlength="5" onblur="Validator.Validate(this);" />
+			</p>
+		</fieldset>
+	
+		</br>
+		<div id="innerFieldset">
+			<noscript>
+				<input id="submit" type="submit" value="Register" class="action" />
+			</noscript>
+		</div>
+		<script type="text/javascript">
+			gebid('innerFieldset').innerHTML = '<input id="submit" type="submit" value="Register" style="width: 100px;" disabled="true" />';
+		</script>
+	</form>
+</body>
+</html>

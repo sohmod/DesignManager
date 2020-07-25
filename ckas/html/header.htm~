@@ -1,0 +1,51 @@
+<?php 
+// This page begins the HTML header for the site.
+// Start output buffering and initialize a session.
+ob_start();
+session_start();
+
+// Check for a $page_title value.
+if (!isset($page_title)) {
+	$page_title = 'mcedo:'.$give_name;
+}
+include_once('../ip_SERVER.php');
+
+
+#####################
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>	
+<title><?php echo $page_title; ?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<meta name="description" content="checklists for civil engineering students, intro to infra works " />
+	<meta name="keywords" content="engineering,civil,infra,earthworks,hydrology,drainage,roads,watersupply,reticulation,sewerage,STP,mysql,php,eip,jeip,tcpdf" />
+	<META name="y_key" content="371e5c105efa0ea9">
+	<link rel="icon" href="../themes/default/favicon.ico" type="image/x-icon" />
+
+
+<?php
+
+// Display links based upon the login status.
+if (isset($_SESSION['user_id']) AND (substr($_SERVER['PHP_SELF'], -10) != 'logout.php')) {
+//echo '<fieldset><center><small><a href="11pro/html/logout.php">Logout</a> |
+echo '<fieldset style="border:2px dotted #00f; background-color:#ddd;"><center><small><a href="http://'.$ipthis.'/'.PROJ_FOLDER.'/html/logout.php">Logout</a> |
+<a href="http://'.$ipthis.'/'.PROJ_FOLDER.'/change_password.php">Change Password</a> |
+<a href="http://'.$ipthis.'">Mukadepan</a> ';
+
+//<!--a href="index.php">Index Page</a-->
+//</small></center></fieldset>';
+} else {
+	echo '<fieldset style="border:2px dotted #00f; background-color:#ddd;"><center><small><a href="http://'.$ipthis.'/'.PROJ_FOLDER.'/register.php">Register</a> |
+<a href="http://'.$ipthis.'/'.PROJ_FOLDER.'/login.php">Login</a> |
+<a href="http://'.$ipthis.'/'.PROJ_FOLDER.'/forgot_password.php">Forgot Password</a> |
+<!--a href="../phpDev/tna/index.php">TNA Index Page</a> |
+<a href="http://'.$ipthis.'/'.PROJ_FOLDER.'/index.php">Project Index Page</a--> 
+<a href="http://'.$ipthis.'">Mukadepan</a> ';
+//</small></center></fieldset>';
+}
+
+?> 	
+			
+    <!-- Script 11.1 - header.html -->

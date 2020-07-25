@@ -1,0 +1,131 @@
+<div id="map"></div>
+ 
+<script src="http://www.google.com/jsapi?key=YOUR_MAP_API_KEY" type="text/javascript"></script>
+<script type="text/javascript">google.load("maps", "2");</script>
+<script type="text/javascript" src="epoly.js"></script>
+<script type="text/javascript">
+map = new google.maps.Map2(document.getElementById("map"));
+poly = GPolyline.fromEncoded({
+		color:'#b30b7a',
+		weight:4,
+		opacity:0.5,
+		points:'YOUR_ENCODED_POLYLINE_STRING',
+		zoomFactor:32,
+		levels:'YOUR_ENCODED_LEVELS_STRING',
+		numLevels:4
+});
+map.addOverlay(poly);
+</script>
+
+///////////////////////
+
+distanceToPlaceMarkerInMetres = 100;
+routeDistance = poly.Distance(); // Full distance of route in metres
+if(distanceToPlaceMarkerInMetres < routeDistance){ // Ensures your distance is less than the total distance of your route
+     pointsAlongRoute = poly.GetPointsAtDistance(distanceToPlaceMarkerInMetres);
+     marker = new GMarker(pointsAlongRoute[0]);
+     map.addOverlay(marker);
+     marker.openInfoWindowHtml("You are here");
+     map.panTo(marker.getLatLng())
+}
+
+////////////////////////////
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Google Maps</title>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAPDUET0Qt7p2VcSk6JNU1sBSM5jMcmVqUpI7aqV44cW1cEECiThQYkcZUPRJn9vy_TWxWvuLoOfSFBw" type="text/javascript"></script>
+    <script src="epoly2.js" type="text/javascript"> </script>
+  </head>
+  <body onunload="GUnload()">
+
+
+    <div id="map" style="width: 800px; height: 600px"></div>
+    <a href="epoly.htm">Back to the tutorial page</a>
+
+
+    <noscript><b>JavaScript must be enabled in order for you to use Google Maps.</b> 
+      However, it seems JavaScript is either disabled or not supported by your browser. 
+      To view Google Maps, enable JavaScript by changing your browser options, and then 
+      try again.
+    </noscript>
+ 
+
+    <script type="text/javascript">
+    //<![CDATA[
+
+    if (GBrowserIsCompatible()) {
+
+      var polys = [];
+      var labels = [];
+
+      // Display the map, with some controls and set the initial location 
+      var map = new GMap2(document.getElementById("map"));
+      map.addControl(new GLargeMapControl());
+      map.addControl(new GMapTypeControl());
+      map.setCenter(new GLatLng(42.16,-100.72),4);
+
+      GEvent.addListener(map, "click", function(overlay,point) {
+        var T1 = new Date();
+        if (!overlay) {
+          for (var i=0; i<polys.length; i++) {
+            if (polys[i].Contains(point)) {
+              var area = polys[i].Area()/1000000;
+              var sqmiles = area/2.58998811;
+              var T2 = new Date();
+              map.openInfoWindowHtml(point,"You clicked on "+labels[i]+"<br>The area of "+labels[i]+" is "+parseInt(area)
+                    +" sq km.<br>that's "+parseInt(sqmiles)+" square miles<br>"
+                    +"Its boundary is "+parseInt(polys[i].Distance()/1609.344)+" miles long"
+                    +"<hr>Time taken = "+(T2.getTime()-T1.getTime())+" milliseconds"
+              );             i = 999; // Jump out of loop
+            }
+          }
+        }
+      });
+
+      // Read the data from states.xml
+      var request = GXmlHttp.create();
+      request.open("GET", "states.xml", true);
+      request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+          var xmlDoc = GXml.parse(request.responseText);
+          // ========= Now process the polylines ===========
+          var states = xmlDoc.documentElement.getElementsByTagName("state");
+
+          // read each line
+          for (var a = 0; a < states.length; a++) {
+            // get any state attributes
+            var label  = states[a].getAttribute("name");
+            var colour = states[a].getAttribute("colour");
+            // read each point on that line
+            var points = states[a].getElementsByTagName("point");
+            var pts = [];
+            for (var i = 0; i < points.length; i++) {
+               pts[i] = new GLatLng(parseFloat(points[i].getAttribute("lat")),
+                                   parseFloat(points[i].getAttribute("lng")));
+            }
+            var poly = new GPolygon(pts,"#000000",1,1,colour,0.5,{clickable:false});
+            polys.push(poly);
+            labels.push(label);
+            map.addOverlay(poly);
+          }
+          // ================================================           
+        }
+      }
+      request.send(null);
+    }
+    
+    // display a warning if the browser was not compatible
+    else {
+      alert("Sorry, the Google Maps API is not compatible with this browser");
+    }
+
+    //]]>
+    </script>
+  </body>
+
+</html>
+
+///////////////

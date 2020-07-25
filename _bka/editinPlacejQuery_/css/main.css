@@ -1,0 +1,24 @@
+body
+{
+  padding: 20px;
+}
+		.ft{
+			font-family:sans-serif;
+			color:black;
+			text-align: left;
+			font-size:70%;
+		}
+
+		.gmap {
+	width: 800px;
+	height: 550px;
+			font-family:sans-serif;
+			color:blue;
+			font-size:80%;
+		}
+
+		.menutitlebl {
+			font-family:sans-serif;
+			color:black;
+			font-size:80%;
+		}

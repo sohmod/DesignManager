@@ -1,0 +1,78 @@
+skip to main | skip to sidebar 
+The Blog of Phill 
+
+Thursday, April 23, 2009
+jQuery CSV validation for user input
+ 
+I'm using jQuery 1.3.2 with the jQuery Validation plugin 1.5.2 and noticed there was no validation for CSV formatted user input. After looking for a while I did find that I could extend the validation plugin with the additional-methods.js file. It's has some great added validations but still nothing for CSV. So this is to all looking for something for CSV (Comma Separated Values).
+
+Validates for a-z A-Z 0-9
+
+jQuery.validator.addMethod("validcsv", function(value, element) { return this.optional(element) || /^([a-zA-Z0-9])+(,[a-zA-Z0-9]+)*$/.test(value);}, "Must be comma separated if entering multiple values: Value1,Value2");
+
+Validates for a-z A-Z
+
+jQuery.validator.addMethod("validcsv", function(value, element) { return this.optional(element) || /^([a-zA-Z])+(,[a-zA-Z]+)*$/.test(value);}, "Must be comma separated if entering multiple values: Value1,Value2");
+
+Validates for 0-9
+
+jQuery.validator.addMethod("validcsv", function(value, element) { return this.optional(element) || /^([0-9])+(,[0-9]+)*$/.test(value);}, "Must be comma separated if entering multiple values: Value1,Value2");
+
+Alt validation for 0-9
+
+jQuery.validator.addMethod("validcsv", function(value, element) { return this.optional(element) || /^([\d])+(,[\d]+)*$/.test(value);}, "Must be comma separated if entering multiple values: Value1,Value2");
+
+Validates for a-z A-Z 0-9 _ 
+
+
+jQuery.validator.addMethod("validcsv", function(value, element) { return this.optional(element) || /^([\w])+(,[\w]+)*$/.test(value);}, "Must be comma separated if entering multiple values: Value1,Value2");
+
+Now this will validate values for a-z upper and lower case and 0-9 numeric values that are separated by a comma. If you need to modify the Regular Expression to fit your needs please post back with your findings. 
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+How to use it
+Note: If you are using a jQuery version less than 1.2.6, you will also need to install the Dimensions plugin.
+
+Include jQuery (I am assuming you already know how to do that) 
+Include the Date Input plugin:
+
+<script type="text/javascript" src="jquery.date_input.js"></script>Include the CSS:
+
+<link rel="stylesheet" href="date_input.css" type="text/css">Fields are turned into date inputs by getting a jQuery object of the fields you want, and calling date_input() on then. I find it convenient to give all my date inputs a class of date_input and transform them automatically on DOM load. There is an initialize method which can do this for you, like so:
+
+$($.date_input.initialize);If you want to get a bit more specific, you can do it like this:
+
+$(function() {   $("#my_specific_input").date_input(); });Customisation
+There is support for simple customisation without completely bloating the plugin. This works by letting you specify options when you call $(el).date_input({my: opts}). The options essentially replace keys in the DateInput.prototype object so you can replace any internal method like this if you want. However, there are a few “recommended” customisations you can make and I can’t promise that other customisations won’t break in future versions.
+
+Instead of specifying options for every new date input, you can specify global defaults by overwriting or modifying DateInput.DEFAULT_OPTS. These will then be used automatically.
+
+Internationalisation
+The only strings used by Date Input are month names (January, February, etc..), short month names (Jan, Feb, etc…) and short day names (Sun, Mon, etc…). The usual way to specify a new language is to change the default options. For example the Spanish translation is:
+
+jQuery.extend(DateInput.DEFAULT_OPTS, {   month_names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],   short_month_names: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],   short_day_names: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sab"] });It’s recommended to place this in a separate file called (using the example of a Spanish translation) jquery.date_input.es_ES.js. The currently available translations are:
+
+
+
+First day of the week
+The day names are listed from Sunday to Saturday, as this corresponds with Javascript’s representation of days of the week being between 0 for Sunday and 6 for Saturday. The default first day of the week is 1 for Monday. You can change this in the options like so:
+
+$(el).date_input({ start_of_week: 0 });or:
+
+$.extend(DateInput.DEFAULT_OPTS, { start_of_week: 0 });Date formatting
+Date formatting is done by two methods: stringToDate, which takes a string and returns a Javascript Date object, and dateToString which takes a Javascript Date object and returns a string. You can replace these two functions in the options to format the date differently. For example, the following formats dates as YYYY-MM-DD:
+
+$.extend(DateInput.DEFAULT_OPTS, {   stringToDate: function(string) {     var matches;     if (matches = string.match(/^(\d{4,4})-(\d{2,2})-(\d{2,2})$/)) {       return new Date(matches[1], matches[2] - 1, matches[3]);     } else {       return null;     };   },   dateToString: function(date) {     var month = (date.getMonth() + 1).toString();     var dom = date.getDate().toString();     if (month.length == 1) month = "0" + month;     if (dom.length == 1) dom = "0" + dom;     return date.getFullYear() + "-" + month + "-" + dom;   } });
+
+
+
+
+
+
+
+
+

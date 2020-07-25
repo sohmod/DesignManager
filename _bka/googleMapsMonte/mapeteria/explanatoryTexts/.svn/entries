@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2007-05-27T01:25:43.788339Z"
+   url="https://mapeteria.googlecode.com/svn/trunk/explanatoryTexts"
+   last-author="duckysherwood"
+   kind="dir"
+   repos="https://mapeteria.googlecode.com/svn"
+   revision="3"/>
+<entry
+   committed-rev="3"
+   name="yearJustification.php"
+   text-time="2007-05-27T01:09:16.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="43f7054b2151e0579d2c7d23f173e40f"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="csvExplanation.php"
+   text-time="2007-05-27T01:09:16.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="6cee553a03e5c55f2634804c1932bea8"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="colourMappingExplanation.php"
+   text-time="2007-05-27T01:09:16.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="936668f5fb008e90ee3267dcf2664efa"
+   last-author="duckysherwood"
+   kind="file"/>
+<entry
+   committed-rev="3"
+   name="resolutionExplanation.php"
+   text-time="2007-05-27T01:09:16.000000Z"
+   committed-date="2007-05-27T01:25:43.788339Z"
+   checksum="0da6ce92c7445ca1f7afe43ac86f3cba"
+   last-author="duckysherwood"
+   kind="file"/>
+</wc-entries>

@@ -1,0 +1,358 @@
+<?php
+ob_start();
+session_start();
+$chk_id=$_SESSION['daftar_id'];
+if (!$_SESSION['daftar_id']){ $tjk_projek="Projek Dummi .. "; $chk_id=7654321; $modus="Inhouse"; $kp_s=="123456-78-9012"; }
+include_once ("../../ip_SERVER.php");
+include_once("../../".PROJ_FOLDER."/inc/mysql_connect2cfg.php");
+	$db = new mysqli($bkaHost,$bkaULogin,$bkaPass,$bkaDbase) or die(mysqli_error());
+	if(!$db) {
+		// Show error if we cannot connect.
+		echo "ERROR: Could not connect to the database.";
+	} 
+else {
+	$q = "SELECT * FROM laporanbulananrm9 WHERE id_daftar='$chk_id'";
+	$r = mysqli_query($q);
+	if (mysqli_num_rows($r) == 1) {
+		list($x1,$x2,
+		$mX[1],$mX[2],$mX[3],$mX[4],$mX[5],$mX[6],$mX[7],$mX[8],$mX[9],$mX[10],$mX[11],$mX[12],
+		$mX[13],$mX[14],$mX[15],$mX[16],$mX[17],$mX[18],$mX[19],$mX[20],$mX[21],$mX[22],$mX[23],$mX[24],
+		$mX[25],$mX[26],$mX[27],$mX[28],$mX[29],$mX[30],$mX[31],$mX[32],$mX[33],$mX[34],$mX[35],$mX[36],
+		$mX[37],$mX[38],$mX[39],$mX[40],$mX[41],$mX[42],$mX[43],$mX[44],$mX[45],$mX[46],$mX[47],$mX[48],
+		$mX[49],$mX[50],$mX[51],$mX[52],$mX[53],$mX[54],$mX[55],$mX[56],$mX[57],$mX[58],$mX[59],$mX[60],
+		$mX[61],$mX[62],$mX[63],$mX[64],$mX[65],$mX[66],$mX[67],$mX[68],$mX[69],$mX[70],$mX[71],$mX[72]
+		) = mysqli_fetch_array($r, MYSQLI_NUM);}	
+	}
+////////////
+$Xcoor = array(
+		1 => 80,
+		2 => 90,
+		3 => 100,
+		4 => 110,
+		5 => 120,
+		6 => 130,
+		7 => 140,
+		8 => 150,
+		9 => 160,
+		10 => 170,
+		11 => 180,
+		12 => 190,
+		13 => 200,
+		14 => 210,
+		15 => 220,
+		16 => 230,
+		17 => 240,
+		18 => 250,
+		19 => 260,
+		20 => 270,
+		21 => 280,
+		22 => 290,
+		23 => 300,
+		24 => 310,
+		25 => 320,
+		26 => 330,
+		27 => 340,
+		28 => 350,
+		29 => 360,
+		30 => 370,
+		31 => 380,
+		32 => 390,
+		33 => 400,
+		34 => 410,
+		35 => 420,
+		36 => 430,
+		37 => 440,
+		38 => 450,
+		39 => 460,
+		40 => 470,
+		41 => 480,
+		42 => 490,
+		43 => 500,
+		44 => 510,
+		45 => 520,
+		46 => 530,
+		47 => 540,
+		48 => 550,
+		49 => 560,
+		50 => 570,
+		51 => 580,
+		52 => 590,
+		53 => 600,
+		54 => 610,
+		55 => 620,
+		56 => 630,
+		57 => 640,
+		58 => 650,
+		59 => 660,
+		60 => 670,
+		61 => 680,
+		62 => 690,
+		63 => 700,
+		64 => 710,
+		65 => 720,
+		66 => 730,
+		67 => 740,
+		68 => 750,
+		69 => 760,
+		70 => 770,
+		71 => 780,
+		72 => 790
+); 
+///////
+$Ycoor = array(	"sifar" => 348,
+		"KIV" => 336,
+		"statustakjelas" => 322,
+		"dplan" => 309,
+		"pelanukur" => 297,
+		"pelansusunatur" => 283,
+		"NSorTOR" => 271,
+		"lawatapak" => 258,
+		"surat2pberkuasa" => 245,
+		"konsepRB" => 232,
+		"RBawalan" => 218,
+		"RBterperinci" => 205,
+		"varifikasiRB" => 192,
+		"auditRB" => 179,
+		"TTD" => 166,
+		"tender" => 154,
+		"pnilaianTeknikal" => 141,
+		"pranego" => 128,
+		"nego" => 115,
+		"LA" => 102,
+		"miliktapak" => 88,
+		"pembinaan" => 76,
+		"validasiRB" => 63,
+		"tambahmasa" => 50,
+		"serahan" => 36,
+		"tempohkecacatan" =>23,
+		"SEMPURNA"  => 10,
+		"" => 360);
+// set the HTTP header type to PNG
+header("Content-type: image/png"); 
+$sizesx = 800;
+$sizesy = 400;
+$im=imagecreatetruecolor($sizesx, $sizesy);
+// switch on image antialising if it is available
+ImageAntiAlias($im, true);
+//$im = imagecreate(250, 250);
+$back = imagecolorallocate($im, 255, 255, 255);
+$border = imagecolorallocate($im, 0, 0, 0);
+imagefilledrectangle($im, 0, 0, $sizesx - 1, $sizesy - 1, $back);
+imagerectangle($im, 0, 0, $sizesx - 1, $sizesy - 1, $border);
+// some colors
+$yellow_a = imagecolorallocatealpha($im, 250, 250, 10, 50);
+$red_a = imagecolorallocatealpha($im, 255, 0, 0, 90);
+$blue_a = imagecolorallocatealpha($im, 0, 0, 255, 99);
+$black_a = imagecolorallocatealpha($im, 0, 0, 0, 20);
+$white_a = imagecolorallocatealpha($im, 255, 255, 255, 10);
+	$ForestGreen		= imagecolorallocatealpha($im, 34, 139,  34, 80);
+	$OliveDrab		= imagecolorallocatealpha($im, 107, 142,  35 , 80);
+	$coral		= imagecolorallocatealpha($im, 255, 127,  80, 80);
+	$DarkKhaki		= imagecolorallocatealpha($im, 189, 183, 107 , 80);
+	$khaki		= imagecolorallocatealpha($im, 240, 230, 140 , 80);
+$moccasin	      =   imagecolorallocatealpha($im, 238, 228, 121,80);
+$PapayaWhip 	=   imagecolorallocatealpha($im, 255, 239, 213,80);
+$DarkGoldenrod	=   imagecolorallocatealpha($im, 184, 134,  11 , 80);
+$SpringGreen	=   imagecolorallocatealpha($im, 0, 139,  69 , 80);
+	$tomato			= imagecolorallocatealpha($im, 255,  99,  71 , 80);
+	$OrangeRed		= imagecolorallocatealpha($im, 255,  69,   0 , 80);
+	$red		= imagecolorallocatealpha($im, 255,   0,   0 , 80);
+	$HotPink			= imagecolorallocatealpha($im, 255, 105, 180 , 80);
+	$DeepPink			= imagecolorallocatealpha($im, 255,  20, 147 , 80);
+	$pink			= imagecolorallocatealpha($im, 255, 192, 203 , 80);
+	$LightPink		= imagecolorallocatealpha($im, 255, 182, 193 , 80);
+	$PaleVioletRed		= imagecolorallocatealpha($im, 219, 112, 147 , 80);
+	$maroon			= imagecolorallocatealpha($im, 176,  48,  96 , 80);
+	$MediumVioletRed	= imagecolorallocatealpha($im, 199,  21, 133 , 80);
+	$VioletRed			= imagecolorallocatealpha($im, 208,  32, 144 , 80);
+	$magenta			= imagecolorallocatealpha($im, 255,   0, 255 , 80);
+	$violet			= imagecolorallocatealpha($im, 238, 130, 238 , 80);
+	$plum			= imagecolorallocatealpha($im, 221, 160, 221 , 80);
+	$orchid			= imagecolorallocatealpha($im, 218, 112, 214 , 80);
+$a = array(	"",
+			"JAN2006", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis",
+			"JAN2007", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis",
+			"JAN2008", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis",
+			"JAN2009", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis",
+			"JAN2010", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis",
+			"JAN2011", "feb", "mac", "apr", "mei", "jun", "jul", "ogo", "sep", "okt", "nov", "dis"
+			);
+$b = array(	" ", " ", " ", "sifar", "KIV", "statustakjelas", 
+			"dplan", "pelanukur", "pelansusunatur", "NSorTOR", "lawatapak", 
+			"surat2pberkuasa", "konsepRB", "RBawalan", "RBterperinci", "validasiRB", 
+			"auditRB", "TTD", "tender", "pnilaianTeknikal", "pranego", 
+			"nego" , "LA", "miliktapak", "pembinaan", "validasiRB",
+			"tambahmasa", "serahan", "tempohkecacatan", "SEMPURNA");
+$c = array_combine($a, $b);
+for ($q=1 ; $q < abs($sizesy/13) ; $q++){
+imageline($im,0,$sizesy-13*$q,$sizesx,$sizesy-13*$q,$PapayaWhip );
+$txt=$b[$q];
+imagettftext($im, 7, 0, 2, $sizesy-13*$q , $black, "arial.ttf", "$txt");
+}
+for ($q=1 ; $q < abs($sizesx/10)+1 ; $q++){
+if ($q>8){
+imageline($im,10*$q,0,10*$q,$sizesy,$PapayaWhip );
+$txt= $a[$q - 8];
+imagettftext($im, 7, 90, 10*$q-1, $sizesy-3 , $black, "arial.ttf", "$txt");
+			} else
+		{
+imageline($im,20*$q,0,20*$q,$sizesy,$PapayaWhip );
+imagettftext($im, 7, 90, 20*$q+1, $sizesy-3 , $black, "arial.ttf", "");		
+			}
+}
+function drawProgressBox($locX,$locY,$borderC,$filledC) {
+global $im;
+//put in array
+imagerectangle($im, $locX,$locY, $locX+10,$locY+12, $borderC);
+imagefilledrectangle($im, $locX,$locY, $locX+10,$locY+12, $filledC);
+}
+function drawProgressRing($locX,$locY,$borderC,$filledC) {
+global $im;
+//put in array
+imageellipse($im, $locX, $locY, 15, 15, $borderC);
+imagefilledellipse($im, $locX, $locY, 15, 15, $filledC);
+}
+function drawArrowDn($angle,$locx1,$locy1,$borderC,$filledC){
+global $im;
+$p6x = $locx1 + 13 * sin ($angle);
+$p6y = $locy1 + 13 * cos($angle);
+$p7x = $p6x - 13 / 2 * cos($angle);
+$p7y = $p6y + 13 / 2 * sin($angle);
+$p8x = $p7x + 13 * sin ($angle) + 13 / 2 * cos($angle);
+$p8y = $p7y + 13 * cos($angle) - 13 / 2 * sin($angle);
+$p9x = $p8x - 13 * sin ($angle) + 13 / 2 * cos($angle);
+$p9y = $p8y - 13 * cos($angle) - 13 / 2 * sin($angle);
+$p10x = $p9x - 13 / 2 * cos ($angle);
+$p10y = $p9y + 13 / 2 * sin($angle);
+//put in array
+$points = array( $p6x,$p6y , $p7x,$p7y , $p8x,$p8y , $p9x,$p9y , $p10x,$p10y ); 
+imagepolygon( $im , $points , 5 ,$borderC );
+imagefilledpolygon( $im , $points , 5 , $filledC );}
+//calling function vertical
+drawProgressBox(0,348,$ForestGreen,$ForestGreen);
+drawProgressBox(10,336,$ForestGreen,$ForestGreen);
+drawProgressBox(0,322,$ForestGreen,$ForestGreen);
+drawProgressBox(10,309,$ForestGreen,$ForestGreen);
+drawProgressBox(0,297,$ForestGreen,$ForestGreen);
+drawProgressBox(10,283,$ForestGreen,$ForestGreen);
+drawProgressBox(0,271,$ForestGreen,$ForestGreen);
+drawProgressBox(10,258,$ForestGreen,$ForestGreen);
+drawProgressBox(0,245,$ForestGreen,$ForestGreen);
+drawProgressBox(10,232,$ForestGreen,$ForestGreen);
+drawProgressBox(0,218,$ForestGreen,$ForestGreen);
+drawProgressBox(10,205,$ForestGreen,$ForestGreen);
+drawProgressBox(0,192,$ForestGreen,$ForestGreen);
+drawProgressBox(10,179,$ForestGreen,$ForestGreen);
+drawProgressBox(0,166,$ForestGreen,$ForestGreen);
+drawProgressBox(10,154,$ForestGreen,$ForestGreen);
+drawProgressBox(0,141,$ForestGreen,$ForestGreen);
+drawProgressBox(10,128,$ForestGreen,$ForestGreen);
+drawProgressBox(0,115,$ForestGreen,$ForestGreen);
+drawProgressBox(10,102,$ForestGreen,$ForestGreen);
+drawProgressBox(0,88,$ForestGreen,$ForestGreen);
+drawProgressBox(10,76,$ForestGreen,$ForestGreen);
+drawProgressBox(0,63,$ForestGreen,$ForestGreen);
+drawProgressBox(10,50,$ForestGreen,$ForestGreen);
+drawProgressBox(0,36,$ForestGreen,$ForestGreen);
+drawProgressBox(10,23,$ForestGreen,$ForestGreen);
+drawProgressBox(0,10,$ForestGreen,$ForestGreen);
+//calling function horizontal
+drawProgressBox(80,386,$SpringGreen,$SpringGreen);
+drawProgressBox(90,374,$SpringGreen,$SpringGreen);
+drawProgressBox(100,386,$SpringGreen,$SpringGreen);
+drawProgressBox(110,374,$SpringGreen,$SpringGreen);
+drawProgressBox(120,386,$SpringGreen,$SpringGreen);
+drawProgressBox(130,374,$SpringGreen,$SpringGreen);
+drawProgressBox(140,386,$SpringGreen,$SpringGreen);
+drawProgressBox(150,374,$SpringGreen,$SpringGreen);
+drawProgressBox(160,386,$SpringGreen,$SpringGreen);
+drawProgressBox(170,374,$SpringGreen,$SpringGreen);
+drawProgressBox(180,386,$SpringGreen,$SpringGreen);
+drawProgressBox(190,374,$SpringGreen,$SpringGreen);
+drawProgressBox(200,386,$SpringGreen,$SpringGreen);
+drawProgressBox(210,374,$SpringGreen,$SpringGreen);
+drawProgressBox(220,386,$SpringGreen,$SpringGreen);
+drawProgressBox(230,374,$SpringGreen,$SpringGreen);
+drawProgressBox(240,386,$SpringGreen,$SpringGreen);
+drawProgressBox(250,374,$SpringGreen,$SpringGreen);
+drawProgressBox(260,386,$SpringGreen,$SpringGreen);
+drawProgressBox(270,374,$SpringGreen,$SpringGreen);
+drawProgressBox(280,386,$SpringGreen,$SpringGreen);
+drawProgressBox(290,374,$SpringGreen,$SpringGreen);
+drawProgressBox(300,386,$SpringGreen,$SpringGreen);
+drawProgressBox(310,374,$SpringGreen,$SpringGreen);
+drawProgressBox(320,386,$SpringGreen,$SpringGreen);
+drawProgressBox(330,374,$SpringGreen,$SpringGreen);
+drawProgressBox(340,386,$SpringGreen,$SpringGreen);
+drawProgressBox(350,374,$SpringGreen,$SpringGreen);
+drawProgressBox(360,386,$SpringGreen,$SpringGreen);
+drawProgressBox(370,374,$SpringGreen,$SpringGreen);
+drawProgressBox(380,386,$SpringGreen,$SpringGreen);
+drawProgressBox(390,374,$SpringGreen,$SpringGreen);
+drawProgressBox(400,386,$SpringGreen,$SpringGreen);
+drawProgressBox(410,374,$SpringGreen,$SpringGreen);
+drawProgressBox(420,386,$SpringGreen,$SpringGreen);
+drawProgressBox(430,374,$SpringGreen,$SpringGreen);
+drawProgressBox(440,386,$SpringGreen,$SpringGreen);
+drawProgressBox(450,374,$SpringGreen,$SpringGreen);
+drawProgressBox(460,386,$SpringGreen,$SpringGreen);
+drawProgressBox(470,374,$SpringGreen,$SpringGreen);
+drawProgressBox(480,386,$SpringGreen,$SpringGreen);
+drawProgressBox(490,374,$SpringGreen,$SpringGreen);
+drawProgressBox(500,386,$SpringGreen,$SpringGreen);
+drawProgressBox(510,374,$SpringGreen,$SpringGreen);
+drawProgressBox(520,386,$SpringGreen,$SpringGreen);
+drawProgressBox(530,374,$SpringGreen,$SpringGreen);
+drawProgressBox(540,386,$SpringGreen,$SpringGreen);
+drawProgressBox(550,374,$SpringGreen,$SpringGreen);
+drawProgressBox(560,386,$SpringGreen,$SpringGreen);
+drawProgressBox(570,374,$SpringGreen,$SpringGreen);
+drawProgressBox(580,386,$SpringGreen,$SpringGreen);
+drawProgressBox(590,374,$SpringGreen,$SpringGreen);
+drawProgressBox(600,386,$SpringGreen,$SpringGreen);
+drawProgressBox(610,374,$SpringGreen,$SpringGreen);
+drawProgressBox(620,386,$SpringGreen,$SpringGreen);
+drawProgressBox(630,374,$SpringGreen,$SpringGreen);
+drawProgressBox(640,386,$SpringGreen,$SpringGreen);
+drawProgressBox(650,374,$SpringGreen,$SpringGreen);
+drawProgressBox(660,386,$SpringGreen,$SpringGreen);
+drawProgressBox(670,374,$SpringGreen,$SpringGreen);
+drawProgressBox(680,386,$tomato,$tomato);
+drawProgressBox(690,374,$tomato,$tomato);
+drawProgressBox(700,386,$tomato,$tomato);
+drawProgressBox(710,374,$tomato,$tomato);
+drawProgressBox(720,386,$tomato,$tomato);
+drawProgressBox(730,374,$tomato,$tomato);
+drawProgressBox(740,386,$tomato,$tomato);
+drawProgressBox(750,374,$tomato,$tomato);
+drawProgressBox(760,386,$tomato,$tomato);
+drawProgressBox(770,374,$tomato,$tomato);
+drawProgressBox(780,386,$tomato,$tomato);
+drawProgressBox(790,374,$tomato,$tomato);
+////
+$startX = 0;$startY = 400;
+for ($q=1 ; $q < 73 ; $q++){
+drawProgressBox($Xcoor[$q],$Ycoor[$mX[$q]],$maroon,$red);
+if ($mX[$q]){
+imageline($im, $startX, $startY, $Xcoor[$q]+5, $Ycoor[$mX[$q]]+6, $maroon); 
+$startX = $Xcoor[$q]+5;$startY = $Ycoor[$mX[$q]]+6;
+  }
+}
+//$ForestGreen  $OliveDrab $coral $moccasin $PapayaWhip $DarkGoldenrod $SpringGreen
+//$tomato	$OrangeRed	$red	$HotPink	$DeepPink	$pink	$LightPink	$plum
+//$PaleVioletRed	$maroon	$MediumVioletRed	$VioletRed	$magenta	$violet $orchid
+//drawArrowDn(3.14,250,348,$black,$black );
+//drawArrowDn(3.14,300,348,$magenta,$magenta );
+//drawProgressRing(150, 348,$SpringGreen,$SpringGreen);
+//drawProgressRing(350, 348,$SpringGreen,$SpringGreen);
+$tajukprojek1 = substr($_SESSION['tajuk'], 0, 99);	
+$tajukprojek2 = substr($_SESSION['tajuk'], 99);	
+/////////////////////////////////////////////////////////////////////////////////
+// flush image
+imagettftext($im, 10, 25, 78, 337 , $MediumVioletRed, "arial.ttf", "$tajukprojek1");		
+imagettftext($im, 10, 25, 87, 347 , $MediumVioletRed, "arial.ttf", "$tajukprojek2");		
+imagepng($im);
+imagedestroy($im);
+// Flush the buffered output to the Web browser.
+ob_flush();
+?>

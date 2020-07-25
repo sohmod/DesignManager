@@ -1,0 +1,22 @@
+.bubble {
+width: 350px;
+}
+.bubble h5 {
+margin: 0;
+padding: 0;
+font-size: 150%;
+}
+.polybub {
+width: 250px;
+}
+.bubble h4 {
+margin: -1;
+padding: -1;
+font-size: 80%;
+background-color: rgb( 149, 206, 145);
+}
+.bubble p {
+margin: 10;
+padding: 10;
+font-size: 70%;
+}

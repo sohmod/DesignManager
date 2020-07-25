@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<style type="text/css">
+	.regtext {
+		font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+		font-size : 11px;
+		color : #708090;
+	}
+	.headline {
+		color : #708090;
+		font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+		font-size : 11px;
+		font-weight : bold;
+		margin-bottom : 1px;
+	}
+	.link {
+		color : #708090;
+		font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+		font-size : 11px;
+		text-decoration : underline;
+	}
+</style>
+	<title>PHPstat ver. 1.0 - Info</title>
+</head>
+<body>
+ <img src="../data/logo.gif" alt="" width="273" height="38" border="0">
+ <p>
+  <a class="link" href="#license">End User License Agreement</a>
+  <br>
+  <a class="link" href="#info">Information About PHPstat</a>
+  <br>
+  <a class="link" href="#install">Installation of PHPstat</a>
+  <br>
+  <a class="link" href="#setup">Setup of PHPstat</a>
+  <br>
+  <a class="link" href="#files">Files</a>
+  <br>
+  <a class="link" href="#faq">Frequently Asked Questions</a>
+  <br>
+  <a class="link" href="#setup">Contact</a>
+  <br>
+ </p>
+
+ <a name=license></a>
+ <div class="headline">
+  License Agreement
+ </div>
+ <table width="450">
+  <tr>
+   <td>
+    <div class="regtext">
+     This script is freeware. You're allowed to share it and/or modify it, use it for private 
+	 or commercial purpose. You may NOT sell it, either in it's original form, or parts of the 
+	 script.<br>
+	 You are NOT permitted to publish this script in its original form as your own.<br>
+	 If you publish this script in its original form, this file must be included.<br>
+     This script is provided "AS IS" with no warranty of any kind. The writer of this script is 
+	 of no way responsible for any damages this script may cause.
+    </div>
+   </tr>
+  <td>
+ </table>
+ <br>
+ <a name=info></a>
+ <div class="headline">
+  Information About PHPstat
+ </div>
+ <table width="450">
+  <tr>
+   <td>
+    <div class=regtext>
+     PHPstat is a web statistic program that does not require the use of a database.
+    </div>
+   </td>
+  </tr>
+   <tr>
+   <td>
+    <div class="regtext">
+     The program registers number of visitors, unique visitors (ip pr. day), color depth, screen size, browser, javascript support, operating systems, country (top domain) and referrers.
+	</div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext"> 
+     The script is easy to install and the setup is done by web, and includes layout, css and password protection.
+	</div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext">
+	 ! Remember that as this script does not use a database, a large website with many visitors will increase the server's workload.<br>
+     Recommend a maximum of 1000 unique visitors a day depending on the server speed.
+    </div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext">
+     PHPstat works with php 4.1 Older versions have not been tested. See F.A.Q for more info.
+	</div>
+   </td>
+  </tr>
+ </table>
+ <br>
+ <a name="install"></a>
+ <div class="headline">
+  Installation of PHPstat
+ </div>
+ <table width="450">
+  <tr>
+   <td>
+    <div class="regtext">
+	 Unzip PHPstat and save it in a directory on the server (e.g. "/phpstat").<br>
+	 ! Remember to change the file rights in the directory "data/*.*" (666).<br>
+     
+	</div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class=regtext>
+	 ! In the file you wish to have statistics on (e.g. index.html) put the following code in your file. <br><br>
+    </td>
+   </tr>
+  </table>
+  <table width="1000">
+   <tr>
+    <td>
+	 <div class="regtext">
+<pre>&lt!-- PHPstat code --&gt
+&ltscript language="JavaScript"&gt
+var ref=""+escape(top.document.referrer); var colord = window.screen.colorDepth; 
+var res = window.screen.width + "x" + window.screen.height;
+document.write("&ltimg src='http://www.yoursite.com/phpstat/stat.php?referer=" + ref + "&js=yes&color=" + colord + "&res=" + res + "' border=0&gt");
+&lt/script&gt&ltnoscript&gt&ltimg src="http://www.yoursite.com/phpstat/stat.php" border="0"&gt&lt/noscript&gt
+&lt!-- PHPstat code --&gt </pre>
+	 </div>
+	</td>
+   </tr>
+  </table>
+  <table width="450">
+   <tr>
+    <td>
+	 <div class="regtext">
+	  ! Remember to change the 2 &ltimg&gt tags to match your website (e.g. http://www.yoursite.com/phpstat/stat.php):  
+	 </div> 
+    </td>
+   </tr>
+   <tr>
+    <td>
+	<div class="regtext">
+	 Since an image tag "&ltimg&gt" calls the script, there will be a 1x1pixel transparent gif inserted on the page.
+	</div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext">
+     Remember to reset your stats on use to get the correct start date.
+    </div>
+   </td>
+  </tr> 
+  <tr>
+   <td>
+    <div class="regtext">
+     To see your stats, use the following url: "http://www.yoursite.com/phpstat".
+    </div>
+   </td>
+  </tr> 
+ </table>
+ <br>
+ <a name="setup"></a>
+ <div class="headline">Setup of PHPstat</div>
+ <table>
+  <tr>
+   <td>
+    <div class="regtext">
+     Setup is done from the web - Go to "Settings" and press "PHPstat Setup".<br>
+     ! Username and Password are initially set to "user" / "abc123"
+    </div>
+   </td>
+  </tr>
+ </table>
+ <br>
+ <a name="files"></a>
+ <div class="headline">Files</div>
+ <table>
+  <tr>
+   <td>
+    <div class="regtext">
+	 Index.php - The file that prints out the stats<br>
+     - Can be edited<br>
+     - Should not be renamed
+	</div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext"><br>
+     Stat.php - The file that registers the stats<br>
+     - Can be edited<br>
+     - Should not be renamed
+    </div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext"><br>
+     Setup.php - The setup interface to PHPstat<br>
+     - Is run from "index.php"<br>
+     - Can be edited<br>
+     - Should not be renamed
+    </div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext"><br>
+     Data/*.* - Stored data<br>
+     - Reset from "index.php"<br>
+     - Should not be edited<br>
+     - Should not be renamed<br>
+    </div>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <div class="regtext"><br>
+     Info/info.html - This file<br>
+     - May be edited<br>
+     - May be renamed
+    </div>
+   </td>
+  </tr>
+ </table>
+ <br>
+ <a name="faq"></a>
+ <div class="headline">Frequently Asked Questions</div>
+ <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">I Get this error: "...Warning: fopen("data/filename", "w")..."? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Change the file permission to "chmode 666" in "/data/*.*"</div>
+   </td></tr>
+ </table>
+ <table>
+ <br>
+ <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">Chmod doesn't work? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Some windows ftp clients don't support chmode. Use a program like WS_Ftp</div>
+   </td></tr>
+ </table>
+ <br>
+<table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">My script doesn't register statistics? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Remember to put the JavaScript code on your page and change the path to match your website</div>
+   </td></tr>
+ </table>
+ <br>
+ <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">My script shows all hits as "0"? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">A few have reported this error when running PHPstat on a WinNT/IIS server.    The problem is caused by the function "flock()". A way to solve this is removing the function. This may cause problems if 2 people are visiting your website at the exact same time </div>
+   </td></tr>
+ </table>
+ <br>
+  <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">My webserver is using a php version below 4.1 - What do I do? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Upgrade... If this is not possible, open all .php files and change "$_REQUEST['var']" with "$var"</div>
+   </td></tr>
+ </table>
+ <br>
+ <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">I still haven't solved my problem? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Check for updates on the webpage below. If you still have problems contact me. If possible please include your webserver's operating system and php version</div>
+   </td></tr>
+ </table>
+ <br>
+ <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">I don't know my webserver's operating system or php version? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Use the php function "phpinfo()". It will tell you all you need to know</div>
+   </td></tr>
+ </table>
+ <br>
+ <table width="450">
+  <tr><td valign="top">
+    <div class="regtext">Q:</div>
+	</td><td valign="top">
+	<div class="regtext">Can I edit this script? </div> 
+	</td></tr>
+	<tr><td valign="top">	
+	<div class="regtext">A:</div>
+	</td><td valign="top">
+	<div class="regtext">Yes. You can do practically anything you want. Remember to read the license agreement</div>
+   </td></tr>
+ </table>
+ <br>
+ <a name="contact"></a>
+ <div class="headline">Contact</div>
+ <table width="450">
+  <tr>
+   <td>
+    <div class="regtext">
+     If you find errors, have ideas, need help, or just want to say
+     you like the script, feel free to contact me.<br><br></div>
+	 
+	<div class="regtext" style="font-weight: bold;">
+	Visit my site and click some banners. That way you support the development of free software.
+	</div>
+<br>
+<div class="regtext">    - Karsten Brogaard<br>
+     &nbsp;&nbsp;Download, updates and news: <a href="http://harme.dk/php" class="link">http://harme.dk/php</a><br>
+     &nbsp;&nbsp;E-mail: <a class="link" href="mailto:kohaar@harme.dk">kohaar@harme.dk</a><br>
+     &nbsp;&nbsp;Denmark<br>  
+    </div>
+   </td>
+  </tr>
+ </table>
+ <br>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<head>
+
+<script src="ajax.js"></script>
+
+<script>
+/**Ajax Request (Submits the form below through AJAX
+ *               and then calls the ajax_response function)
+ */
+function ajax_request() {
+  var submitTo = 'ajax_request.php';
+  //location.href = submitTo; //uncomment if you need for debugging
+  http('POST', submitTo, ajax_response, document.form1);
+}
+
+/**Ajax Response (Called when ajax data has been retrieved)
+ *
+ * @param   object  data   Javascript (JSON) data object received
+ *                         through ajax call
+ */
+function ajax_response(data) {
+  for(var key in data) {
+    document.form1[key].value = data[key];
+  }
+}
+</script>
+
+
+</head>
+<body>
+
+<input type="button" onclick="ajax_request()" value="Do AJAX"><br><br>
+<form name="form1">
+  First <input type="text" id="first"><br>
+  Last  <input type="text" id="last"><br>
+  Address <input type="text" id="address"><br>
+</form>
+
+
+</body>
+</html>
+

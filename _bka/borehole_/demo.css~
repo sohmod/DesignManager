@@ -1,0 +1,99 @@
+body {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	margin: 0px;
+	padding: 20px 10px 0px;
+}
+.textfield {
+	font-size: 11px;
+	color: #333333;
+	background: #FfFfFf;
+	border: 1px solid #CCCCCC;
+	padding-left: 1px;
+}
+h1 {
+	color: #99CC00;
+	margin: 0px 0px 5px;
+	padding: 0px 0px 3px;
+	font: bold 18px Verdana, Arial, Helvetica, sans-serif;
+	border-bottom: 1px dashed #E6E8ED;
+}
+a {
+	color: #2D3954;
+	font-size: 11px;
+}
+a:hover {
+	color: #99CC00;
+}
+.err {
+	color: #FF9900;
+}
+th {
+	font-weight: bold;
+	text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#form_box {
+	float: left;
+	width: 350px;
+	background: #f8f8f8;
+	border: 1px solid #d6d6d6;
+	border-left-color: #e4e4e4;
+	border-top-color: #e4e4e4;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 0.5em;
+	margin-top: 10px;
+	margin-bottom: 2px;
+}
+ 
+#form_box div {
+	padding: 0.2em 0.5em;
+}
+ 
+#form_box p {
+	float: left;
+	margin: 4px 0pt;
+	width: 100px;
+}
+ 
+#form_box textarea {
+	float: left;
+	margin: 4px 0pt;
+	width: 220px;
+	background: #FfFfFf;
+} 
+ 
+ 
+#log {
+	float: left;
+	padding: 0.5em;
+	margin-left: 10px;
+	width: 350px;
+	border: 1px solid #d6d6d6;
+	border-left-color: #e4e4e4;
+	border-top-color: #e4e4e4;
+	margin-top: 10px;
+}
+ 
+#log_res {
+	overflow: auto;
+}
+ 
+#log_res.ajax-loading {
+	padding: 20px 0;
+	background: url(http://127.0.0.1/_objectorientated/mootools/Form.Send/spinner.gif) no-repeat center;
+}

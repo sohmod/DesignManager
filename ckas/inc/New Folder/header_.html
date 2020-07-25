@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title><?php echo $page_title; ?></title>
+<link rel="stylesheet" href="inc/weblog.css" type="text/css" />
+
+</head>
+<body>
+
+<table width="95%" border="0" cellspacing="10" cellpadding="0" align="center">
+<div id="header"><!--<h1 class="hide">kg kota</h1>--></div>
+	<div id="subheader">
+</div>	
+
+  <tr> 
+    <td valign="top" nowrap="nowrap">
+	<div id="left">
+		<div id="leftcontent">
+    			<ul>
+<?php include("useronline.php");  ?><b>&nbsp;&nbsp;KURSUS</b>
+<li><a href="ihos.php?usm=in house:select * from kursus where KodKursus LIKE 'ih%' ">
+<font color="orange"><b>Inhouse</b></font></a></li>
+
+<a href="ihos.php?usm=anjuran luar:select * from kursus where KodKursus LIKE 'os%' ">
+<font color="orange"><b>Anjuran Luar</b></font></a></li>
+
+<a href="Lampiran_A_tna.php?usm=anjuran luar:select * from kursus where KodKursus LIKE 'os%' ">
+<font color="green"><b>Anjuran Luar</b></font></a></li>
+
+
+			</ul>
+		</div>	
+  	</div>
+    </td>
+
+     
+    <td valign="top" class="content"> 
+    <!-- Script 11.1 - header.html -->

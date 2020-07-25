@@ -1,0 +1,81 @@
+# Canada median market (pre-tax/credit) income 
+# for economic families of two persons or more, 2004
+# Source: Stat Can
+# http://www.statcan.ca/Daily/English/060330/d060330a.htm
+# Downloaded 20070411
+# Canadian dollars, converted at CDN$1.25 per USD$
+# ca,ab,66900
+# ca,bc,53600
+# ca,mb,52900
+# ca,nb,43700
+# ca,nl,34500
+# ca,ns,47100
+# ca,on,63100
+# ca,pe,41500
+# ca,qc,49000
+# ca,sk,49800
+ca,ab,53520
+ca,bc,42880
+ca,mb,42320
+ca,nb,34960
+ca,nl,34500
+ca,ns,37680
+ca,on,50480
+ca,pe,33200
+ca,qc,39200
+ca,sk,39840
+# US Median Household income, 2004-2005
+# Source: US Census Bureau
+# http://www.census.gov/hhes/www/income/histinc/h08a.html
+# Downloaded on 11 April 2007
+us,ak,56398
+us,al,37502
+us,ar,36406
+us,az,45279
+us,ca,51312
+us,co,51518
+us,ct,56889
+us,dc,44949
+us,de,50445
+us,fl,42440
+us,ga,44140
+us,hi,58854
+us,ia,45671
+us,id,45009
+us,il,48008
+us,in,43091
+us,ks,42233
+us,ky,36750
+us,la,37442
+us,ma,54888
+us,md,59762
+us,me,43317
+us,mi,44801
+us,mn,56098
+us,mo,43266
+us,ms,34396
+us,mt,36202
+us,nc,41820
+us,nd,41362
+us,ne,46587
+us,nh,57850
+us,nj,60246
+us,nm,39916
+us,nv,48496
+us,ny,46659
+us,oh,44362
+us,ok,39292
+us,or,43262
+us,pa,45941
+us,ri,49511
+us,sc,40107
+us,sd,42816
+us,tn,39376
+us,tx,42102
+us,ut,53693
+us,va,52383
+us,vt,49808
+us,wa,51119
+us,wi,45956
+us,wv,35467
+us,wy,45817

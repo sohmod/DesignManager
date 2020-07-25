@@ -1,0 +1,1240 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20000303 Stylable//EN" "http://www.w3.org/TR/2000/03/WD-SVG-20000303/DTD/svg-20000303-stylable.dtd">
+<svg height="100%" width="100%" viewBox="0 0 800 590" 
+  xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/"
+  xmlns:xlink="http://www.w3.org/1999/xlink"> 
+
+<!-- Blinds Vertical  -->
+<a:transition id="t1" type="barWipe" subType="leftToRight" direction="forward" dur="1s">
+  <a:param name="sections" value="30" />
+</a:transition>
+
+<!-- Blinds Horizontal  -->
+<a:transition id="t2" type="barWipe" subType="topToBottom" direction="forward" dur="1s">
+  <a:param name="sections" value="30" />
+</a:transition>
+
+<!-- Box In  -->
+<a:transition id="t3" type="irisWipe" subType="rectangle" direction="reverse" dur="1s" />
+
+<!-- Box Out  -->
+<a:transition id="t4" type="irisWipe" subType="rectangle" direction="forward" dur="1s" />
+
+<!-- Dissolve  -->
+<a:transition id="t5" type="glitter" subType="random" direction="forward" dur="1s">
+  <a:param name="cellSize" value="4" />
+</a:transition>
+
+<!-- Glitter Down  -->
+<a:transition id="t6" type="glitter" subType="topToBottom" direction="forward" dur="1s">
+  <a:param name="cellSize" value="4" />
+</a:transition>
+
+<!-- Glitter Right  -->
+<a:transition id="t7" type="glitter" subType="leftToRight" direction="forward" dur="1s">
+  <a:param name="cellSize" value="4" />
+</a:transition>
+
+<!-- Glitter Rigth Down  -->
+<a:transition id="t8" type="glitter" subType="topLeft" direction="forward" dur="1s">
+  <a:param name="cellSize" value="4" />
+</a:transition>
+
+<!-- None  -->
+<a:transition id="t9" type="none" dur="1s" />
+
+<!-- Random  -->
+<a:transition id="t10" type="random" dur="1s" />
+
+<!-- Replace  -->
+<a:transition id="t11" type="replace" dur="1s" />
+
+<!-- Split Horizontal In  -->
+<a:transition id="t12" type="barnDoorWipe" subType="horizontal" direction="reverse" dur="1s" />
+
+<!-- Split Horizontal Out  -->
+<a:transition id="t13" type="barnDoorWipe" subType="horizontal" direction="forward" dur="1s" />
+
+<!-- Split Vertical In  -->
+<a:transition id="t14" type="barnDoorWipe" subType="vertical" direction="reverse" dur="1s" />
+
+<!-- Split Vertical Out  -->
+<a:transition id="t15" type="barnDoorWipe" subType="vertical" direction="forward" dur="1s" />
+
+<!-- Wipe Down  -->
+<a:transition id="t16" type="barWipe" subType="topToBottom" direction="forward" dur="1s" />
+
+<!-- Wipe Right  -->
+<a:transition id="t17" type="barWipe" subType="leftToRight" direction="forward" dur="1s" />
+
+<!-- Wipe Left  -->
+<a:transition id="t18" type="barWipe" subType="leftToRight" direction="reverse" dur="1s" />
+
+<!-- Wipe Up  -->
+<a:transition id="t19" type="barWipe" subType="topToBottom" direction="reverse" dur="1s" />
+
+<!-- Opactiy Fade  -->
+<a:transition id="t20" type="fade" subType="crossFade" direction="forward" dur="1s" />
+
+
+
+<script language="JavaScript"><![CDATA[
+  var slide=0;
+  var transition = new Array(20,2,1,20,2,3,4,14,15,12,12,20,16,17,18,19,14,15,17,18,19);
+  var view=1;
+
+  function next(event)
+  {
+    var svgdoc = event.getCurrentNode().getOwnerDocument();
+
+    slide = slide + 1;
+    if(slide > 19) slide = 19;
+
+    var nodes = svgdoc.getElementsByTagName("animate");
+    var from = nodes.item(0).getAttribute("from");
+    nodes.item(0).setAttribute("from","#s"+slide);
+    nodes.item(0).setAttribute("a:transIn","t"+transition[slide]);
+    nodes.item(0).setAttribute("begin","0s");
+  }
+
+  function back(event)
+  {
+    var svgdoc = event.getCurrentNode().getOwnerDocument();
+
+    slide = slide - 1;
+    if(slide < 0) slide = 0;
+
+    var nodes = svgdoc.getElementsByTagName("animate");
+    var from = nodes.item(0).getAttribute("from");
+    nodes.item(0).setAttribute("from","#s"+slide);
+
+    nodes.item(0).setAttribute("a:transIn","t"+transition[slide]);
+    nodes.item(0).setAttribute("begin","0s");
+  }
+
+  function toggleView(event)
+  {
+    var svgdoc = event.getCurrentNode().getOwnerDocument();
+
+    var node = svgdoc.getElementById("View"+view);
+    node.setAttribute("style","visibility:hidden");
+
+    view = view + 1;
+    if(view > 3) view = 1;
+    node = svgdoc.getElementById("View"+view);
+    node.setAttribute("style","visibility:visible");
+  }
+
+  function select(event,s)
+  {
+    slide = s-1;
+    next(event);
+
+    var svgdoc = event.getCurrentNode().getOwnerDocument();
+    var node = svgdoc.getElementById("View"+view);
+    node.setAttribute("style","visibility:hidden");
+
+    view = 1;
+    node = svgdoc.getElementById("View"+view);
+    node.setAttribute("style","visibility:visible");
+  }
+]]>
+</script>
+
+<style type="text/css"><![CDATA[
+  .LJ {text-anchor:start;}
+  .RJ {text-anchor:end;}
+  .Center {text-anchor:middle;}
+  .F30 {font-size:30;}
+  .F35 {font-size:35;}
+  .F40 {font-size:40;}
+  .F50 {font-size:50;}
+
+  .title {fill:black;font-size:50;text-anchor:middle;}
+  .H1 {fill:navy;}
+  .H2 {fill:black;font-size:40;}
+  .H3 {fill:red;}
+  .H4 {fill:green;}
+  .H5 {fill:crimson;font-size:35;}
+  .H6 {fill:black;font-size:35;}
+]]>
+</style>
+
+<defs>
+  <linearGradient id="Separator" x1="0%" y1="0%" x2="0%" y2="100%" >
+    <stop offset="0%" stop-color="#EEEEEE" />
+    <stop offset="10%" stop-color="navy" />
+    <stop offset="70%" stop-color="#EEEEEE" />
+  </linearGradient>
+
+  <linearGradient id="Separator2" x1="0%" y1="0%" x2="0%" y2="100%" >
+    <stop offset="0%" stop-color="#EEEEEE" />
+    <stop offset="10%" stop-color="silver" />
+    <stop offset="100%" stop-color="#EEEEEE" />
+  </linearGradient>
+
+  <linearGradient id="Separator3" x1="0%" y1="100%" x2="0%" y2="0%" >
+    <stop offset="0%" stop-color="white" />
+    <stop offset="20%" stop-color="purple" />
+    <stop offset="40%" stop-color="blue" />
+    <stop offset="60%" stop-color="green" />
+    <stop offset="67%" stop-color="yellow" />
+    <stop offset="78%" stop-color="yellow" />
+    <stop offset="80%" stop-color="red" />
+    <stop offset="100%" stop-color="white" />
+   </linearGradient>
+
+   <pattern id="Q" x="0" y="0" width="50" height="70"  patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
+     <rect x="0" y="0" width="50" height="70" style="fill:#EEEEEE" />
+     <text x="10" y="40" style="font-size:50;fill:navy">?</text>
+   </pattern>
+
+
+  <symbol id="s0" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="60" class="title">W3C for Process Control</text>
+    <g transform="translate(0,100)" class="H1 Center F40">
+      <text x="400" y="100">World Wide Web Consortium (W3C)</text>
+      <text x="400" y="150">Technologies for Process Control</text>
+      <text x="400" y="250" class="H6 Center">April 13, 2004</text>
+      <text x="400" y="290" class="H6 Center">Jay Nick</text>
+      <text x="400" y="330" class="H6 Center">Manager - Applied Technology</text>
+      <text x="400" y="370" class="H6 Center">WPS Resources Corporation</text>
+      <image x="344" y="380" width="112" height="85" xlink:href="WPSRLogo.svgz" />
+    </g>
+  </symbol>
+
+  <symbol id="s1" viewBox="0 0 800 500" style="overflow:visible">
+    <image x="242" y="10" width="315" height="48" xlink:href="http://www.w3.org/Icons/w3c_main" />
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">W3C - World Wide Web Consortium</text>
+    </g>
+    <g transform="translate(25,140)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Founded in October, 1994</text>
+    </g>
+    <g transform="translate(25,180)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">About 400 member organizations</text>
+    </g>
+    <g transform="translate(25,220)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">promote interoperability of the web</text>
+    </g>
+    <g transform="translate(25,260)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">develop technical specifications</text>
+    </g>
+    <g transform="translate(50,300)" class="H4 F35">
+      <circle cx="65" cy="40" r="5" />
+      <text x="90" y="55">Markup Languages</text>
+    </g>
+    <g transform="translate(75,340)" class="H6">
+      <rect x="75" y="40" width="8" height="8" />
+      <text x="100" y="55">HTML, XML, MathML, VoiceXML</text>
+    </g>
+    <g transform="translate(50,380)" class="H4 F35">
+      <circle cx="65" cy="40" r="5" />
+      <text x="90" y="55">Graphics formats: PNG, SVG</text>
+    </g>
+    <g transform="translate(50,420)" class="H4 F35">
+      <circle cx="65" cy="40" r="5" />
+      <text x="90" y="55">Stylesheets: CSS, XSL</text>
+    </g>
+    <g transform="translate(50,460)" class="H4 F35">
+      <circle cx="65" cy="40" r="5" />
+      <text x="90" y="55">Document Object Model (DOM)</text>
+    </g>
+  </symbol>
+
+  <symbol id="s2" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">W3C Technologies</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">XML - eXtensible Markup Language</text>
+    </g>
+    <g transform="translate(25,140)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">for structuring data</text>
+    </g>
+    <g transform="translate(25,180)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">text consisting of tags and attributes</text>
+    </g>
+    <g transform="translate(25,220)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">a family of technologies</text>
+    </g>
+    <g transform="translate(25,260)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">license free and well supported</text>
+    </g>
+    <g transform="translate(25,300)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">W3C Recommendation: Feb 10, 1998</text>
+    </g>
+    <g transform="translate(0,370)" class="H3">
+      <circle cx="30" cy="40" r="5" />
+      <text x="60" y="55" class="F40">Get your data in XML format</text>
+    </g>
+    <g transform="translate(0,440)" class="H1">
+      <circle cx="30" cy="40" r="5" />
+      <text x="60" y="55" class="F40" style="font-style:italic;">&quot;XML is HTML for Data&quot;</text>
+    </g>
+  </symbol>
+
+  <symbol id="s3" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">XML Example</text>
+    <g transform="translate(0,100)">
+      <text x="60" y="35" class="H1 F30">&lt;?xml version="1.0"?&gt;</text>
+    </g>
+    <g transform="translate(0,100)">
+      <text x="60" y="70" class="H3 F30">&lt;ModbusTCP&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="105" class="H1 F30">&lt;IP&gt;192.168.0.1&lt;/IP&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="140" class="H1 F30">&lt;Points type="Analog"&gt;</text>
+    </g>
+    <g transform="translate(50,100)">
+      <text x="60" y="175" class="H4 F30">&lt;Point id="40001" desc="Reg 1"&gt;2048&lt;/Point&gt;</text>
+    </g>
+    <g transform="translate(50,100)">
+      <text x="60" y="210" class="H4 F30">&lt;Point id="40002" desc="Reg 2"&gt;32768&lt;/Point&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="245" class="H1 F30">&lt;/Points&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="280" class="H1 F30">&lt;Points type="Digital"&gt;</text>
+    </g>
+    <g transform="translate(50,100)">
+      <text x="60" y="315" class="H4 F30">&lt;Point id="10001" desc="Reg 1"&gt;1&lt;/Point&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="350" class="H1 F30">&lt;/Points&gt;</text>
+    </g>
+    <g transform="translate(0,100)">
+      <text x="60" y="385" class="H3 F30">&lt;/ModbusTCP&gt;</text>
+    </g>
+  </symbol>
+
+  <symbol id="s4" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">W3C Technologies</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">SVG - Scalable Vector Graphics</text>
+    </g>
+    <g transform="translate(25,140)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">XML based definition for graphics</text>
+    </g>
+    <g transform="translate(25,180)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">text consisting of tags and attributes</text>
+    </g>
+    <g transform="translate(25,220)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">looks the same in any resolution</text>
+    </g>
+    <g transform="translate(25,260)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">license free and support is growing</text>
+    </g>
+    <g transform="translate(25,300)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">W3C Recommendation: Sept 4, 2001</text>
+    </g>
+    <g transform="translate(0,370)" class="H3">
+      <circle cx="30" cy="40" r="5" />
+      <text x="60" y="55" class="F40">Create your graphics using SVG</text>
+    </g>
+    <g transform="translate(0,440)" class="H1">
+      <circle cx="30" cy="40" r="5" />
+      <text x="60" y="55" class="F40" style="font-style:italic;">&quot;SVG is HTML for Graphics&quot;</text>
+    </g>
+  </symbol>
+
+  <symbol id="s5" viewBox="0 0 800 500" style="overflow:hidden">
+    <text x="400" y="55" class="title">SVG Example</text>
+    <g transform="translate(0,100)">
+      <image x="80" y="0" width="640" height="400" xlink:href="GenRTD.svg" old="PIDLoop.svg" />
+    </g>
+  </symbol>
+
+  <symbol id="s6" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">W3C Technologies</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">XSL - eXtensible Stylesheet Language</text>
+    </g>
+    <g transform="translate(25,140)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">XML language for presenting data</text>
+    </g>
+    <g transform="translate(25,180)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">text consisting of tags and attributes</text>
+    </g>
+    <g transform="translate(25,220)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">reformats XML data to SVG, HTML, etc.</text>
+    </g>
+    <g transform="translate(25,260)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">XSL Transformations (XSLT)</text>
+    </g>
+    <g transform="translate(25,300)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">W3C Recommendation: Oct 15, 2001</text>
+    </g>
+    <g transform="translate(0,370)" class="H3">
+      <circle cx="30" cy="40" r="5" />
+      <text x="60" y="55" class="F40">Use XSL to reformat your data</text>
+    </g>
+  </symbol>
+
+  <marker id="arrow" refX="3" refY="2" markerWidth="4" markerHeight="4" orient="auto">
+    <path d="M1,2L1,1,3,2,1,3 z" style="fill:navy;stroke:navy;" />
+  </marker>
+
+  <symbol id="s7" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">W3C Technologies</text>
+    <g style="fill:navy;stroke:navy;stroke-width:5;">
+      <g transform="rotate(22.5,100,200)">
+        <path d="M100,200L345,200" marker-end="url(#arrow)"  />
+      </g>
+      <g transform="rotate(-22.5,100,450)">
+        <path d="M100,450L345,450" marker-end="url(#arrow)"  />
+      </g>
+      <g transform="rotate(-22.5,400,325)">
+        <path d="M400,325L645,325" marker-end="url(#arrow)"  />
+      </g>
+      <g transform="rotate(22.5,400,325)">
+        <path d="M400,325L645,325" marker-end="url(#arrow)"  />
+      </g>
+    </g>
+    <g transform="translate(0,100)">
+      <circle cx="100" cy="100" r="75" style="fill:white;stroke:navy" />
+      <text x="100" y="110" class="H1 F40 Center">XML</text>
+    </g>
+    <g transform="translate(0,350)">
+      <circle cx="100" cy="100" r="75" style="fill:white;stroke:navy" />
+      <text x="100" y="110" class="H1 F40 Center">XSL</text>
+    </g>
+    <g transform="translate(300,225)">
+      <circle cx="100" cy="100" r="75" style="fill:white;stroke:navy" />
+      <text x="100" y="110" class="H1 F40 Center">XSLT</text>
+    </g>
+    <g transform="translate(600,100)">
+      <circle cx="100" cy="100" r="75" style="fill:white;stroke:navy" />
+      <text x="100" y="110" class="H1 F40 Center">HTML</text>
+    </g>
+    <g transform="translate(600,350)">
+      <circle cx="100" cy="100" r="75" style="fill:white;stroke:navy" />
+      <text x="100" y="110" class="H1 F40 Center">SVG</text>
+    </g>
+  </symbol>
+
+  <symbol id="s8" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Learning SVG</text>
+    <g transform="translate(0,100)">
+      <text x="60" y="35" class="H1 F30">&lt;?xml version="1.0"?&gt;</text>
+    </g>
+    <g transform="translate(0,100)">
+      <text x="60" y="70" class="H3 F30">&lt;svg viewBox="0 0 800 500"&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="105" class="H1 F30">&lt;circle cx="400" cy="400" r="100" style="fill:red" /&gt;</text>
+    </g>
+    <g transform="translate(25,100)">
+      <text x="60" y="140" class="H1 F30">&lt;circle cx="400" cy="400" r="2" style="fill:black" /&gt;</text>
+    </g>
+    <g transform="translate(0,100)">
+      <text x="60" y="175" class="H3 F30">&lt;/svg&gt;</text>
+    </g>
+    <circle cx="400" cy="400" r="100" style="fill:red" />
+    <circle cx="400" cy="400" r="2" style="fill:black" />
+    <g transform="translate(0,510)" class="H1">
+      <text x="400" y="55" class="F40 Center" style="font-style:italic;">http://www.cattocreations.com/LearnSVG/</text>
+    </g>
+  </symbol>
+
+  <symbol id="s9" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">It's Easy</text>
+    <text x="20" y="350" class="H1 F40 Center" transform="rotate(-90,20,350)">Lombardi Middle School</text>
+    <text x="780" y="350" class="H1 F40 Center" transform="rotate(90,780,350)">November 26, 2003</text>
+    <g transform="translate(25,100)">
+      <rect x="0" y="0" width="250" height="250" style="fill:none;stroke:black;" />
+      <image x="0" y="0" width="250" height="250" xlink:href="Lombardi/Kirby.svg" />
+    </g>
+    <g transform="translate(275,100)">
+      <rect x="0" y="0" width="250" height="250" style="fill:none;stroke:black;" />
+      <image x="0" y="0" width="250" height="250" xlink:href="Lombardi/planet.svg" />
+    </g>
+    <g transform="translate(525,100)">
+      <rect x="0" y="0" width="250" height="250" style="fill:none;stroke:black;" />
+      <image x="0" y="0" width="250" height="250" xlink:href="Lombardi/eric cartman.svg" />
+    </g>
+    <g transform="translate(25,350)">
+      <rect x="0" y="0" width="250" height="250" style="fill:none;stroke:black;" />
+      <image x="0" y="0" width="250" height="250" xlink:href="Lombardi/Futuresnowman.svg" />
+    </g>
+    <g transform="translate(275,350)">
+      <rect x="0" y="0" width="250" height="250" style="fill:none;stroke:black;" />
+      <image x="0" y="0" width="250" height="250" xlink:href="Lombardi/my christmas tree.svg" />
+    </g>
+    <g transform="translate(525,350)">
+      <rect x="0" y="0" width="250" height="250" style="fill:none;stroke:black;" />
+      <image x="0" y="0" width="250" height="250" xlink:href="Lombardi/thing.svg" />
+    </g>
+  </symbol>
+
+  <symbol id="s10" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">And Fun</text>
+    <g transform="translate(0,100)">
+      <image x="0" y="0" width="500" height="500" xlink:href="chris.svg" />
+      <text x="520" y="35" class="H6">Find people in your</text>
+      <text x="520" y="70" class="H6">organization that</text>
+      <text x="520" y="105" class="H6">like creating HTML</text>
+      <text x="520" y="140" class="H6">by hand.  You know</text>
+      <text x="520" y="175" class="H6">they are out there.</text>
+      <text x="520" y="245" class="H6">They will learn SVG</text>
+      <text x="520" y="280" class="H6">quickly and have</text>
+      <text x="520" y="315" class="H6">fun creating it.</text>
+    </g>
+  </symbol>
+
+  <symbol id="s11" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Live Demo</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Excel Spreadsheet running Macro</text>
+    </g>
+    <g transform="translate(25,140)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Excel will be our data source</text>
+    </g>
+    <g transform="translate(0,200)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">VB Interface Application</text>
+    </g>
+    <g transform="translate(25,240)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">DDE link to Excel</text>
+    </g>
+    <g transform="translate(25,280)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Puts Excel Data into XML format</text>
+    </g>
+    <g transform="translate(0,350)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">SVG graphic in Browser</text>
+    </g>
+    <g transform="translate(25,390)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">XML data linked to SVG</text>
+    </g>
+    <g transform="translate(0,450)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Let's take a look</text>
+    </g>
+  </symbol>
+
+  <symbol id="s12" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Benefits</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Browser is your HMI</text>
+    </g>
+    <g transform="translate(25,140)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">No software to install</text>
+    </g>
+    <g transform="translate(25,180)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">No license fees to pay</text>
+    </g>
+    <g transform="translate(0,250)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Data on every desktop</text>
+    </g>
+    <g transform="translate(25,290)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">No running to control room</text>
+    </g>
+    <g transform="translate(0,350)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">"Web Services" access to the data</text>
+    </g>
+    <g transform="translate(25,390)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Integrate data into business apps</text>
+    </g>
+    <g transform="translate(0,450)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Can be done very inexpensively</text>
+    </g>
+    <g transform="translate(25,490)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Apache Web Server, PHP Scripting</text>
+    </g>
+  </symbol>
+
+  <symbol id="s13" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Where To Start</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Examine your interface possibilities</text>
+    </g>
+    <g transform="translate(25,140)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">OPC, DDE, ModbusTCP, Other</text>
+    </g>
+    <g transform="translate(0,200)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Write an application for an interface</text>
+    </g>
+    <g transform="translate(0,250)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Put your data in an XML file</text>
+    </g>
+    <g transform="translate(0,300)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Create your graphics in SVG</text>
+    </g>
+    <g transform="translate(0,350)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Link the XML data to your SVG</text>
+    </g>
+    <g transform="translate(25,390)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Easily updated in JavaScript</text>
+    </g>
+    <g transform="translate(25,430)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">using well supported XML parsers</text>
+    </g>
+  </symbol>
+
+  <symbol id="s14" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">The Concept Works</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">ModbusTCP Interface</text>
+    </g>
+    <g transform="translate(25,140)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Combustion Turbine Generators (2 locations)</text>
+    </g>
+    <g transform="translate(25,180)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Opto 22 Ethernet I/O</text>
+    </g>
+    <g transform="translate(25,220)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Serial devices using Ethernet Bridge</text>
+    </g>
+    <g transform="translate(0,280)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">OPC Interface</text>
+    </g>
+    <g transform="translate(25,320)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Generating Plant DCS (2 locations)</text>
+    </g>
+    <g transform="translate(25,360)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Opto 22 Ethernet I/O</text>
+    </g>
+    <g transform="translate(25,400)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">RS Linx</text>
+    </g>
+    <g transform="translate(0,460)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">DDE interface</text>
+    </g>
+    <g transform="translate(25,500)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">GE Cimplicity, JC Metasys, RS Linx</text>
+    </g>
+  </symbol>
+
+  <symbol id="s15" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Security</text>
+    <g transform="translate(0,100)">
+/* Define Symbols used in graphic */
+<defs>
+  <symbol id="OpCon" viewBox="0 0 60 40">
+    <rect x="1" y="1" width="58" height="38" rx="7" ry="7" style="fill:none;stroke-width:2;" />
+    <text x="30" y="17" style="font-size:12;stroke:none;text-anchor:middle;pointer-events:none">Operator</text>
+    <text x="30" y="32" style="font-size:12;stroke:none;text-anchor:middle;pointer-events:none">Console</text>
+  </symbol>
+
+  <symbol id="PLC" viewBox="0 0 60 40">
+    <rect x="1" y="1" width="58" height="38" rx="7" ry="7" style="fill:none;stroke-width:2;" />
+    <text x="30" y="26" style="font-size:20;stroke:none;text-anchor:middle;pointer-events:none">PLC</text>
+  </symbol>
+
+  <symbol id="IO" viewBox="0 0 60 40">
+    <rect x="1" y="1" width="58" height="38" rx="7" ry="7" style="fill:none;stroke-width:2;" />
+    <text x="30" y="17" style="font-size:12;stroke:none;text-anchor:middle;pointer-events:none">Smart</text>
+    <text x="30" y="32" style="font-size:12;stroke:none;text-anchor:middle;pointer-events:none">I/O</text>
+  </symbol>
+
+  <symbol id="Net" viewBox="0 0 410 110">
+    <ellipse cx="205" cy="55" rx="200" ry="50" style="fill:#EEEEEE;stroke-width:2;" />
+  </symbol>
+
+  <symbol id="PC" viewBox="0 0 60 40">
+    <rect x="1" y="1" width="58" height="38" rx="7" ry="7" style="fill:none;stroke-width:2;" />
+    <text x="30" y="17" style="font-size:12;stroke:none;text-anchor:middle;pointer-events:none">Personal</text>
+    <text x="30" y="32" style="font-size:12;stroke:none;text-anchor:middle;pointer-events:none">Computer</text>
+  </symbol>
+
+  <symbol id="OPCWeb" viewBox="0 0 70 40">
+    <rect x="1" y="1" width="68" height="38" rx="7" ry="7" style="fill:white;stroke-width:2;" />
+    <text x="35" y="18" style="font-size:14;stroke:none;text-anchor:middle;pointer-events:none">Web</text>
+    <text x="35" y="33" style="font-size:14;stroke:none;text-anchor:middle;pointer-events:none">Server</text>
+  </symbol>
+
+  <symbol id="FW502" viewBox="0 0 70 40">
+    <rect x="1" y="1" width="68" height="38" rx="7" ry="7" style="fill:white;stroke-width:2;" />
+    <text x="35" y="18" style="font-size:14;stroke:none;text-anchor:middle;pointer-events:none">Firewall</text>
+    <text x="35" y="33" style="font-size:14;stroke:none;text-anchor:middle;pointer-events:none">Port 502</text>
+  </symbol>
+
+  <symbol id="FW80" viewBox="0 0 70 40">
+    <rect x="1" y="1" width="68" height="38" rx="7" ry="7" style="fill:white;stroke-width:2;" />
+    <text x="35" y="18" style="font-size:14;stroke:none;text-anchor:middle;pointer-events:none">Firewall</text>
+    <text x="35" y="33" style="font-size:14;stroke:none;text-anchor:middle;pointer-events:none">Port 80</text>
+  </symbol>
+</defs>
+
+<text x="400" y="20" style="font-size:18;text-anchor:middle">Network Layout</text>
+
+<g id="ControlNet">
+  <use x="150" y="10" width="60" height="40" xlink:href="#OpCon" style="fill:red;stroke:red;" />
+  <path d="M210,30 L400,75" style="fill:none;stroke:red;stroke-width:2;" />
+
+  <use x="150" y="140" width="60" height="40" xlink:href="#PLC" style="fill:red;stroke:red;" />
+  <path d="M210,160 L400,75" style="fill:none;stroke:red;stroke-width:2;" />
+
+  <use x="590" y="10" width="60" height="40" xlink:href="#PLC" style="fill:red;stroke:red;" />
+  <path d="M590,30 L400,75" style="fill:none;stroke:red;stroke-width:2;" />
+
+  <use x="590" y="140" width="60" height="40" xlink:href="#IO" style="fill:red;stroke:red;" />
+  <path d="M590,160 L400,75" style="fill:none;stroke:red;stroke-width:2;" />
+
+
+  <use x="195" y="40" width="410" height="110" xlink:href="#Net" style="stroke:red;" />
+  <text x="400" y="93" style="font-size:14;text-anchor:middle;fill:red;pointer-events:none">Control Network</text>
+  <text x="400" y="107" style="font-size:14;text-anchor:middle;fill:red;pointer-events:none">192.168.x.x</text>
+</g>
+
+<g id="Net2Net" transform="translate(0,0)">
+  <use x="290" y="225" width="70" height="40" xlink:href="#OPCWeb" style="fill:green;stroke:green;" />
+  <path d="M360,235 L400,235 L400,145" style="fill:none;stroke:red;stroke-width:2;" />
+  <path d="M360,255 L400,255 L400,355" style="fill:none;stroke:blue;stroke-width:2;" />
+  <g>
+    <use x="365" y="170" width="70" height="40" xlink:href="#FW502" style="fill:green;stroke:green;" />
+  </g>
+  <g>
+    <use x="365" y="285" width="70" height="40" xlink:href="#FW80" style="fill:green;stroke:green;" />
+  </g>
+</g>
+
+<g id="CorporateNet" transform="translate(0,310)">
+  <use x="150" y="10" width="60" height="40" xlink:href="#PC" style="fill:blue;stroke:blue;" />
+  <path d="M210,30 L400,75" style="fill:none;stroke:blue;stroke-width:2;" />
+
+  <use x="150" y="140" width="60" height="40" xlink:href="#PC" style="fill:blue;stroke:blue;" />
+  <path d="M210,160 L400,75" style="fill:none;stroke:blue;stroke-width:2;" />
+
+  <use x="590" y="10" width="60" height="40" xlink:href="#PC" style="fill:blue;stroke:blue;" />
+  <path d="M590,30 L400,75" style="fill:none;stroke:blue;stroke-width:2;" />
+
+  <use x="590" y="140" width="60" height="40" xlink:href="#PC" style="fill:blue;stroke:blue;" />
+  <path d="M590,160 L400,75" style="fill:none;stroke:blue;stroke-width:2;" />
+
+  <use x="195" y="40" width="410" height="110" xlink:href="#Net" style="stroke:blue;" />
+  <text x="400" y="93" style="font-size:14;text-anchor:middle;fill:blue;pointer-events:none">Corporate Network</text>
+  <text x="400" y="107" style="font-size:14;text-anchor:middle;fill:blue;pointer-events:none">10.x.x.x</text>
+</g>
+    </g>
+  </symbol>
+
+  <symbol id="s16" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Where to Learn More</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">W3 Schools</text>
+    </g>
+    <g transform="translate(10,140)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">http://www.w3schools.com</text>
+    </g>
+    <g transform="translate(0,200)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">W3C Web Site</text>
+    </g>
+    <g transform="translate(10,240)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">http://www.w3.org</text>
+    </g>
+    <g transform="translate(0,300)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Learn SVG</text>
+    </g>
+    <g transform="translate(10,340)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">http://www.cattocreations.com/LearnSVG/</text>
+    </g>
+    <g transform="translate(10,380)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">http://www.wpsenergy.com/JayNick/</text>
+    </g>
+    <g transform="translate(0,440)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">SVG Sites</text>
+    </g>
+    <g transform="translate(10,480)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">http://www.svgx.org</text>
+    </g>
+    <g transform="translate(10,520)" class="H5">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">http://groups.yahoo.com/group/svg-developers</text>
+    </g>
+  </symbol>
+
+  <symbol id="s17" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Buyer Beware</text>
+    <g transform="translate(0,100)">
+      <circle cx="30" cy="40" r="5" style="fill:navy" />
+      <text x="60" y="55" class="H1 F40">Beware of Web Offerings</text>
+    </g>
+    <g transform="translate(25,140)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Applets are proprietary</text>
+    </g>
+    <g transform="translate(25,180)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Portals help license accounting</text>
+    </g>
+    <g transform="translate(25,220)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Use of non-standards: VML, WVG</text>
+    </g>
+    <g transform="translate(25,260)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Security hype (work with IT)</text>
+    </g>
+    <g transform="translate(0,330)" class="H3">
+      <circle cx="30" cy="40" r="5" />
+      <text x="60" y="55" class="F40">Be Platform Neutral</text>
+    </g>
+    <g transform="translate(25,370)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">Embrace W3C Standards</text>
+    </g>
+    <g transform="translate(25,490)" class="H6">
+      <rect x="55" y="40" width="8" height="8" />
+      <text x="80" y="55">2004 - Year of the Linux Desktop</text>
+    </g>
+    <g transform="translate(25,445)" class="H6">
+      <rect x="55" y="25" width="8" height="8" />
+      <text x="80" y="40">OPC: XML-DA</text>
+      <image x="317.5" y="0" width="165" height="60" xlink:href="http://www.tsopc.com/images/logos/OPCLinux.jpg"/>
+    </g>
+  </symbol>
+
+  <symbol id="s18" viewBox="0 0 800 500" style="overflow:visible">
+    <text x="400" y="55" class="title">Wrap Up</text>
+    <g transform="translate(0,100)">
+      <text x="400" y="200" class="H1" style="font-size:100;text-anchor:middle;">More Examples</text>
+    </g>
+  </symbol>
+
+  <symbol id="s19" viewBox="0 0 800 490" style="overflow:visible">
+    <text x="400" y="55" class="title">Thank You</text>
+    <g transform="translate(0,100)">
+      <rect x="0" y="0" width="800" height="390" style="fill:url(#Q);" />
+      <g transform="rotate(-25,400,240)">
+        <text x="400" y="240" style="fill:none;stroke:red;stroke-width:4;font-size:170;text-anchor:middle;">Questions</text>
+      </g>
+    </g>
+  </symbol>
+
+</defs>
+
+
+<rect x="-100%" y="-100%" width="300%" height="300%" style="fill:#EEEEEE;" />
+
+<image x="0" y="0" width="90" height="68" xlink:href="WPSRLogo.svgz" />
+<rect x="0" y="70" width="800" height="30" style="fill:URL(#Separator);" />
+
+<!-- **************  Clock  ******************** -->
+<defs>
+<style type="text/css">
+<![CDATA[
+circle.bullet {fill:#0C469C;stroke:none}
+.clock-back {fill:white;stroke:none;}
+.clock-rim {fill:silver;stroke:yellow;stroke-width:3;}
+.clock-face {fill:white;stroke:black;}
+.clock-hour {stroke:none;fill:black;stroke-width:1;font-size:10pt;}
+.clock-minute {stroke:grey;fill:grey;stroke-width:1;font-size:10pt;}
+.clock-second {stroke:none;fill:red;stroke-width:2;font-size:10pt;}
+]]>
+</style>
+</defs>
+<g onload="Start(evt);">
+<defs>
+<script  type="text/ecmascript">	
+<![CDATA[
+var variableUpdateTimer;
+var clockObj = null;
+var centerX = 50;
+var centerY = 50;
+// ***************Need resetting for each clock use I am afraid ****************
+var offsetX = 0;
+var offsetY = 0;
+var scale = 1;
+// ******************************************************************************
+				// variable.js
+function GetVariableValue(vars,name)
+{
+var splitVar;
+for (var i = 0;i < vars.length;i ++)
+{
+splitVar = vars[i].split(":");
+if (splitVar[0] == name)
+return splitVar[1];
+}
+return null;
+}				
+	
+function SetSVGVariables(svg)	// plus name value pairs arguments
+{
+if (svg == null)
+return;
+var varNode = svg.getElementById('variables');
+if (varNode != null)
+{
+var variables = varNode.firstChild.nodeValue;
+var vars = variables.split(";");
+for (arg = 1;arg < arguments.length;arg += 2)
+SetVariableValue(vars,arguments[arg],arguments[arg + 1]);
+varNode.firstChild.nodeValue = vars.join(";");
+}	
+}
+	
+function SetVariableValue(vars,name,value)
+{
+var splitVar;
+for (var i = 0;i < vars.length;i ++)
+{
+splitVar = vars[i].split(":");
+if (splitVar[0] == name)
+{
+splitVar[1] = value;
+vars[i] = splitVar.join(":");
+return;
+}
+}
+vars[i] = name + ":" + value;
+return;
+}				
+function clock(doc)
+{
+this.doc = doc;
+this.variableNode = doc.getElementById("variables");
+this.variables = this.variableNode.firstChild + "";
+var vars = this.variables.split(";");
+this.width = GetVariableValue(vars,"width") - 0;
+this.height = GetVariableValue(vars,"height") - 0;
+this.secondNode = doc.getElementById("seconds");
+this.minuteNode = doc.getElementById("minutes");
+this.hourNode = doc.getElementById("hours");
+				
+this.variables = this.variableNode.firstChild + "";
+var vars = this.variables.split(";");
+				
+var handTouched = null;
+								
+this.adjustTime = AdjustTime;
+this.adjustHand = AdjustHand;
+this.makeMinutes = MakeMinutes;
+this.xyAngle = XyAngle;
+this.xyRadius = XyRadius;
+}
+			
+/* member functions */
+function MakeMinutes()
+{
+var newNode;
+var na;
+				
+var hourNode = this.doc.getElementById("minute-0");
+var dot = hourNode.getAttribute("r");
+var x = hourNode.getAttribute("cx") - 0;										
+var y = hourNode.getAttribute("cy") - 0;
+				
+var a = this.xyAngle(x,y);
+var r = this.xyRadius(x,y);
+				
+for (var m = 1;m < 60;m ++)
+{
+newNode = hourNode.cloneNode(true);
+newNode.setAttribute("id","minute-" + m);
+na = ((a + 6 * m) - 90) % 360;
+na = (na * 2 * Math.PI) / 360;
+newNode.setAttribute("cx",r * Math.cos(na) + centerX);										
+newNode.setAttribute("cy",r * Math.sin(na) + centerY);										
+if (m % 5 != 0)
+newNode.setAttribute("r",dot / 2);
+hourNode.getParentNode().appendChild(newNode);
+}
+}
+			
+function AdjustTime(time)
+{
+var seconds = time.getSeconds();
+var minutes = time.getMinutes() + seconds / 60;
+var hours = time.getHours() + minutes / 60;
+	          
+this.secondNode.setAttribute('transform', 'rotate(' + (seconds * 6) + ')');
+this.minuteNode.setAttribute('transform', 'rotate(' + (minutes * 6) + ')');
+this.hourNode.setAttribute('transform', 'rotate(' + (hours * 30) + ')');
+}
+function XyAngle(x,y)
+{
+x = x - centerX;
+y = y - centerY;
+				
+var a = (360 * Math.atan(y / x)) / (2 * Math.PI);
+if (x < 0)
+a = 180 + a;
+a = a + 90;
+return a;				
+}
+			
+function XyRadius(x,y)
+{
+x = x - centerX;
+y = y - centerY;
+				
+var r = Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
+return r;				
+}
+			
+function AdjustHand(node,x,y)
+{
+var size = this.doc.getElementById("size");
+// var w = size.getAttribute("width");
+// var x = (x * w) / this.width;
+// var h = size.getAttribute("height");
+// var y = (y * h) / this.height;
+var x = (x - offsetX) / scale;
+var y = (y - offsetY) / scale;
+var r = this.xyRadius(x,y);
+var a = this.xyAngle(x,y);
+				
+if (node == this.hourNode)
+{	// hour hand
+this.hourNode.setAttribute('transform', 'rotate(' + a + ')');
+} 
+if (node == this.minuteNode)
+{	// minute hand
+this.minuteNode.setAttribute('transform', 'rotate(' + a + ')');
+}
+if (node == this.secondNode)
+{	// second hand
+this.secondNode.setAttribute('transform', 'rotate(' + a + ')');
+}
+}
+/* event handlers */
+function Start(event)
+{
+var SVGDocument = event.getTarget().getOwnerDocument();
+clockObj = new clock(SVGDocument);	
+clockObj.makeMinutes();
+				
+//varNode.addEventListener("DOMSubtreeModified",Test, false);
+var now = new Date();
+clockObj.adjustTime(now);
+}
+function TouchHand(clock,event)
+{
+clock.handTouched = event.currentNode;
+clock.touchX = event.clientX;
+clock.touchY = event.clientY;
+}
+function LeaveHand(clock,event)
+{
+clock.handTouched = null;
+}
+			
+function MoveHand(clock,event)
+{
+if (clock.handTouched)
+					clock.adjustHand(clockObj.handTouched,event.clientX,event.clientY);
+}
+			
+]]>
+</script>
+		
+		
+</defs>	
+<g transform="translate(740,5) scale(0.6)">
+<rect id="size" width="100" height="100" style="opacity:0" />	<!-- document size -->
+<g id="clock">
+<text id="variables" x="5" y="20" style="visibility:hidden;" >width:100;height:100;"</text>
+<circle class="clock-rim" cx="50" cy="50" r="49" />
+<circle class="clock-face" cx="50" cy="50" r="47.5" />
+<image x="33" y="22" width="33" height="25" xlink:href="WPSRLogo.svgz"/>
+<text id="hour-12" class="clock-hour" x="43" y="16" >12</text>
+<text id="hour-1" class="clock-hour" x="66" y="21" >1</text>
+<text id="hour-2" class="clock-hour" x="79.5" y="33" >2</text>
+<text id="hour-3" class="clock-hour" x="86.5" y="54" >3</text>
+<text id="hour-4" class="clock-hour" x="80.5" y="74" >4</text>
+<text id="hour-5" class="clock-hour" x="66.5" y="87" >5</text>
+<text id="hour-6" class="clock-hour" x="47" y="92.5" >6</text>
+<text id="hour-7" class="clock-hour" x="27" y="87" >7</text>
+<text id="hour-8" class="clock-hour" x="13.5" y="74.5" >8</text>
+<text id="hour-9" class="clock-hour" x="7.5" y="54" >9</text>
+<text id="hour-10" class="clock-hour" x="12.5" y="36" >10</text>
+<text id="hour-11" class="clock-hour" x="27" y="21" >11</text>
+<circle id="minute-0" class="clock-minute" cx="50" cy="5" r="1" xlink:href="#minute-dot" />
+<g transform="translate(50 50)" >
+<g>
+<path  id="hours" class="clock-hour" transform="rotate(0)" d="M 0,0 L 3.5 -7.5 L 0 -30 L -3.5 -7.5 L 0 0" onmousedown="TouchHand(clockObj,evt)"/>
+<animateTransform attributeName="transform" type="rotate" dur="43200s" values="0;360" repeatCount="indefinite"/>
+</g>
+<g>
+<path id="minutes" class="clock-minute" transform="rotate(0)" d="M 0,0 L 2.5 -7.5 L 0 -40 L -2.5 -7.5 L 0 0" onmousedown="TouchHand(clockObj,evt)" />
+<animateTransform attributeName="transform" type="rotate" dur="3600s" values="0;360" repeatCount="indefinite"/>
+</g>
+<g>
+<path id="seconds" class="clock-second" transform="rotate(0)" d="M 0,0 L0.5 -22 L 0,-45 L-0.5 -22 L0 0"  />
+<animateTransform attributeName="transform" type="rotate" dur="60s" values="0;360" repeatCount="indefinite"/>
+</g>				
+</g>
+</g>  
+	
+</g>
+</g>
+<!-- **************  End Clock  ******************** -->
+
+
+<g id="View1" cursor="default" style="visibility:visible">
+  <use x="0" y="0" width="800" height="490" xlink:href="#s0">
+    <animate attributeName="xlink:href" a:transIn="t1" from="#s0" to="#s0" begin="0s" />
+  </use>
+  <g transform="translate(0,70)" cursor="pointer">
+    <path d="M775,0L790,10L775,20z" style="fill:URL(#Separator2);" onclick="next(evt)" />
+    <path d="M765,0L750,10L765,20z" style="fill:URL(#Separator2);" onclick="back(evt)" />
+    <g onclick="toggleView(evt)">
+      <rect x="725" y="2.5" width="15" height="15" style="fill:none;stroke:silver;stroke-width:2" />
+      <rect x="725" y="7.5" width="15" height="5" style="fill:none;stroke:silver;stroke-width:1"  />
+      <rect x="730" y="2.5" width="5" height="15" style="fill:none;stroke:silver;stroke-width:1"  />
+    </g>
+  </g>
+</g>
+
+<g id="View2" cursor="default" style="visibility:hidden">
+  <text x="400" y="55" class="title">ISA Vendor Expo - 2004</text>
+  <g transform="translate(0,70)" cursor="pointer">
+    <path d="M775,0L790,10L775,20z" style="fill:URL(#Separator2);" onclick="toggleView(evt)" />
+    <path d="M765,0L750,10L765,20z" style="fill:URL(#Separator2);" onclick="toggleView(evt)" />
+  </g>
+  <g transform="translate(0,90)">
+    <rect  x="0" y="0" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="18" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="0" width="256" height="140" xlink:href="#s0" onclick="select(evt,0)" />
+
+    <rect  x="0" y="165" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="183" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="165" width="256" height="140" xlink:href="#s1" onclick="select(evt,1)" />
+
+    <rect  x="0" y="330" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="348" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="330" width="256" height="150" xlink:href="#s2" onclick="select(evt,2)" />
+  </g>
+  <g transform="translate(272,90)">
+    <rect  x="0" y="0" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="18" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="0" width="256" height="150" xlink:href="#s3" onclick="select(evt,3)" />
+
+    <rect  x="0" y="165" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="183" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="165" width="256" height="150" xlink:href="#s4" onclick="select(evt,4)" />
+
+    <rect  x="0" y="330" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="348" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="330" width="256" height="150" xlink:href="#s5" onclick="select(evt,5)" />
+  </g>
+  <g transform="translate(544,90)">
+    <rect  x="0" y="0" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="18" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="0" width="256" height="150" xlink:href="#s6" onclick="select(evt,6)" />
+
+    <rect  x="0" y="165" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="183" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="165" width="256" height="150" xlink:href="#s7" onclick="select(evt,7)" />
+
+    <rect  x="0" y="330" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="348" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="330" width="256" height="140" xlink:href="#s8" onclick="select(evt,8)" />
+  </g>
+</g>
+
+<g id="View3" cursor="default" style="visibility:hidden">
+  <text x="400" y="55" class="title">ISA Vendor Expo - 2004</text>
+  <g transform="translate(0,70)" cursor="pointer">
+    <path d="M775,0L790,10L775,20z" style="fill:URL(#Separator2);" onclick="toggleView(evt)" />
+    <path d="M765,0L750,10L765,20z" style="fill:URL(#Separator2);" onclick="toggleView(evt)" />
+  </g>
+  <g transform="translate(0,90)">
+    <rect  x="0" y="0" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="18" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="0" width="256" height="130" xlink:href="#s9" onclick="select(evt,9)" />
+
+    <rect  x="0" y="165" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="183" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="165" width="256" height="130" xlink:href="#s10" onclick="select(evt,10)" />
+
+    <rect  x="0" y="330" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="348" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="330" width="256" height="150" xlink:href="#s11" onclick="select(evt,11)" />
+  </g>
+  <g transform="translate(272,90)">
+    <rect  x="0" y="0" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="18" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="0" width="256" height="140" xlink:href="#s12" onclick="select(evt,12)" />
+
+    <rect  x="0" y="165" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="183" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="165" width="256" height="150" xlink:href="#s13" onclick="select(evt,13)" />
+
+    <rect  x="0" y="330" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="348" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="330" width="256" height="140" xlink:href="#s14" onclick="select(evt,14)" />
+  </g>
+  <g transform="translate(544,90)">
+    <rect  x="0" y="0" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="18" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="0" width="256" height="130" xlink:href="#s15" onclick="select(evt,15)" />
+
+    <rect  x="0" y="165" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="183" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="165" width="256" height="130" xlink:href="#s16" onclick="select(evt,16)" />
+
+    <rect  x="0" y="330" width="256" height="160" style="fill:none;stroke:black" />
+    <rect x="2" y="348" width="252" height="10" style="fill:URL(#Separator);" />
+    <use x="0" y="330" width="256" height="130" xlink:href="#s17" onclick="select(evt,17)" />
+  </g>
+</g>
+</svg>

@@ -1,0 +1,46 @@
+{ "markers": [
+		{	"point":new GLatLng(6.083545, 102.231015), 
+			"kementerian":"Hijau",		// perancangan
+			"siling":"100.00",
+			"tajukProj":"Markas Pasukan Mencari dan Menyelamat Khasgara (Fasa 2) ",
+			"lokasi":"",			
+			"hopt":"Ir. Md Noor",
+			"photoA":"<img src=\"./images/photoA1.jpg\" width=\"150\" height=\"100\" alt=\"photoA\" />",			
+			////////////////////// rekabentuk
+			"kaedahR":"Inhouse",		
+			"skop":"Semua mau",
+			"titikssa":"",
+			"perekaORperunding":"",
+			"penyemakORice":"",
+			"kppk":"pt",
+			"statusReka":[	
+						"Perlantikan hodt : ",
+						"Sah Dplan : ",
+						"Lawat Tapak : 12/03/2009",
+						"Konsep r/bentuk: ",
+						"R/bentuk awalan : ",
+						"R/bentuk perincian : ",
+						"Varifikasi R/bentuk : "	// audit rb for DB
+						],			
+			"catatanReka":["reka1","reka2"],
+			////////////////////// perolehan
+			"kaedahT":"",				
+			"ttdORpranego":"",
+			"iklanORnego":"",
+			"tutupT":"",
+			"kontraktor":"",
+			"kosKontrak":"",
+			"tempohKontrak":"",
+			////////////////////// pembinaan
+			"SO":"",					
+			"RE":"",
+			"statusBina":[	
+						"Milik Tapak : ",
+						"Validasi/Audit pembinaan : ",
+						"Serahan : "
+						],
+			"photoB":"<img src=\"./images/photoB2.jpg\" width=\"150\" height=\"100\" alt=\"photoB\" />",			
+			"catatanBina":["bina1","bina2"]			
+		}
+ ]
+ }

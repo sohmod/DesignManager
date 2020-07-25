@@ -1,0 +1,139 @@
+<?php
+ob_start();
+
+session_start();
+$chk_id=$_SESSION['daftar_id'];
+if (!$_SESSION['daftar_id']){ $tjk_projek="Projek Dummi .. "; $chk_id=7654321; $modus="Inhouse"; $kp_s=="123456-78-9012"; }
+include_once ("../../ip_SERVER.php");
+include_once("../../".PROJ_FOLDER."/inc/mysql_connect2cfg.php");
+$db=@mysql_connect($bkaHost,$bkaULogin,$bkaPass,$bkaDbase) or $error=(mysql_error()."<br>");
+@mysql_select_db($bkaDbase,$db) or $error=(mysql_error());
+echo $db . "<<== db info";
+
+	//$db = new mysqli($bkaHost,$bkaULogin,$bkaPass,$bkaDbase) or die(mysqli_error());
+	if(!$db) {
+		// Show error if we cannot connect.
+		echo "ERROR: Could not connect to the database.";
+	} 
+else {
+	$q = "SELECT * FROM laporanbulananRM11 WHERE id_daftar='$chk_id'";
+	$r = mysql_query($q);
+	if (mysql_num_rows($r) == 1) {
+		list($x1,$x2,
+		$mX[1],$mX[2],$mX[3],$mX[4],$mX[5],$mX[6],$mX[7],$mX[8],$mX[9],$mX[10],$mX[11],$mX[12],
+		$mX[13],$mX[14],$mX[15],$mX[16],$mX[17],$mX[18],$mX[19],$mX[20],$mX[21],$mX[22],$mX[23],$mX[24],
+		$mX[25],$mX[26],$mX[27],$mX[28],$mX[29],$mX[30],$mX[31],$mX[32],$mX[33],$mX[34],$mX[35],$mX[36],
+		$mX[37],$mX[38],$mX[39],$mX[40],$mX[41],$mX[42],$mX[43],$mX[44],$mX[45],$mX[46],$mX[47],$mX[48],
+		$mX[49],$mX[50],$mX[51],$mX[52],$mX[53],$mX[54],$mX[55],$mX[56],$mX[57],$mX[58],$mX[59],$mX[60],
+		$mX[61],$mX[62],$mX[63],$mX[64],$mX[65],$mX[66],$mX[67],$mX[68],$mX[69],$mX[70],$mX[71],$mX[72]
+		) = mysql_fetch_array($r, MYSQL_NUM);}	
+	}
+echo $chk_id." mX ". $mX[1]." - ".$mX[2]." - ".$mX[3]." - ".$mX[4]." - ".$mX[5]." - ".$mX[6]." - ".$mX[7]." - ".$mX[8]." - ".$mX[9]." - ".$mX[10].
+" - ".$mX[11]." - ".$mX[12]." <small>-->> GD pic here breaking .. </small>";
+
+$Xcoor = array(
+		1 => 80,
+		2 => 90,
+		3 => 100,
+		4 => 110,
+		5 => 120,
+		6 => 130,
+		7 => 140,
+		8 => 150,
+		9 => 160,
+		10 => 170,
+		11 => 180,
+		12 => 190,
+		13 => 200,
+		14 => 210,
+		15 => 220,
+		16 => 230,
+		17 => 240,
+		18 => 250,
+		19 => 260,
+		20 => 270,
+		21 => 280,
+		22 => 290,
+		23 => 300,
+		24 => 310,
+		25 => 320,
+		26 => 330,
+		27 => 340,
+		28 => 350,
+		29 => 360,
+		30 => 370,
+		31 => 380,
+		32 => 390,
+		33 => 400,
+		34 => 410,
+		35 => 420,
+		36 => 430,
+		37 => 440,
+		38 => 450,
+		39 => 460,
+		40 => 470,
+		41 => 480,
+		42 => 490,
+		43 => 500,
+		44 => 510,
+		45 => 520,
+		46 => 530,
+		47 => 540,
+		48 => 550,
+		49 => 560,
+		50 => 570,
+		51 => 580,
+		52 => 590,
+		53 => 600,
+		54 => 610,
+		55 => 620,
+		56 => 630,
+		57 => 640,
+		58 => 650,
+		59 => 660,
+		60 => 670,
+		61 => 680,
+		62 => 690,
+		63 => 700,
+		64 => 710,
+		65 => 720,
+		66 => 730,
+		67 => 740,
+		68 => 750,
+		69 => 760,
+		70 => 770,
+		71 => 780,
+		72 => 790); 
+
+$Ycoor = array(	"sifar" => 348,
+		"KIV" => 336,
+		"statustakjelas" => 322,
+		"dplan" => 309,
+		"pelanukur" => 297,
+		"pelansusunatur" => 283,
+		"NSorTOR" => 271,
+		"lawatapak" => 258,
+		"surat2pberkuasa" => 245,
+		"konsepRB" => 232,
+		"RBawalan" => 218,
+		"RBterperinci" => 205,
+		"varifikasiRB" => 192,
+		"auditRB" => 179,
+		"TTD" => 166,
+		"tender" => 154,
+		"pnilaianTeknikal" => 141,
+		"pranego" => 128,
+		"nego" => 115,
+		"LA" => 102,
+		"miliktapak" => 88,
+		"pembinaan" => 76,
+		"validasiRB" => 63,
+		"tambahmasa" => 50,
+		"serahan" => 36,
+		"tempohkecacatan" =>23,
+		"SEMPURNA"  => 10,
+		"" => 360);
+
+// Flush the buffered output to the Web browser.
+ob_flush();
+?>

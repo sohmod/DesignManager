@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Question form</title>
+</head>
+<style type="text/css">
+	div {
+		font-family: verdana;
+		font-size: 11px;
+		font : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	.input {
+		border : 1px solid;
+		font : 11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	table {
+		margin-left : 0px;
+		padding : 0px;
+	}
+</style>
+<body>
+<div><strong>Please take 2 minutes to answer this questionnaire.<br>This will help us develop the next version of PHPstat</strong></div><br>
+<div>!This form uses the internet to store the data. <br>Use this link if you get an error of some kind: <a href="http://www.harme.dk/php/question.html" style="color: Black;">http://www.harme.dk/php/question.html</a></div>
+<br>
+<hr align="left" width="500" size="1" color="#000000" noshade>
+<br>
+<form action="http://www.harme.dk/php/question.php">
+
+<table cellspacing="2" cellpadding="2" border="0">
+<tr>
+    <td><div><strong>Name:</strong></div></td>
+    <td><input type="text" name="name" size="30" class="input"></td>
+</tr>
+<tr>
+    <td><div><strong>Age:</strong></div></td>
+    <td><input type="text" name="age" size="30" class="input"></td>
+</tr>
+<tr>
+    <td><div><strong>Country:</strong></div></td>
+    <td><input type="text" name="country" size="30" class="input"></td>
+</tr>
+<tr>
+    <td><div><strong>Job description:</strong></div></td>
+    <td><select name="job" class="input" style="width: 195px;">
+<option value="Professional Webdesigner">Professional Webdesigner</option>
+<option value="Amature Webdesigner">Amateur Webdesigner</option>
+<option value="Marketing/Sales">Marketing/sales</option>
+<option value="E-commerce">E-commerce</option>
+<option value="Software development">Software development</option>
+<option value="Student">Student</option>
+<option value="Other">Other</option>
+</select></td>
+</tr>
+<tr>
+    <td><div><strong>If other descript what:</strong></div></td>
+    <td><input type="text" name="descother" size="30" class="input"></td>
+</tr>
+</table>
+<br>
+<hr align="left" width="500" size="1" color="#000000" noshade>
+<br>
+<div><strong>How experienced are you in (1: not experienced - 5 very experienced)?</strong></div><br>
+<div>&nbsp;&nbsp;PHP programming:<br>
+&nbsp;&nbsp;1<input type="radio" name="php" value="1" checked>
+&nbsp;&nbsp;2<input type="radio" name="php" value="2">
+&nbsp;&nbsp;3<input type="radio" name="php" value="3">
+&nbsp;&nbsp;4<input type="radio" name="php" value="4">
+&nbsp;&nbsp;5<input type="radio" name="php" value="5"><br>
+<br>&nbsp;&nbsp;Webserver configuration:<br>
+&nbsp;&nbsp;1<input type="radio" name="server" value="1" checked>
+&nbsp;&nbsp;2<input type="radio" name="server" value="2">
+&nbsp;&nbsp;3<input type="radio" name="server" value="3">
+&nbsp;&nbsp;4<input type="radio" name="server" value="4">
+&nbsp;&nbsp;5<input type="radio" name="server" value="5"><br>
+<br>&nbsp;&nbsp;Database programming:<br>
+&nbsp;&nbsp;1<input type="radio" name="database" value="1" checked>
+&nbsp;&nbsp;2<input type="radio" name="database" value="2">
+&nbsp;&nbsp;3<input type="radio" name="database" value="3">
+&nbsp;&nbsp;4<input type="radio" name="database" value="4">
+&nbsp;&nbsp;5<input type="radio" name="database" value="5"><br>
+<br>&nbsp;&nbsp;Database configuration:<br>
+&nbsp;&nbsp;1<input type="radio" name="dbcfg" value="1" checked>
+&nbsp;&nbsp;2<input type="radio" name="dbcfg" value="2">
+&nbsp;&nbsp;3<input type="radio" name="dbcfg" value="3">
+&nbsp;&nbsp;4<input type="radio" name="dbcfg" value="4">
+&nbsp;&nbsp;5<input type="radio" name="dbcfg" value="5"><br>
+<br>&nbsp;&nbsp;FTP:<br>
+&nbsp;&nbsp;1<input type="radio" name="ftp" value="1" checked>
+&nbsp;&nbsp;2<input type="radio" name="ftp" value="2">
+&nbsp;&nbsp;3<input type="radio" name="ftp" value="3">
+&nbsp;&nbsp;4<input type="radio" name="ftp" value="4">
+&nbsp;&nbsp;5<input type="radio" name="ftp" value="5">
+</div><br>
+<hr align="left" width="500" size="1" color="#000000" noshade><br>
+<div><strong>Which stats should a traffic analysis program to register</strong></div>
+<div>
+<input type="checkbox" name="hits" value="Hits">Hits<br>
+<input type="checkbox" name="unique" value="Unique Hits">Unique hits<br>
+<input type="checkbox" name="day" value="Hits per day">Hits per day<br>
+<input type="checkbox" name="week" value="Hits per week">Hits per week<br>
+<input type="checkbox" name="month" value="Hits per month">Hits per month<br>
+<input type="checkbox" name="pagehits" value="Hits per page">Hits per page<br>
+<input type="checkbox" name="browser" value="Browser">Browser<br>
+<input type="checkbox" name="screen" value="Screen size">Screen size<br>
+<input type="checkbox" name="color" value="Color depth">Color depth<br>
+<input type="checkbox" name="os" value="Operating system">Operating system<br>
+<input type="checkbox" name="country2" value="Country">Country<br>
+<input type="checkbox" name="js" value="Javascript">Detect javascript<br>
+<input type="checkbox" name="cookie" value="Cookie">Detect cookie<br>
+<input type="checkbox" name="counter" value="Website counter">Website counter<br>
+<input type="checkbox" name="online" value="Users online counter">Users online counter<br>
+<input type="checkbox" name="search" value="Search engine hits">Search engine hits<br>
+<input type="checkbox" name="keys" value="Search engine key words">Search engine key-words<br>
+<input type="checkbox" name="referrers" value="Referrers">Referrers<br>
+<input type="checkbox" name="times" value="Time spent on website">Time spent on website<br>
+</div>
+<table cellspacing="2" cellpadding="2" border="0">
+<tr>
+<td>
+<div>Other stats you would like to see:</div>
+</td>
+<td>
+<input class="input" type="text" name="statother">
+</td>
+</tr>
+</table><br>
+<hr align="left" width="500" size="1" color="#000000" noshade><br>
+<div><strong>How would you like the program to store the data?</strong></div>
+<div>
+Database (mysql)<input type="radio" name="store" value="mysql"><br>
+Database (postgre)<input type="radio" name="store" value="postgre"><br>
+Database (interbase)<input type="radio" name="store" value="interbase"><br>
+Database (oracle)<input type="radio" name="store" value="oracle"><br>
+Text file<input type="radio" name="store" value="text"><br>
+Other<input type="radio" name="store" value="other"><br>
+</div>
+<div>If other descript what:
+<input class="input" type="text" name="storeother">
+</div>
+<br>
+<hr align="left" width="500" size="1" color="#000000" noshade><br>
+
+<div><strong>Would you like to see graphical representation of the traffic analysis?</strong></div>
+<div>
+Yes:<input type="radio" name="graphic" value="Yes"> No:<input type="radio" name="graphic" value="No">
+</div>
+<br>
+<hr align="left" width="500" size="1" color="#000000" noshade><br>
+
+<div><strong>Would you use this program for business, personal or both?</strong></div>
+<div>Business:<input type="radio" name="use" value="Business"> Personal:<input type="radio" name="use" value="Personal"> Both:<input type="radio" name="use" value="Both"></div>
+<br>
+<hr align="left" width="500" size="1" color="#000000" noshade><br>
+
+<div><strong>Comments</strong></div>
+<textarea cols="50" rows="8" name="comment"></textarea><br><br>
+
+<input type="submit" name="send" value="Send" class="input" style="width: 60px;">
+
+</form>
+
+
+</body>
+</html>

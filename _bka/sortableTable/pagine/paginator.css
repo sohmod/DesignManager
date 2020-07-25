@@ -1,0 +1,226 @@
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+/*CSS Meneame style pagination*/
+	div.pagination {
+		padding: 3px;
+		margin: 3px;
+		text-align:left;
+		color:#ff6500;
+	}
+	
+	div.pagination a {
+		border: 1px solid #ff9600;
+		margin-right:3px;
+		padding:5px 7px;
+
+		background-image:url(pagine/meneame.jpg);
+		background-position:bottom;
+		text-decoration: none;
+
+		color: #ff6500;		
+	}
+	div.pagination a:hover, div.meneame a:active {
+		border: 1px solid #ff9600;
+		background-image:none;
+		background-color:#ffc794;
+		color: #ff6500;
+	}
+	div.pagination span.current {
+		margin-right:3px;
+		padding:5px 7px;
+		border: 1px solid #ff6500;
+		
+		font-weight: bold;
+		background-color: #ffbe94;
+		color: #ff6500;
+	}
+	div.pagination span.disabled {
+		margin-right:3px;
+		padding:5px 7px;
+		border: 1px solid #ffe3c6;
+	
+		color: #ffe3c6;
+	}
+	
+	
+	
+.paginate {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 1em;
+
+}
+
+
+
+a.paginate {
+
+	border: 1px solid #000080;
+
+	padding: 2px 6px 2px 6px;
+
+	text-decoration: none;
+
+	color: #000080;
+
+}
+
+
+
+
+
+a.paginate:hover {
+
+	background-color: #000080;
+
+	color: #FFF;
+
+	text-decoration: underline;
+
+}
+
+
+
+a.current {
+
+	border: 1px solid #000080;
+
+	font: bold .7em Arial,Helvetica,sans-serif;
+
+	padding: 2px 6px 2px 6px;
+
+	cursor: default;
+
+	background: #B2E05D        ;     //#000080;
+
+	color: #FFF;
+
+	text-decoration: none;
+
+}
+
+
+
+span.inactive {
+
+	border: 1px solid #999;
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 1em;
+
+	padding: 2px 6px 2px 6px;
+
+	color: #999;
+
+	cursor: default;
+
+}
+
+
+
+table {
+
+	margin: 8px;
+
+}
+
+
+
+th {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align:center;
+
+	background: #666;
+
+	color: #FFF;
+
+	padding: 0px 0px;
+
+	border-collapse: separate;
+
+	border: 0px solid #000;
+
+}
+
+
+
+td {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 1em;
+
+	border: 1px solid #DDD;
+
+	width: 300px;
+}
+	
+	
+function hilite(elem)
+{
+	elem.style.background = '#FFC';
+}
+
+function lowlite(elem)
+{
+	elem.style.background = '';
+}	
+
+
+
+
+///////////////////
+/*
+Plugin Name: WP-Digg Style Paginator
+Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+/*Scott*/
+div.pagination {
+	padding:3px;
+	margin:3px;
+	text-align:center;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	
+	text-decoration: none; 
+	color: #88AF3F;
+}
+div.pagination a:hover, div.pagination a:active {
+	border:1px solid #85BD1E;
+	color: #638425;
+	background-color: #F1FFD6;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #B2E05D;
+	font-weight: bold;
+	background-color: #B2E05D;
+	color: #FFF;
+}
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+}
+/////////////
+
+
+

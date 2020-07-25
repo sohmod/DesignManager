@@ -1,0 +1,279 @@
+body {
+	margin:0px;
+	padding:0px;
+	font-family:verdana, arial, helvetica, sans-serif;
+	color:#333;
+	background-color: #f2FBF0;
+width: 999px;
+background: white url(http://localhost/bground/rockpile.jpg) no-repeat top right; 
+
+	}
+.content {
+	background-color: #f5f5f5; 
+	padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; 
+	margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;    }
+	
+h1 {
+	margin:0px 0px 15px 0px;
+	padding:0px;
+	font-size:28px;
+	line-height:28px;
+	font-weight:900;
+	color:#ccc;
+	}
+
+
+#header {
+	display: block;
+	height: 25px;
+	/*background-color: #EEE;*/
+	width: 95%;
+	border-bottom: 1px solid #999;
+	background-image: url(../../../_img/favicon.ico);
+	background-repeat: no-repeat;
+	text-align: left;
+margin-left: 27px;
+}
+#subheader {
+	display: block;
+	height: 18px;
+	font-size: 12px;
+	color: #999999;
+	text-align: right;
+	margin-top: -1px;
+	width: 95%;
+margin-left: 27px;
+
+}
+
+/*TABS*/
+#tabs {
+	border-bottom: 1px solid #999;
+	border-top: 1px solid #999;
+	height: 18px;
+	padding-top: 2px;
+	background-color: #eee;
+border-left: 1px solid #999;
+border-right: 1px solid #999;
+
+}
+#tabs ul {
+	/*margin-left: 310px;*/
+	padding-left: 0;
+	display: inline;
+} 
+#tabs ul li {
+	margin: 0;
+	margin-left: -4px;
+	padding: 2px 15px 5px;
+	border-left: 1px solid #999;
+	list-style: none;
+	display: inline;
+}
+
+
+#tabs ul li a:link {
+	color: #C30;
+	text-decoration: none;
+}
+
+#tabs ul li a:visited {
+	color: #C30;
+	text-decoration: none;
+}
+
+#tabs ul li a:hover {
+	color: #09c;
+	text-decoration: none;
+	background-color: #f2FBF0;
+	border-top: 1px solid #09c;
+	border-bottom: 1px solid #c30;
+}
+
+
+	
+p {
+	font:11px/20px verdana, arial, helvetica, sans-serif;
+	margin:0px 0px 16px 0px;
+	padding:0px;
+	}
+
+
+/*LEFT*/
+#left {
+	width: 130px;
+	background-color: #f2FBF0;
+	margin-left: 0px;
+	margin-top: 0px;
+	text-align: left;
+	float: left;
+	/*border-right: 1px solid #999;*/
+}
+#leftcontent {
+	margin: 5px 0 0 -5px;
+padding-left: 5px;
+	/*color: #666;*/
+color: #003366;
+	font-size: 0.9em;
+	width: 120px;
+	padding: 0 0 1em 0;
+	/*border-top: 1px dotted #ccc;*/
+	line-height: 1.2em;
+}
+
+#leftcontent ul {
+	color: #C30;
+	list-style-type: none;
+	margin: 0;
+	padding-left: 3px;
+	/*text-transform: lowercase;*/
+}
+
+#leftcontent li {
+	margin: 0;
+	/*color: #666;*/
+	padding: 0px 0px 10px 5px;
+}
+
+#leftcontent li a {
+	display: block;
+	color: #C30;
+color: #ac3366;
+	text-decoration: none;
+}
+//
+#leftcontent_1 a:link {
+	color: #09c;
+	text-decoration: none;
+}
+#leftcontent_1 a:visited {
+	color: #09c;
+	text-decoration: none;
+}
+#leftcontent_1 a:hover  {
+	background-color: #DDD;
+	border-right: 2px solid #c30;
+	border-left: 2px solid #c30;
+	//color: #C30;
+color: #003366;
+}
+
+
+
+
+
+
+
+#leftcontent ul li {
+	letter-spacing: 0.01em;
+	margin-top: 1px;
+	padding-bottom: 2px;
+	border-bottom: 1px dotted #ccc;
+}
+
+#leftcontent ul ul li a {
+	color: #666;
+	text-decoration: none;
+}
+
+#leftcontent ul ul li a:hover {
+	background-color: #DDD;
+	border-right: 2px solid #c30;
+	color: #C30;
+color: #003366;
+}
+#leftcontent ul li a:hover {
+	background-color: #DDD;
+	border-right: 2px solid #c30;
+	border-left: 2px solid #c30;
+	color: #C30;
+color: #003366;
+}
+
+
+	
+#Content>p {margin:0px; text-indent:30px;}
+
+a {
+	color:#09c;
+	font-size:10px;
+	text-decoration:none;
+	font-weight:200;
+	font-family:verdana, arial, helvetica, sans-serif;
+	}
+/*BOTTOM*/
+#bottom {
+	height: 20px;
+	border-top: solid #999 1px;
+	font-size: 0.7em;
+	text-align: center;
+	padding-right: 10px;
+	padding-top: 4px;
+	color: #333;
+	clear: both;
+}
+/* FORMS */
+input#s {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	background: #fff;
+	border: 1px solid #ccc;
+	color: #666;
+}
+
+/////////////////////////////////////////
+/*	
+a:link {color:#09c;}
+
+a:visited {color:#07a;}
+
+a:hover {background-color:#eee;}*/
+
+
+#Header {
+	font-size:20px;
+	margin:-4px 28px 10px 1px;
+	padding:17px 0px 0px 20px;
+	/* For IE5/Win's benefit height = [correct height] + [top padding] + [top and bottom border widths] */
+	height:33px; /* 14px + 17px + 2px = 33px */
+	border-style:solid;
+	border-color:black;
+	border-width:1px 0px; /* top and bottom borders: 1px; left and right borders: 0px */
+	line-height:11px;
+	background-color:#eee;
+
+/* Here is the ugly brilliant hack that protects IE5/Win from its own stupidity. 
+Thanks to Tantek Celik for the hack and to Eric Costello for publicizing it. 
+IE5/Win incorrectly parses the "\"}"" value, prematurely closing the style 
+declaration. The incorrect IE5/Win value is above, while the correct value is 
+below. See http://glish.com/css/hacks.asp for details. */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	height:14px; /* the correct height */
+	}
+/* I've heard this called the "be nice to Opera 5" rule. Basically, it feeds correct 
+length values to user agents that exhibit the parsing error exploited above yet get 
+the CSS box model right and understand the CSS2 parent-child selector. ALWAYS include
+a "be nice to Opera 5" rule every time you use the Tantek Celik hack (above). */
+body>#Header {height:14px;}
+
+#Content {
+	margin:0px 210px 50px 10px;
+	padding:10px;
+	}
+
+#Menu {
+	position:relative;
+	//top:155px;
+	//right:15%;
+	width:472px;
+	padding:10px;
+	background-color:#eee;
+	border:1px dashed #999;
+	line-height:12px;
+/* Again, the ugly brilliant hack. */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width:150px;
+	}
+/* Again, "be nice to Opera 5". */
+body>#Menu {width:150px;}

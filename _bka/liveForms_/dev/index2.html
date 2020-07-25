@@ -1,0 +1,161 @@
+<html>
+<head>
+	<title>Live forms</title>
+<script type="text/javascript" src="jquery-1.2.1.pack.js"></script>
+<script type="text/javascript">
+	function lookup(inputString) {
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+			$('#suggestions').hide();
+		} else {
+			$.post("rpc.php", {queryString: ""+inputString+""}, function(data){
+				if(data.length >0) {
+					$('#suggestions').show();
+					$('#autoSuggestionsList').html(data);
+				}
+			});
+		}
+	} // lookup
+	
+	function fill(thisValue) {
+		$('#inputString').val(thisValue);
+		setTimeout("$('#suggestions').hide();", 200);
+	}
+</script>	
+<script type="text/javascript" src="jasoncalendar/calendarDateInput.js"></script>
+	
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/Validator.js"></script>
+	<style type="text/css">
+
+
+
+	
+	
+	.suggestionsBox {
+		position: relative;
+		left: 30px;
+		margin: 10px 0px 0px 0px;
+		width: 200px;
+		background-color: green; //#212427;
+		-moz-border-radius: 7px;
+		-webkit-border-radius: 7px;
+		border: 2px solid #000;	
+		color: #fff;
+		font-size: 12px;
+		font-family: Helvetica, Arial, Verdana, Sans-Serif;
+
+	}
+	
+	.suggestionList {
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.suggestionList li {
+		
+		margin: 0px 0px 3px 0px;
+		padding: 3px;
+		cursor: pointer;
+	}
+	
+	.suggestionList li:hover {
+		background-color: #659CD8;
+	}	
+	
+	</style>
+</head>
+
+<body onload="Validator.Initialize('liveForm', 4, 'submit', 'img/check.gif', 'img/x.gif');">
+	<form id="liveForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" onsubmit="if(!Validator.AllFieldsValidated()) return false;">
+
+			<div>
+				Taip nombor kod projek:
+				<br />
+				<input type="text" size="100" value="" id="inputString" onkeyup="lookup(this.value);" onblur="fill();Validator.Validate(this);" />
+			</div>	
+			<div class="suggestionsBox" id="suggestions" style="display: none;">
+				<img src="upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+				<div class="suggestionList" id="autoSuggestionsList">
+					&nbsp;
+				</div>
+			</div>	
+
+			
+			<div style="float: right;"></div>
+			<div class="suggestionsBox" id="suggestions" style="display: none;">
+				<img src="upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+				<div class="suggestionList" id="autoSuggestionsList">
+					&nbsp;
+				</div>
+			</div>		
+	
+
+			<p>Tajuk Lukisan<br/><input type="text" size="80" id="lastName" name="lastName" onblur="Validator.Validate(this);" /></p>
+			<p>Nombor Lukisan<br/><input type="text" size="60" id="street" name="street" onblur="Validator.Validate(this);" /></p>
+			<p>Kategori Lukisan :
+			<select id="state" name="state" onchange="Validator.Validate(this);" onblur="Validator.Validate(this);">
+				<option value="" selected="true"></option>
+				<option value="AK">Baru</option>
+				<option value="AL">Pindaan 1</option>
+				<option value="AR">Pindaan 2</option>
+				<option value="AZ">Pindaan 3</option>
+
+				<option value="Other">Pindaan Piawai</option>
+			</select>
+			Peti.Rak Simpanan No : <input type="text" size="15" id="street" name="street" />
+			</p>
+			<p>Tarikh Lukisan : 
+<script> DateInput( 'tarikh', true, 'MM/DD/YYYY')</script>
+			</p>
+		<div id="innerFieldset">
+			<noscript>
+				<input id="submit" type="submit" value="Register" class="action" />
+			</noscript>
+		</div>
+		<script type="text/javascript">
+			gebid('innerFieldset').innerHTML = '<input id="submit" type="submit" value="Register" style="width: 100px;" disabled="true" />';
+		</script>
+	</form>
+<?php	
+if (isset($_POST['submit'])) { // Check if the form has been submitted.
+echo 'saya disini';
+$db=mysql_connect('localhost','ajaxuser','practical') or die('Error connecting to the server');
+	mysql_select_db('ajax') or die('Error selecting database');
+	  
+ 	$query = "INSERT INTO mydrawings (daftar_id, tajuk, nombor, kategori, peti,tarikh, username, kp, regist_date) VALUES ('$daftar_id', '$tajuk', '$nombor', '$kategori', '$peti', '$tarikh', '$kp', NOW())";		
+			$result = @mysql_query ($query); // Run the query.
+
+			if ($result) { // If it ran OK.
+			
+				// Send an email, if desired.
+				echo '<center><h3>Thank you for registering!</h3></center>';
+				exit();				
+				
+			} else { // If it did not run OK.
+				// Send a message to the error log, if desired.
+				echo '<p><font color="red" size="+1">You could not be registered due to a system error. We apologize for any inconvenience.</font></p>'; 
+			}
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+	
+	
+	
+	
+</body>
+</html>
